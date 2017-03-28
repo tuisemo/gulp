@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>404</title>
+    @@include('./include/basecss.html')
+</head>
+
+<body>
+<div class="container-fluid pad-b-20 mar-50">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-white" style="background-color: rgba(255, 255, 255, 0.4);">
+ <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-12 col-xs-12 mar-t20 mar-b40 " style="min-height:400px">
+                <div style="margin:50px auto 30px;">
+                    <div class="col-md-12 col-xs-6 text-c" style="position: relative;float: left;font-size: 170px;color: #00b4e9;line-height: 170px;">404
+                    </div>
+                    <h4 style="color: #00b4e9;text-align: center;"><span id="msgtimer">5</span>  秒后将自动跳转至i厦门首页...</h4>
+                    <div class="clear"></div>
+                </div>
+                <div class="col-md-6 col-md-offset-3 text-c" style="font-size: 16px;">
+                    <label>很抱歉，您想访问的页面不存在。
+                        <br/>
+                        <span style="font-size: 12px;">The page you’re looking for can’t be found.</span></label>
+                    <a href="/ids/custom/xiamen/login_xm.jsp">
+                        <div class="col-md-2 col-md-offset-5 btn btn-sm btn-primary realname">返回首页</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer style="position: absolute;bottom: 0;left: 0;right: 0;font-size: 10px;">
+        <p class="text-c"><span>主办：厦门市经济和信息化局 运行管理：厦门市信息中心 闽ICP备14010412号-1 服务热线：0592-5051516</span></p>
+    </footer>
+</body>
+<script>
+var wait = 5;
+
+function time() {
+    if (wait == 0) {
+        document.location = 'http://www.ixm.gov.cn/'
+    } else {
+        document.getElementById("msgtimer").innerHTML = wait;
+        wait--;
+        setTimeout(function() {
+            time();
+        }, 1000);
+    }
+}
+</script>
+<script>
+//time();
+</script>
+
+</html>
