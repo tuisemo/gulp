@@ -3,6 +3,7 @@ const gulp = require('gulp');
 
 // 引入组件
 const jshint = require('gulp-jshint');
+const htmlhint = require('gulp-htmlhint');
 const less = require('gulp-less');
 const concat = require('gulp-concat');
 const jsmin = require('gulp-uglify');
@@ -23,6 +24,12 @@ gulp.task('jshint', function() {
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
+//检查html
+gulp.task('htmlhint', function() {
+    gulp.src('./src/*.html')
+        .pipe(htmlhint())
+        .pipe(htmlhint.reporter());
+});
 // 编译Less
 gulp.task('less', function() {
     gulp.src('./src/css/*.less')
@@ -37,7 +44,8 @@ gulp.task('fileinclude', function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
-            basepath: '@file'
+            basepath: '@file',
+            indent: true
         }))
         .pipe(gulp.dest('dist'));
 });
