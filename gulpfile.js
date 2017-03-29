@@ -39,11 +39,13 @@ gulp.task('fileinclude', function() {
         }))
         .pipe(gulp.dest('dist'));
 });
+//格式化html
 gulp.task('htmlbeautify', function() {
     gulp.src('./*.html')
         .pipe(htmlbeautify())
         .pipe(gulp.dest('dist'));
 });
+//压缩简化html
 gulp.task('htmlminify', function() {
     gulp.src('./*.html')
         .pipe(htmlminify())
