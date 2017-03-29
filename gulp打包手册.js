@@ -11,4 +11,4 @@
 //        清理档案 (gulp-clean)
 //        图片快取，只有更改过得图片会进行压缩 (gulp-cache)
 //        更动通知 (gulp-notify)
-npm install gulp-autoprefixer gulp-clean-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-clean gulp-rename gulp-cache --save-dev
+npm install gulp-autoprefixer gulp-clean-css jshint gulp-jshint gulp-less gulp-concat gulp-uglify gulp-imagemin gulp-file-include gulp-html-beautify gulp-html-minify gulp-clean gulp-rename gulp-cache --save-dev

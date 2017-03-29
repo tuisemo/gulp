@@ -1,17 +1,19 @@
 // 引入 gulp
-var gulp = require('gulp');
+const gulp = require('gulp');
 
 // 引入组件
-var jshint = require('gulp-jshint');
-var less = require('gulp-less');
-var concat = require('gulp-concat');
-var jsmin = require('gulp-uglify');
-var cssmin = require('gulp-clean-css');
-var imagemin = require('gulp-imagemin');
-var rename = require('gulp-rename');
-var fileinclude = require('gulp-file-include');
-var htmlbeautify = require('gulp-html-beautify');
-var htmlminify = require("gulp-html-minify");
+const jshint = require('gulp-jshint');
+const less = require('gulp-less');
+const concat = require('gulp-concat');
+const jsmin = require('gulp-uglify');
+const cssmin = require('gulp-clean-css');
+const imagemin = require('gulp-imagemin');
+const rename = require('gulp-rename');
+const fileinclude = require('gulp-file-include');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
+const htmlbeautify = require('gulp-html-beautify');
+const htmlminify = require("gulp-html-minify");
 
 // 检查脚本
 gulp.task('jshint', function() {
