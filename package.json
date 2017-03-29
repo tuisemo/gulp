@@ -24,6 +24,7 @@
     "gulp-less": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2",
+    "gulp-watch": "^4.3.11",
     "gulp.spritesmith": "^6.4.0",
     "imagemin": "^5.2.2",
     "jshint": "^2.9.4"
