@@ -10,10 +10,11 @@ const cssmin = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const rename = require('gulp-rename');
 const fileinclude = require('gulp-file-include');
-const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const htmlbeautify = require('gulp-html-beautify');
 const htmlminify = require("gulp-html-minify");
+const spritesmith = require("gulp.spritesmith");
+const spriter = require("gulp-css-spriter");
 
 // 检查脚本
 gulp.task('jshint', function() {
@@ -53,9 +54,23 @@ gulp.task('htmlminify', function() {
 });
 //压缩图片文件
 gulp.task('imagemin', function() {
-    gulp.src('./images/*.{png,jpg,gif,ico}')
+    gulp.src('./images/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./images'))
+        .pipe(gulp.dest('dist/images'));
+});
+//合成雪碧图
+gulp.task('spritesmith', function() {
+    gulp.src('./images/*')
+        .pipe(spritesmith({
+            imgName: 'sprite.png',
+            cssName: 'sprite.css'
+        }))
+        .pipe(gulp.dest('dist/images'));
+});
+//CSS合成雪碧图
+gulp.task('CSSspriter', function() {
+    gulp.src('./images/*')
+        .pipe(spritesr())
         .pipe(gulp.dest('dist/images'));
 });
 // 合并，压缩文件
@@ -70,10 +85,9 @@ gulp.task('scripts', function() {
         .pipe(jsmin())
         .pipe(gulp.dest('./dist/js/lib'));
 });
-
 // 默认任务
 gulp.task('default', function() {
-    gulp.run('jshint', 'less', 'scripts', 'fileinclude');
+    gulp.run('jshint', 'less', 'scripts', 'fileinclude', 'imagemin');
 
     // 监听文件变化
     gulp.watch('./js/*.js', function() {
