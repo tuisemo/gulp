@@ -69,9 +69,13 @@ gulp.task('spritesmith', function() {
 });
 //CSS合成雪碧图
 gulp.task('CSSspriter', function() {
-    gulp.src('./images/*')
-        .pipe(spritesr())
-        .pipe(gulp.dest('dist/images'));
+    gulp.src('./css/less.css')
+        .pipe(spriter({
+            'spriteSheet': './dist/images/spritesheet.png',
+            'pathToSpriteSheetFromCSS': '../images/spritesheet.png',
+            'padding':20
+        }))
+        .pipe(gulp.dest('dist/css'));
 });
 // 合并，压缩文件
 gulp.task('scripts', function() {
