@@ -6,12 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>首页</title>
     <link href="css/normalize.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/layer.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layer.css" rel="stylesheet">
 
 </head>
 
 <body>
+    <div id="header" class="container">
+        <div class="logo"></div>
+        <nav class="nav navbar-nav">
+            <ul>
+                <li class="nav-li">
+                    <a href="/">东京</a></li>
+                <li class="nav-li">
+                    <a href="/">巴黎</a></li>
+                <li class="nav-li">
+                    <a href="/">洛杉矶</a></li>
+                <li class="nav-li">
+                    <a href="/">迈阿密</a></li>
+            </ul>
+        </nav>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+
     <div class="container">
         <form class="form-horizontal col-sm-6 col-offset-sm-3 col-xs-12 pad-t30">
             <div class="form-group">
@@ -53,10 +73,12 @@
     </div>
 </body>
 <script data-main="js/main" src="js/lib/require.js"></script>
-<script>
+<!-- inject:something -->
+<!-- endinject -->
+<!-- <script>
 require(['handlejs'], function() {
 
 });
-</script>
+</script> -->
 
 </html>

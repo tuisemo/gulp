@@ -11,6 +11,7 @@ const cssmin = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const rename = require('gulp-rename');
 const fileinclude = require('gulp-file-include');
+const inject = require('gulp-inject');//html中插入js/css
 const sourcemaps = require('gulp-sourcemaps');
 const htmlbeautify = require('gulp-html-beautify');
 const htmlminify = require("gulp-html-minify");
@@ -47,6 +48,7 @@ gulp.task('fileinclude', function() {
             basepath: '@file',
             indent: true
         }))
+        .pipe(inject(gulp.src('./src/js/*.js',{reda:false}),{relative: true}))
         .pipe(gulp.dest('dist'));
 });
 //格式化html

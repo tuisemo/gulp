@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @@include('./include/header.html')
     <div class="container">
         <form class="form-horizontal col-sm-6 col-offset-sm-3 col-xs-12 pad-t30">
             <div class="form-group">
@@ -50,10 +51,12 @@
     </div>
 </body>
 <script data-main="js/main" src="js/lib/require.js"></script>
-<script>
+<!-- inject:something -->
+<!-- endinject -->
+<!-- <script>
 require(['handlejs'], function() {
 
 });
-</script>
+</script> -->
 
 </html>
