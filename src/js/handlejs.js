@@ -1,4 +1,4 @@
-define(['jquery', 'MSG', 'lodash', 'layer'], function() {
+define(['jquery', 'MSG'], function() {
     var begin, end;
     var CheckFunc = function() {
         this.$Tel = $("input[type='tel']");

@@ -11,7 +11,7 @@ const cssmin = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const rename = require('gulp-rename');
 const fileinclude = require('gulp-file-include');
-const inject = require('gulp-inject');//html中插入js/css
+const inject = require('gulp-inject'); //html中插入js/css
 const sourcemaps = require('gulp-sourcemaps');
 const htmlbeautify = require('gulp-html-beautify');
 const htmlminify = require("gulp-html-minify");
@@ -48,7 +48,8 @@ gulp.task('fileinclude', function() {
             basepath: '@file',
             indent: true
         }))
-        .pipe(inject(gulp.src('./src/js/*.js',{reda:false}),{relative: true}))
+        .pipe(inject(gulp.src(['./src/css/normalize.css','./src/css/bootstrapStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/js/MSG.js','./src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
 //格式化html
@@ -103,7 +104,7 @@ gulp.task('scripts', function() {
 });
 // 默认任务
 gulp.task('default', function() {
-    gulp.run('jshint', 'less', 'scripts', 'fileinclude', 'imagemin');
+    gulp.run('jshint', 'less', 'scripts', 'fileinclude');
 
     // 监听文件变化
     gulp.watch('./src/js/*.js', function() {
