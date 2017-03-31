@@ -18,6 +18,8 @@ const htmlminify = require("gulp-html-minify");
 const spritesmith = require("gulp.spritesmith");
 const spriter = require("gulp-css-spriter");
 const watch = require("gulp-watch");
+const cache = require("gulp-cache");
+const autoprefixer = require("gulp-autoprefixer");
 
 // 检查脚本
 gulp.task('jshint', function() {
@@ -34,22 +36,33 @@ gulp.task('htmlhint', function() {
 // 编译Less
 gulp.task('less', function() {
     gulp.src('./src/css/*.less')
-        .pipe(less())
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(cache(less()))
+        .pipe(gulp.dest('./src/css'));
+});
+gulp.task('autoprefixer', function() {
+    gulp.src('./src/css/*.css')
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: true, //是否美化属性值 默认：true 像这样：
+            remove: true //是否去掉不必要的前缀 默认：true 
+        }))
+        .pipe(gulp.dest('./src/css'));
+});
+gulp.task('cssmin', ['clear','autoprefixer'], function() {
     gulp.src('./src/css/*.css')
         .pipe(cssmin())
         .pipe(gulp.dest('./dist/css'));
 });
 //include公共文件
-gulp.task('fileinclude', function() {
+gulp.task('fileinclude', ['cssmin', 'scripts'], function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file',
             indent: true
         }))
-        .pipe(inject(gulp.src(['./src/css/normalize.css','./src/css/bootstrapStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
-        .pipe(inject(gulp.src(['./src/js/MSG.js','./src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/bootstrapStyle.css', './src/css/Style.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
 //格式化html
@@ -102,9 +115,12 @@ gulp.task('scripts', function() {
         .pipe(jsmin())
         .pipe(gulp.dest('./dist/js/lib'));
 });
+gulp.task('clear', function(done) {
+    return cache.clearAll(done);
+});
 // 默认任务
 gulp.task('default', function() {
-    gulp.run('jshint', 'less', 'scripts', 'fileinclude');
+    gulp.run('jshint', 'fileinclude', 'imagemin');
 
     // 监听文件变化
     gulp.watch('./src/js/*.js', function() {
@@ -113,7 +129,10 @@ gulp.task('default', function() {
     gulp.watch('./src/css/*.less', function() {
         gulp.run('less');
     });
-    gulp.watch('./src/*.html', function() {
+    gulp.watch('./src/css/*.css', function() {
+        gulp.run('cssmin');
+    });
+    gulp.watch(['./src/*.html', './src/include/*.html'], function() {
         gulp.run('htmlminify', 'fileinclude', 'htmlbeautify'); //html文件必须先压缩再执行include引入
     });
 });
