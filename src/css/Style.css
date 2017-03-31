@@ -1,0 +1,65 @@
+/* 工具 */
+a {
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul,
+ol {
+  padding: 0;
+}
+/* 变量 */
+/**
+*Author:alone
+*CreatTime:2017/3/31
+*/
+#header {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  box-shadow: 0px 0px 10px 0px #ccc;
+}
+#header .logo {
+  display: block;
+  width: 300px;
+  height: 69px;
+  float: left;
+  background: url('../images/logo.png') no-repeat;
+}
+#header .header-nav {
+  display: block;
+  position: relative;
+  float: left;
+}
+#header .header-nav .nav-menu {
+  line-height: 28px;
+}
+#header .header-nav .nav-menu li {
+  display: inline-block;
+  position: relative;
+  float: left;
+  width: 80px;
+  padding: 0 15px;
+}
+#header .header-nav .nav-menu li a {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+#header .header-nav .nav-menu li a:hover {
+  color: #000000;
+}
+#header .header-nav .nav-menu:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
+}

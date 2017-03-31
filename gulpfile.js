@@ -39,22 +39,19 @@ gulp.task('less', function() {
         .pipe(cache(less()))
         .pipe(gulp.dest('./src/css'));
 });
-gulp.task('autoprefixer', function() {
+//补全前缀+压缩css
+gulp.task('cssmin', function() {
     gulp.src('./src/css/*.css')
         .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: true, //是否美化属性值 默认：true 像这样：
-            remove: true //是否去掉不必要的前缀 默认：true 
+            browsers: ['last 4 versions']
+            //cascade: true, //是否美化属性值 默认：true 像这样：
+            //remove: true //是否去掉不必要的前缀 默认：true 
         }))
-        .pipe(gulp.dest('./src/css'));
-});
-gulp.task('cssmin', ['clear','autoprefixer'], function() {
-    gulp.src('./src/css/*.css')
         .pipe(cssmin())
         .pipe(gulp.dest('./dist/css'));
 });
 //include公共文件
-gulp.task('fileinclude', ['cssmin', 'scripts'], function() {
+gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
@@ -115,9 +112,7 @@ gulp.task('scripts', function() {
         .pipe(jsmin())
         .pipe(gulp.dest('./dist/js/lib'));
 });
-gulp.task('clear', function(done) {
-    return cache.clearAll(done);
-});
+
 // 默认任务
 gulp.task('default', function() {
     gulp.run('jshint', 'fileinclude', 'imagemin');

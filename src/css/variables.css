@@ -1,0 +1,14 @@
+/* 工具 */
+a {
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul,
+ol {
+  padding: 0;
+}
+/* 变量 */
