@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册</title>
+    <!-- inject:base:css -->
+    <!-- endinject -->
+    <!--IEhack@include('./include/IEhack.html')-->
+</head>
+
+<body>
+    @@include('./include/header.html')
+    <div class="container wrap">
+        <form class="form-horizontal col-sm-5 col-xs-12 pad-t30">
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>用户名:</small></label>
+                <div class="col-sm-9">
+                    <input id="userName" type="text" class="form-control" placeholder="用户名">
+                    <span class="help-block">以英文字母开头，可包含3-20个字符</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>手机:</small></label>
+                <div class="col-sm-9">
+                    <input type="tel" class="form-control" id="inputTel" placeholder="手机">
+                    <span class="help-block">请输入您的手机号(仅支持中国大陆)</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>图片验证码:</small></label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input id="validateCode" type="text" class="form-control" placeholder="图片验证码">
+                        <div class="input-group-btn">
+                            <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                            <div class="btn btn-default">刷新</div>
+                        </div>
+                    </div>
+                    <span class="help-block">如校验错误可尝试刷新</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="msgCode" placeholder="短信验证码">
+                    <span class="help-block">请输入您收到的验证码</span>
+                </div>
+            </div>
+            <!--             <div class="form-group">
+    <label class="col-sm-2 control-label">邮箱:</label>
+    <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        <span class="help-block">请输入您的邮箱地址</span>
+    </div>
+</div> -->
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>设置密码:</small></label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="Password" placeholder="设置密码">
+                    <span class="help-block">8-30位字符包含数字和英文字符</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><small>确认密码:</small></label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="CPassword" placeholder="确认密码">
+                    <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"><small>我已阅读并接受 <a href="/">“市民通行证”服务协议</a></small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <div id="submit" class="btn btn-primary">提交注册</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    @@include('./include/footer.html')
+    <!-- inject:none:js -->
+    <!-- endinject -->
+</body>
+<script data-main="js/main" src="js/lib/require.js"></script>
+<script>
+require(['handlejs'], function() {});
+</script>
+
+</html>

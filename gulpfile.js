@@ -44,8 +44,8 @@ gulp.task('cssmin', function() {
     gulp.src('./src/css/*.css')
         .pipe(autoprefixer({
             browsers: ['last 4 versions']
-            //cascade: true, //是否美化属性值 默认：true 像这样：
-            //remove: true //是否去掉不必要的前缀 默认：true 
+                //cascade: true, //是否美化属性值 默认：true 像这样：
+                //remove: true //是否去掉不必要的前缀 默认：true 
         }))
         .pipe(cssmin())
         .pipe(gulp.dest('./dist/css'));
@@ -55,6 +55,12 @@ gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
+            basepath: '@file',
+            indent: true
+        }))
+        .pipe(fileinclude({
+            prefix: '<!--IEhack@',
+            suffix:'-->',
             basepath: '@file',
             indent: true
         }))

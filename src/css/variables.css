@@ -1,7 +1,7 @@
 /* 工具 */
 a {
   cursor: pointer;
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
   text-decoration: none;
 }
 a:hover {
@@ -9,6 +9,7 @@ a:hover {
 }
 ul,
 ol {
+  margin: 0;
   padding: 0;
 }
 /* 变量 */
