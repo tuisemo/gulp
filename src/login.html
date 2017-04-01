@@ -36,7 +36,7 @@
                         <input id="validateCode" type="text" class="form-control" placeholder="图片验证码">
                         <div class="input-group-btn">
                             <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
-                            <div class="btn btn-default">刷新</div>
+                            <div id="reloadBtn" class="btn btn-default">刷新</div>
                         </div>
                     </div>
                     <span class="help-block">如校验错误可尝试刷新</span>
@@ -45,7 +45,13 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="msgCode" placeholder="短信验证码">
+                    <div class="input-group ">
+                        <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
+                        <span class="input-group-btn">
+                            <div id="sendmsg" class="btn btn-primary" style="display:none;" onclick="sendMsgFor('01','Citizen')">发送校验码</div>
+                            <div id="msgtimer" class="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div>
+                        </span>
+                    </div>
                     <span class="help-block">请输入您收到的验证码</span>
                 </div>
             </div>
@@ -59,14 +65,14 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label"><small>设置密码:</small></label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="Password" placeholder="设置密码">
+                    <input type="password" class="form-control password" id="Password" placeholder="设置密码">
                     <span class="help-block">8-30位字符包含数字和英文字符</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label"><small>确认密码:</small></label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="CPassword" placeholder="确认密码">
+                    <input type="password" class="form-control password" id="CPassword" placeholder="确认密码">
                     <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
                 </div>
             </div>
@@ -81,7 +87,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
-                    <div id="submit" class="btn btn-primary">提交注册</div>
+                    <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
                 </div>
             </div>
         </form>
