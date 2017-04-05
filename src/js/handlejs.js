@@ -1,10 +1,10 @@
 define(['jquery', 'MSG'], function() {
     var Opt = {
-        userNameTrue: false;
-        telTrue: false;
-        emailTrue: false;
-        validateTrue: false;
-        pwdTrue: false;
+        userNameTrue: false,
+        telTrue: false,
+        emailTrue: false,
+        validateTrue: false,
+        pwdTrue: false
     };
     var CheckFunc = function() {
         this.$userName = $("#userName");
