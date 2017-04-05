@@ -1,1 +1,236 @@
-define(["jquery","MSG"],function(){var e={Opt:!1},t={telTrue:!1,emaliTrue:!1,validateTrue:!1},a=function(){this.$userName=$("#userName"),this.$Tel=$("input[type='tel']"),this.$Email=$("input[type='email']"),this.$validateCode=$("#validateCode"),this.$codeimg=$("#codeimg"),this.$reloadBtn=$("#reloadBtn"),this.$Password=$(".password"),this.$SubmitBtn=$("#submit"),userNamTrue=!1,telTrue=!1,emailTrue=!1,validateTrue=!1,pwdTrue=!1,this.init()};a.prototype={init:function(){this.listen()},optMsg:function(e,t,a){t===!0?(e.parents(".form-group").addClass("has-success"),e.next(".help-block").html(MSG.true)):(e.parents(".form-group").addClass("has-error"),e.next(".help-block").html(MSG.false+MSG[a]))},optresult:function(){console.log("opt"),console.log(t.telTrue+"++++"+t.userTrue),e.Opt=t.telTrue&&t.userTrue},checkuserName:function(){var e=this,a=e.$userName.val();/^[a-zA-Z][a-zA-Z0-9_]{2,19}$/.test(a)?$.ajax({url:"/checkTel",type:"GET",dataType:"json",data:{attributeName:"userName",attributeValue:a},success:function(t){t.result?(userNamTrue=!0,e.optMsg(e.$userNam,!0)):e.optMsg(e.$userNam,!1,202)}}):(userNamTrue=!1,t.userTrue=!0,e.optresult(),e.optMsg(e.$userName,!1,"102"))},checkTel:function(){var e=this,a=e.$Tel.val();/^(((13[0-9]{1})|(15[0-9]{1})|(17[678]{1})|(18[0-9]{1}))+\d{8})$/.test(a)&&11==a.length?$.ajax({url:"/checkTel",type:"GET",dataType:"json",data:{attributeName:"mobile",attributeValue:a},success:function(t){t.result?(telTrue=!0,e.optMsg(e.$Tel,!0)):(telTrue=!1,e.optMsg(e.$Tel,!1,203))}}):(telTrue=!1,t.telTrue=!0,e.optresult(),e.optMsg(e.$Tel,!1,202))},checkEmail:function(){var e=this,t=e.$Email.val();/^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i.test(t)?$.ajax({url:"/checkTel",type:"GET",dataType:"json",data:{attributeName:"email",attributeValue:t},success:function(t){t.result?(emailTrue=!0,e.optMsg(e.$Email,!0)):(emailTrue=!1,e.optMsg(e.$Email,!1,302))}}):(emailTrue=!1,e.optMsg(e.$Email,!1,302))},checkvalidateCode:function(){var e=this;$.ajax({url:"/checkTel",type:"GET",dataType:"json",data:{Code:e.$validateCode.val()},success:function(t){t.result?(validateTrue=!0,e.optMsg(e.$validateCode,!0)):(validateTrue=!1,e.optMsg(e.$validateCode,!1,302))}})},reloadvalidate:function(){var e=this;e.$validateCode.val(""),e.$codeimg.attr("src","http://www.ixm.gov.cn/dis/passport/authCode/show?"+Math.random()),validateTrue=!1},checkpassword:function(e){var t=this,a=t.$Password.val();/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/.test(a)?a.length<8||a.length>30?(pwdTrue=!1,t.optMsg(t.$Password,!1,502)):$.ajax({url:"/checkTel",type:"GET",dataType:"json",data:{userName:t.$userName.val()||"",password:a},success:function(e){e.result?(pwdTrue=!0,t.optMsg(t.$Password,!0)):(pwdTrue=!1,t.optMsg(t.$Password,!1,302))}}):(pwdTrue=!1,t.optMsg(t.$Password,!1,502))},confirmpwd:function(){alert("ok")},removeClass:function(e){e.parents(".form-group").removeClass("has-success has-warring has-error")},listen:function(){var t=this;t.$userName.on("blur",function(){t.checkuserName()}),t.$userName.on("focus",function(){t.removeClass($(this)),$(this).next(".help-block").html(MSG[101])}),t.$Tel.on("blur",function(){t.checkTel()}),t.$Tel.on("focus",function(){t.removeClass($(this)),$(this).next(".help-block").html(MSG[201])}),t.$validateCode.on("blur",function(){t.checkvalidateCode($(this))}),t.$validateCode.on("focus",function(){t.removeClass($(this)),$(this).next(".help-block").html(MSG[401])}),t.$codeimg.on("click",function(){t.reloadvalidate($(this))}),t.$reloadBtn.on("click",function(){t.reloadvalidate($(this))}),t.$Email.on("blur",function(){t.checkEmail()}),t.$Email.on("focus",function(){t.removeClass($(this)),$(this).next(".help-block").html(MSG[301])}),t.$Password.on("blur",function(){t.checkpassword()}),t.$Password.on("focus",function(){t.removeClass($(this)),$(this).next(".help-block").html(MSG[501])}),t.$SubmitBtn.on("click",function(){}),Object.defineProperty(e,"Opt",{set:function(e){console.log("oooooopus"+e),e&&console.log("你要赋值给我,我的新值是"+e)}})}},window.checkFunc=new a});
+define(['jquery', 'MSG'], function() {
+    var Opt = {
+        userNameTrue: false;
+        telTrue: false;
+        emailTrue: false;
+        validateTrue: false;
+        pwdTrue: false;
+    };
+    var CheckFunc = function() {
+        this.$userName = $("#userName");
+        this.$Tel = $("input[type='tel']");
+        this.$Email = $("input[type='email']");
+        this.$validateCode = $("#validateCode");
+        this.$codeimg = $("#codeimg");
+        this.$reloadBtn = $("#reloadBtn");
+        this.$Password = $(".password");
+        this.$SubmitBtn = $("#submit");
+        this.init(); //定义声明，默认执行函数
+    };
+    CheckFunc.prototype = {
+        init: function() { //默认执行的函数功能汇总
+            this.listen();
+        },
+        //操作结果通用提示工具
+        optMsg: function(Obj, boolean, MSGnum) {
+            if (boolean === true) {
+                Obj.parents('.form-group').addClass('has-success');
+                Obj.next('.help-block').html(MSG["true"]);
+            } else {
+                Obj.parents('.form-group').addClass('has-error');
+                Obj.next('.help-block').html(MSG["false"] + MSG[MSGnum]);
+            }
+        },
+        //用户名唯一性校验
+        checkuserName: function() { //定义功能函数
+            var that = this;
+            var userNameVal = that.$userName.val();
+            var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
+            if (!userNameRE.test(userNameVal)) {
+                Opt.userNameTrue = false;
+                that.optMsg(that.$userName, false, "102");
+            } else {
+                $.ajax({
+                    url: '/checkTel',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'attributeName': 'userName',
+                        'attributeValue': userNameVal
+                    },
+                    success: function(data) {
+                        if (data.result) {
+                            Opt.userNameTrue = true;
+                            that.optMsg(that.$userName, true);
+                        } else {
+                            that.optMsg(that.$userName, false, 202);
+                        }
+                    }
+                });
+            }
+        },
+        //手机唯一性校验
+        checkTel: function() {
+            var that = this;
+            var TelVal = that.$Tel.val();
+            var telVal = /^(((13[0-9]{1})|(15[0-9]{1})|(17[678]{1})|(18[0-9]{1}))+\d{8})$/;
+            if (!telVal.test(TelVal) || TelVal.length != 11) {
+                Opt.telTrue = true;
+                that.optMsg(that.$Tel, false, 202);
+            } else {
+                $.ajax({
+                    url: '/checkTel',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'attributeName': 'mobile',
+                        'attributeValue': TelVal
+                    },
+                    success: function(data) {
+                        if (data.result) {
+                            Opt.telTrue = true;
+                            that.optMsg(that.$Tel, true);
+                        } else {
+                            telTrue = false;
+                            that.optMsg(that.$Tel, false, 203);
+                        }
+                    }
+                });
+            }
+        },
+        //邮箱唯一性校验
+        checkEmail: function() {
+            var that = this;
+            var EmailVal = that.$Email.val();
+            var emailVal = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
+            if (!emailVal.test(EmailVal)) {
+                Opt.emailTrue = false;
+                that.optMsg(that.$Email, false, 302);
+            } else {
+                $.ajax({
+                    url: '/checkTel',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'attributeName': 'email',
+                        'attributeValue': EmailVal
+                    },
+                    success: function(data) {
+                        if (data.result) {
+                            Opt.emailTrue = true;
+                            that.optMsg(that.$Email, true);
+                        } else {
+                            emailTrue = false;
+                            that.optMsg(that.$Email, false, 302);
+                        }
+                    }
+                });
+            }
+        },
+        checkvalidateCode: function() {
+            var that = this;
+            $.ajax({
+                url: '/checkTel',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'Code': that.$validateCode.val()
+                },
+                success: function(data) {
+                    if (data.result) {
+                        Opt.validateTrue = true;
+                        that.optMsg(that.$validateCode, true);
+                    } else {
+                        Opt.validateTrue = false;
+                        that.optMsg(that.$validateCode, false, 302);
+                    }
+                }
+            });
+        },
+        //刷新图片验证码
+        reloadvalidate: function() {
+            var that = this;
+            that.$validateCode.val("");
+            that.$codeimg.attr('src', 'http://www.ixm.gov.cn/dis/passport/authCode/show?' + Math.random());
+            validateTrue = false;
+        },
+        //密码安全性校验
+        checkpassword: function(argument) {
+            var that = this;
+            var pwdVal = that.$Password.val();
+            var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
+            if (!pwdRE.test(pwdVal)) {
+                Opt.pwdTrue = false;
+                that.optMsg(that.$Password, false, 502);
+            } else if (pwdVal.length < 8 || pwdVal.length > 30) {
+                Opt.pwdTrue = false;
+                that.optMsg(that.$Password, false, 502);
+            } else {
+                $.ajax({
+                    url: '/checkTel',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'userName': that.$userName.val() || '',
+                        'password': pwdVal
+                    },
+                    success: function(data) {
+                        if (data.result) {
+                            Opt.pwdTrue = true;
+                            that.optMsg(that.$Password, true);
+                        } else {
+                            Opt.pwdTrue = false;
+                            that.optMsg(that.$Password, false, 302);
+                        }
+                    }
+                });
+            }
+        },
+        //再次确认密码
+        confirmpwd: function() {
+            alert('ok');
+        },
+        //提示复位清除样式
+        removeClass: function(Obj) {
+            Obj.parents('.form-group').removeClass("has-success has-warring has-error");
+        },
+        listen: function() { //设置监听
+            var that = this;
+            that.$userName.on("blur", function() {
+                that.checkuserName();
+            });
+            that.$userName.on("focus", function() {
+                that.removeClass($(this));
+                $(this).next('.help-block').html(MSG["101"]);
+            });
+            that.$Tel.on("blur", function() {
+                that.checkTel();
+            });
+            that.$Tel.on("focus", function() {
+                that.removeClass($(this));
+                $(this).next('.help-block').html(MSG["201"]);
+            });
+            that.$validateCode.on("blur", function() {
+                that.checkvalidateCode($(this));
+            });
+            that.$validateCode.on("focus", function() {
+                that.removeClass($(this));
+                $(this).next('.help-block').html(MSG["401"]);
+            });
+            that.$codeimg.on("click", function() {
+                that.reloadvalidate($(this));
+            });
+            that.$reloadBtn.on("click", function() {
+                that.reloadvalidate($(this));
+            });
+            that.$Email.on("blur", function() {
+                that.checkEmail();
+            });
+            that.$Email.on("focus", function() {
+                that.removeClass($(this));
+                $(this).next('.help-block').html(MSG["301"]);
+            });
+            that.$Password.on("blur", function() {
+                that.checkpassword();
+            });
+            that.$Password.on("focus", function() {
+                that.removeClass($(this));
+                $(this).next('.help-block').html(MSG["501"]);
+            });
+            that.$SubmitBtn.on("click", function() {
+                //that.checkTel();
+            });
+        }
+    };
+    window.checkFunc = new CheckFunc();
+});

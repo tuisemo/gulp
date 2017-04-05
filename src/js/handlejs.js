@@ -1,12 +1,10 @@
 define(['jquery', 'MSG'], function() {
-    var begin, end;
-    var Optrequest = {
-        Opt: false
-    };
-    var Resultboolean = {
-        telTrue: false,
-        emaliTrue: false,
-        validateTrue: false
+    var Opt = {
+        userNameTrue: false;
+        telTrue: false;
+        emailTrue: false;
+        validateTrue: false;
+        pwdTrue: false;
     };
     var CheckFunc = function() {
         this.$userName = $("#userName");
@@ -17,11 +15,6 @@ define(['jquery', 'MSG'], function() {
         this.$reloadBtn = $("#reloadBtn");
         this.$Password = $(".password");
         this.$SubmitBtn = $("#submit");
-        userNamTrue = false;
-        telTrue = false;
-        emailTrue = false;
-        validateTrue = false;
-        pwdTrue = false;
         this.init(); //定义声明，默认执行函数
     };
     CheckFunc.prototype = {
@@ -38,20 +31,13 @@ define(['jquery', 'MSG'], function() {
                 Obj.next('.help-block').html(MSG["false"] + MSG[MSGnum]);
             }
         },
-        optresult: function() {
-            console.log("opt");
-            console.log(Resultboolean.telTrue+'++++'+Resultboolean.userTrue);
-            Optrequest.Opt = Resultboolean.telTrue && Resultboolean.userTrue;
-        },
         //用户名唯一性校验
         checkuserName: function() { //定义功能函数
             var that = this;
             var userNameVal = that.$userName.val();
             var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
             if (!userNameRE.test(userNameVal)) {
-                userNamTrue = false;
-                Resultboolean.userTrue = true;
-                that.optresult();
+                Opt.userNameTrue = false;
                 that.optMsg(that.$userName, false, "102");
             } else {
                 $.ajax({
@@ -64,10 +50,10 @@ define(['jquery', 'MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            userNamTrue = true;
-                            that.optMsg(that.$userNam, true);
+                            Opt.userNameTrue = true;
+                            that.optMsg(that.$userName, true);
                         } else {
-                            that.optMsg(that.$userNam, false, 202);
+                            that.optMsg(that.$userName, false, 202);
                         }
                     }
                 });
@@ -79,9 +65,7 @@ define(['jquery', 'MSG'], function() {
             var TelVal = that.$Tel.val();
             var telVal = /^(((13[0-9]{1})|(15[0-9]{1})|(17[678]{1})|(18[0-9]{1}))+\d{8})$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
-                telTrue = false;
-                Resultboolean.telTrue = true;
-                that.optresult();
+                Opt.telTrue = true;
                 that.optMsg(that.$Tel, false, 202);
             } else {
                 $.ajax({
@@ -94,7 +78,7 @@ define(['jquery', 'MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            telTrue = true;
+                            Opt.telTrue = true;
                             that.optMsg(that.$Tel, true);
                         } else {
                             telTrue = false;
@@ -110,7 +94,7 @@ define(['jquery', 'MSG'], function() {
             var EmailVal = that.$Email.val();
             var emailVal = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
             if (!emailVal.test(EmailVal)) {
-                emailTrue = false;
+                Opt.emailTrue = false;
                 that.optMsg(that.$Email, false, 302);
             } else {
                 $.ajax({
@@ -123,7 +107,7 @@ define(['jquery', 'MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            emailTrue = true;
+                            Opt.emailTrue = true;
                             that.optMsg(that.$Email, true);
                         } else {
                             emailTrue = false;
@@ -144,10 +128,10 @@ define(['jquery', 'MSG'], function() {
                 },
                 success: function(data) {
                     if (data.result) {
-                        validateTrue = true;
+                        Opt.validateTrue = true;
                         that.optMsg(that.$validateCode, true);
                     } else {
-                        validateTrue = false;
+                        Opt.validateTrue = false;
                         that.optMsg(that.$validateCode, false, 302);
                     }
                 }
@@ -166,10 +150,10 @@ define(['jquery', 'MSG'], function() {
             var pwdVal = that.$Password.val();
             var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
             if (!pwdRE.test(pwdVal)) {
-                pwdTrue = false;
+                Opt.pwdTrue = false;
                 that.optMsg(that.$Password, false, 502);
             } else if (pwdVal.length < 8 || pwdVal.length > 30) {
-                pwdTrue = false;
+                Opt.pwdTrue = false;
                 that.optMsg(that.$Password, false, 502);
             } else {
                 $.ajax({
@@ -182,10 +166,10 @@ define(['jquery', 'MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            pwdTrue = true;
+                            Opt.pwdTrue = true;
                             that.optMsg(that.$Password, true);
                         } else {
-                            pwdTrue = false;
+                            Opt.pwdTrue = false;
                             that.optMsg(that.$Password, false, 302);
                         }
                     }
@@ -245,15 +229,6 @@ define(['jquery', 'MSG'], function() {
             });
             that.$SubmitBtn.on("click", function() {
                 //that.checkTel();
-            });
-            //使用Object.defineProperty对变量实时监听
-            Object.defineProperty(Optrequest, "Opt", {
-                set: function(newValue) {
-                	console.log('oooooopus'+newValue);
-                    if (newValue) {
-                        console.log("你要赋值给我,我的新值是" + newValue);
-                    }
-                }
             });
         }
     };
