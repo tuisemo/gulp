@@ -64,7 +64,7 @@ gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
             basepath: '@file',
             indent: true
         }))
-        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/bootstrapStyle.css', './src/css/Style.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/bootstrapStyle.css', './src/css/Style.css','./src/css/jquery.fileupload.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
