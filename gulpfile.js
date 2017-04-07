@@ -60,11 +60,11 @@ gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
         }))
         .pipe(fileinclude({
             prefix: '<!--IEhack@',
-            suffix:'-->',
+            suffix: '-->',
             basepath: '@file',
             indent: true
         }))
-        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/bootstrapStyle.css', './src/css/Style.css','./src/css/jquery.fileupload.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/bootstrapStyle.css', './src/css/Style.css', './src/css/jquery.fileupload.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
@@ -109,14 +109,14 @@ gulp.task('CSSspriter', function() {
 // 合并，压缩文件
 gulp.task('scripts', function() {
     gulp.src('./src/js/*.js')
-        //.pipe(concat('all.js'))
         .pipe(gulp.dest('./dist/js'))
-        //.pipe(rename('all.min.js'))
         .pipe(jsmin())
         .pipe(gulp.dest('./dist/js'));
-    gulp.src('./src/js/lib/*.js')
-        .pipe(jsmin())
+    gulp.src('./src/js/lib/*.js') //库文件不再压缩
+        //.pipe(jsmin())
         .pipe(gulp.dest('./dist/js/lib'));
+    gulp.src('./src/js/main.js')
+        .pipe(gulp.dest('./dist/js'));
 });
 
 // 默认任务

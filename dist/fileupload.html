@@ -71,9 +71,9 @@
         </div>
     </div>
 
-    <script data-main="./js/main" src="./js/lib/require.js"></script>
+    <script src="./js/lib/require.js"></script>
     <script>
-    require(['jquery.fileupload', 'jquery.iframe-transport', 'jquery.ui.widget'], function() {
+    require(['MSG','HHWebUploader','iframetransport', 'widget','loadimage'], function() {
         $('#fileupload').fileupload({
                 url: '/upload',
                 dataType: 'json',

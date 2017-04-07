@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件上传</title>
+    <link rel="stylesheet" type="text/css" href="./css/webuploader.css" />
+    <!-- inject:base:css -->
+    <!-- endinject -->
+    <!--IEhack@include('./include/IEhack.html')-->
+</head>
+
+<body>
+    @@include('./include/header.html')
+    <div class="container wrap">
+        <div id="uploader-demo">
+            <!--用来存放item-->
+            <div id="fileList" class="uploader-list"></div>
+            <div id="filePicker" class="">选择图片</div>
+        </div>
+    </div>
+    @@include('./include/footer.html')
+    <script data-main="./js/main" src="./js/lib/require.js"></script>
+    <script>
+    require(['upload'], function() {
+
+    });
+    </script>
+</body>
+
+</html>
