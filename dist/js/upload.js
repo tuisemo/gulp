@@ -1,1 +1,92 @@
-define(["WebUploader"],function(e){var i=$("#fileList"),n=window.devicePixelRatio||1,a=100*n,s=100*n,d=e.create({auto:!0,swf:"../css/Uploader.swf",server:"../upload",pick:"#filePicker",accept:{title:"Images",extensions:"gif,jpg,jpeg,bmp,png",mimeTypes:"image/jpg,image/jpeg,image/png"},resize:!1});d.on("fileQueued",function(e){var n=$('<div id="'+e.id+'" class="file-item thumbnail"><img><div class="info">'+e.name+"</div></div>"),o=n.find("img");i.append(n),d.makeThumb(e,function(e,i){if(e)return void o.replaceWith("<span>不能预览</span>");o.attr("src",i)},a,s)}),d.on("uploadProgress",function(e,i){var n=$("#"+e.id),a=n.find(".progress span");a.length||(a=$('<p class="progress"><span></span></p>').appendTo(n).find("span")),a.css("width",100*i+"%")}),d.on("uploadSuccess",function(e){$("#"+e.id).addClass("upload-state-done")}),d.on("uploadError",function(e){var i=$("#"+e.id),n=i.find("div.error");n.length||(n=$('<div class="error"></div>').appendTo(i)),n.text("上传失败")}),d.on("uploadComplete",function(e){$("#"+e.id).find(".progress").remove()})});
+define(['jquery','脚本WebUploader'], function(jquery,WebUploader) {
+    var $list = $('#fileList'),
+        // 优化retina, 在retina下这个值是2
+        ratio = window.devicePixelRatio || 1,
+        // 缩略图大小
+        thumbnailWidth = 100 * ratio,
+        thumbnailHeight = 100 * ratio;
+
+    var uploader = WebUploader.create({
+        auto: true,
+        // swf文件路径
+        swf: './css/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '../upload',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png' 
+        },
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
+    });
+    // 当有文件添加进来的时候
+    uploader.on('fileQueued', function(file) {
+        var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '<div class="info">' + file.name + '</div>' +
+                '</div>'
+            ),
+            $img = $li.find('img');
+
+
+        // $list为容器jQuery实例
+        $list.append($li);
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb(file, function(error, src) {
+            if (error) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+            $img.attr('src', src);
+        }, thumbnailWidth, thumbnailHeight);
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function(file, percentage) {
+        var $li = $('#' + file.id),
+            $percent = $li.find('.progress span');
+
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo($li)
+                .find('span');
+        }
+
+        $percent.css('width', percentage * 100 + '%');
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on('uploadSuccess', function(file) {
+        $('#' + file.id).addClass('upload-state-done');
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on('uploadError', function(file) {
+        var $li = $('#' + file.id),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if (!$error.length) {
+            $error = $('<div class="error"></div>').appendTo($li);
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on('uploadComplete', function(file) {
+        $('#' + file.id).find('.progress').remove();
+    });
+
+});

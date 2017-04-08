@@ -1,1 +1,0 @@
-require.config({baseUrl:"js",paths:{jquery:"./lib/jquery",lodash:"./lib/lodash",layer:"./lib/layer",MSG:"./MSG",handlejs:"./handlejs",fileupload:"./fileuploadjs",iframetransport:"./jquery_iframe_transport",widget:"./jquery_ui_widget",loadimage:"./load_image_all_min",HHWebUploader:"./WebUploader",upload:"./upload"}});

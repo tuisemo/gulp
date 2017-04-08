@@ -10,15 +10,11 @@ require.config({
     baseUrl: "../js",
     paths: {
         jquery: "./lib/jquery",
-        lodash: "./lib/lodash",
-        layer: "./lib/layer",
-        MSG: "./MSG",
-        handlejs: "./handlejs",
-        fileupload: "./fileuploadjs",
-        iframetransport: "./jquery_iframe_transport",
-        widget: "./jquery_ui_widget",
-        loadimage: "./load_image_all_min",
-        HHWebUploader: "./WebUploader",
-        upload: "./upload"
+        脚本lodash: "./lib/lodash",
+        脚本layer: "./lib/layer",
+        脚本MSG: "./MSG",
+        脚本handlejs: "./handlejs",
+        脚本WebUploader: "./lib/WebUploader",
+        脚本upload: "./upload"
     }
 });

@@ -1,4 +1,4 @@
-define(['WebUploader'], function(WebUploader) {
+define(['jquery','脚本WebUploader'], function(jquery,WebUploader) {
     var $list = $('#fileList'),
         // 优化retina, 在retina下这个值是2
         ratio = window.devicePixelRatio || 1,
@@ -9,7 +9,7 @@ define(['WebUploader'], function(WebUploader) {
     var uploader = WebUploader.create({
         auto: true,
         // swf文件路径
-        swf: '../css/Uploader.swf',
+        swf: './css/Uploader.swf',
 
         // 文件接收服务端。
         server: '../upload',
