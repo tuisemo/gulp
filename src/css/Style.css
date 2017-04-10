@@ -74,17 +74,22 @@ body {
   display: inline-block;
   position: relative;
   float: left;
-  width: 80px;
   padding: 0 15px;
 }
 #header .header-nav .nav-menu li a {
   display: block;
   font-size: 16px;
-  color: #333;
+  color: #007fff;
   text-align: center;
 }
 #header .header-nav .nav-menu li a:hover {
-  color: #a2a2a2;
+  color: #6feeff;
+}
+#header .header-nav .nav-menu li span {
+  display: inline-block;
+  position: relative;
+  padding: 0px 5px;
+  color: #007fff;
 }
 #header .header-nav .nav-menu:after {
   clear: both;
@@ -96,10 +101,13 @@ body {
 }
 .wrap {
   margin-top: -100px;
-  margin-bottom: -130px;
+  margin-bottom: -131px;
   padding-top: 100px;
-  padding-bottom: 130px;
+  padding-bottom: 131px;
   min-height: 100%;
+}
+.form-group .help-block {
+  margin-bottom: 0;
 }
 /* 底部自定义样式 */
 #footer {
