@@ -1,42 +1,62 @@
-define(['脚本lodash'], function() {
+define(['脚本layer'], function() {
     var tool = function() {
-        this.$body = $("body");
+        this.$header = $("#header");
+        this.$headercon = $("#header .container");
         this.init();
     };
     tool.prototype = {
         init: function() {
             this.Alltemplate();
-            this.handleSucc();
+            this.loginCheck();
+        },
+        //检查登录状态
+        loginCheck: function() {
+            var that = this;
+            $.ajax({
+                url: 'www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp?callback=ssoUser_for_login',
+                type: 'GET',
+                dataType: 'jsonp',
+                data: {},
+                success: function(data) {
+                    that.loginDraw(data.result,data.user.info);
+                },
+                error: function() {
+                    that.loginDraw(false);
+                    return false;
+                }
+            });
         },
         //初始化全部模板
         Alltemplate: function() {
             var that = this;
-            that.TMPhandle = _.template(
-                '    <div class="modal fade" id="TMPhandle" tabindex="-1" role="dialog" aria-labelledby="TMPhandle">' +
-                '        <div class="modal-dialog modal-sm" role="document">' +
-                '            <div class="modal-content alert-success">' +
-                '                <div class="modal-header">' +
-                '                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                '                    <p class="modal-title"><%=title%></p>' +
-                '                </div>' +
-                '                <div class="modal-body">' +
-                '                    <h3 class="text-c"><%= body%></h3>' +
-                '                </div>' +
-                '                <div class="modal-footer">' +
-                '                    <div type="button" class="btn btn-sm btn-default" data-dismiss="modal">关闭</div>' +
-                '                </div>' +
-                '            </div>' +
-                '        </div>' +
-                '    </div'
+            that.TMPheader = _.template(
+                //'        <a href="/">' +
+                //'            <div class="logo"></div>' +
+                //'        </a>' +
+                '        <nav class="header-nav col-sm-8 hidden-xs">' +
+                '            <ul class="nav-menu fr">' +
+                '<% if (!haslogin) { %>' +
+                '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
+                '                <li id="loginbox" class="nav-li">' +
+                '                    <span><a href="/">登录</a></span>&nbsp;|' +
+                '                    <span><a href="/">注册</a></span>' +
+                '                </li>' +
+                '<% } else { %>' +
+                '                <li id="hasloginbox" class="nav-li">' +
+                '                    <span><a href="/"><%=userName%></a></span>&nbsp;|' +
+                '                    <span><a href="/">退出</a></span>' +
+                '                </li>' +
+                '<% } %>' +
+                '            </ul>' +
+                '        </nav>'
             );
         },
-        handleSucc: function() {
+        loginDraw: function(haslogin, userName) {
             var that = this;
-            that.$body.append(that.TMPhandle({
-                title: "测试数据",
-                body: "测试发送的山东航空数据"
+            that.$headercon.append(that.TMPheader({
+                haslogin: haslogin,
+                userName: userName
             }));
-            $("#TMPhandle").modal('show');
         }
     };
     window.tool = new tool();

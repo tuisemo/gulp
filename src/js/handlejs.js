@@ -1,4 +1,4 @@
-define(['jquery', '脚本MSG'], function() {
+define(['脚本MSG'], function() {
     var Opt = {
         userNameTrue: false,
         telTrue: false,
