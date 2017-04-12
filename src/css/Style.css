@@ -79,17 +79,17 @@ body {
 #header .header-nav .nav-menu li a {
   display: block;
   font-size: 16px;
-  color: #007fff;
+  color: #333;
   text-align: center;
 }
 #header .header-nav .nav-menu li a:hover {
-  color: #6feeff;
+  color: #a2a2a2;
 }
 #header .header-nav .nav-menu li span {
   display: inline-block;
   position: relative;
   padding: 0px 5px;
-  color: #007fff;
+  color: #333;
 }
 #header .header-nav .nav-menu:after {
   clear: both;
@@ -102,9 +102,21 @@ body {
 .wrap {
   margin-top: -100px;
   margin-bottom: -131px;
-  padding-top: 100px;
+  padding-top: 130px;
   padding-bottom: 131px;
   min-height: 100%;
+}
+.login-form {
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+.login-form .form-title {
+  margin-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 24px;
+  line-height: 1.42857143;
+  border-bottom: 2px solid #eee;
 }
 .form-group .help-block {
   margin-bottom: 0;

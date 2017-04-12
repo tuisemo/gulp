@@ -1,4 +1,4 @@
-define(['脚本layer'], function() {
+define(['脚本layer'], function(layer) {
     var tool = function() {
         this.$header = $("#header");
         this.$headercon = $("#header .container");

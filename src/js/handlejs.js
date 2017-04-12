@@ -63,7 +63,7 @@ define(['脚本MSG'], function() {
         checkTel: function() {
             var that = this;
             var TelVal = that.$Tel.val();
-            var telVal = /^(((13[0-9]{1})|(15[0-9]{1})|(17[678]{1})|(18[0-9]{1}))+\d{8})$/;
+            var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
                 Opt.telTrue = true;
                 that.optMsg(that.$Tel, false, 202);

@@ -14,83 +14,86 @@
 <body>
     @@include('./include/header.html')
     <div class="container wrap">
-        <form class="form-horizontal col-sm-5 col-xs-12 pad-t30">
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>用户名:</small></label>
-                <div class="col-sm-9">
-                    <input id="userName" type="text" class="form-control" placeholder="用户名">
-                    <span class="help-block">以英文字母开头，可包含3-20个字符</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>手机:</small></label>
-                <div class="col-sm-9">
-                    <input type="tel" class="form-control" id="inputTel" placeholder="手机">
-                    <span class="help-block">请输入您的手机号(仅支持中国大陆)</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>图片验证码:</small></label>
-                <div class="col-sm-9">
-                    <div class="input-group">
-                        <input id="validateCode" type="text" class="form-control" placeholder="图片验证码">
-                        <div class="input-group-btn">
-                            <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
-                            <div id="reloadBtn" class="btn btn-default">刷新</div>
-                        </div>
+        <div class="col-sm-5 col-xs-12 login-form">
+            <div class="col-sm-12 form-title">Sign Up<a href="/"><span>港澳台侨外人员注册</span></a></div>
+            <form class="form-horizontal col-xs-12 row">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>用户名:</small></label>
+                    <div class="col-sm-9">
+                        <input id="userName" type="text" class="form-control" placeholder="用户名">
+                        <span class="help-block">以英文字母开头，可包含3-20个字符</span>
                     </div>
-                    <span class="help-block">如校验错误可尝试刷新</span>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
-                <div class="col-sm-9">
-                    <div class="input-group ">
-                        <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
-                        <span class="input-group-btn">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>手机:</small></label>
+                    <div class="col-sm-9">
+                        <input type="tel" class="form-control" id="inputTel" placeholder="手机">
+                        <span class="help-block">请输入您的手机号(仅支持中国大陆)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>图片验证码:</small></label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input id="validateCode" type="text" class="form-control" placeholder="图片验证码">
+                            <div class="input-group-btn">
+                                <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                <div id="reloadBtn" class="btn btn-default">刷新</div>
+                            </div>
+                        </div>
+                        <span class="help-block">如校验错误可尝试刷新</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
+                            <span class="input-group-btn">
                             <div id="sendmsg" class="btn btn-primary" style="display:none;" onclick="sendMsgFor('01','Citizen')">发送校验码</div>
                             <div id="msgtimer" class="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div>
                         </span>
+                        </div>
+                        <span class="help-block">请输入您收到的验证码</span>
                     </div>
-                    <span class="help-block">请输入您收到的验证码</span>
                 </div>
-            </div>
-            <!--             <div class="form-group">
+                <!--             <div class="form-group">
     <label class="col-sm-2 control-label">邮箱:</label>
     <div class="col-sm-10">
         <input type="email" class="form-control" id="inputEmail" placeholder="Email">
         <span class="help-block">请输入您的邮箱地址</span>
     </div>
 </div> -->
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>设置密码:</small></label>
-                <div class="col-sm-9">
-                    <input type="password" class="form-control password" id="Password" placeholder="设置密码">
-                    <span class="help-block">8-30位字符包含数字和英文字符</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><small>确认密码:</small></label>
-                <div class="col-sm-9">
-                    <input type="password" class="form-control password" id="CPassword" placeholder="确认密码">
-                    <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"><small>我已阅读并接受 <a href="/">“市民通行证”服务协议</a></small>
-                        </label>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>设置密码:</small></label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control password" id="Password" placeholder="设置密码">
+                        <span class="help-block">8-30位字符包含数字和英文字符</span>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><small>确认密码:</small></label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control password" id="CPassword" placeholder="确认密码">
+                        <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"><small>我已阅读并接受 <a href="/">“市民通行证”服务协议</a></small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     @@include('./include/footer.html')
     <!-- inject:none:js -->
@@ -98,7 +101,7 @@
 </body>
 <script src="js/lib/require.js"></script>
 <script>
-require(['脚本handlejs','脚本tool'], function() {});
+require(['脚本handlejs', '脚本tool'], function() {});
 </script>
 
 </html>
