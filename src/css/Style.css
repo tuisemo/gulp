@@ -109,14 +109,20 @@ body {
 .login-form {
   border: 1px solid #eee;
   border-radius: 5px;
+  background-color: #fff;
 }
 .login-form .form-title {
   margin-bottom: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1.42857143;
   border-bottom: 2px solid #eee;
+}
+.login-form .form-title span.smalltitle {
+  position: relative;
+  float: right;
+  font-size: 12px;
 }
 .form-group .help-block {
   margin-bottom: 0;
