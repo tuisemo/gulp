@@ -21,12 +21,14 @@ require.config({
     baseUrl: "../js",
     paths: {
         //jquery: "./lib/jquery",
+        vue: "./lib/vue",
         //脚本lodash: "./lib/lodash",
         脚本layer: "./lib/layer",
         脚本MSG: "./MSG",
         脚本handlejs: "./handlejs",
         脚本WebUploader: "./lib/WebUploader",
         脚本upload: "./upload",
-        脚本tool: "./tool"
+        脚本tool: "./tool",
+        脚本vueController: "./vueController"
     }
 });

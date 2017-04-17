@@ -71,6 +71,7 @@ gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
         }))
         .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/PassportStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         .pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/js/lib/vue.js'], { reda: false }), { starttag: '<!-- inject:vue:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
 //格式化html
