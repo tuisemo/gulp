@@ -15,16 +15,24 @@
     @@include('./include/header.html')
     <div class="container wrap">
         <div id="app">
-            {{ message }}
+            <div class="col-xs-3" v-for="list in lists">
+                <img v-bind:data-original="list.imgsrc" class="lazy" />
+                <!-- <img v-bind:src="list.imgsrc" class="lazy" /> -->
+                <p>{{ list.title }}</p>
+            </div>
+            <div class="col-xs-3">
+                <img v-if="inputfile.seen" v-bind:src="inputfile.src" />
+            </div>
+            <input type="file" v-on:change="uploadpic"/>
         </div>
     </div>
     @@include('./include/footer.html')
     <!-- inject:xxx:js -->
     <!-- endinject -->
-<script src="js/lib/require.js"></script>
-<script>
-require(['脚本vueController'], function() {});
-</script>    
+    <script src="js/lib/require.js"></script>
+    <script>
+    require(['脚本vueController'], function() {});
+    </script>
 </body>
 
 </html>

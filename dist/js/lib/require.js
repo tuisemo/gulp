@@ -22,6 +22,7 @@ require.config({
     paths: {
         //jquery: "./lib/jquery",
         vue: "./lib/vue",
+        脚本lazyload: "./lib/jquery.lazyload.min",
         //脚本lodash: "./lib/lodash",
         脚本layer: "./lib/layer",
         脚本MSG: "./MSG",

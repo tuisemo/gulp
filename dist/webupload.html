@@ -8,37 +8,12 @@
     <title>文件上传</title>
     <link rel="stylesheet" type="text/css" href="./css/webuploader.css" />
     <!-- inject:base:css -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
-        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
-        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+    <!--IEhack@include('./include/IEhack.html')-->
 </head>
 
 <body>
-    <div id="header">
-        <div class="container">
-            <a href="/">
-                <div class="logo"></div>
-            </a>
-            <!-- <nav class="header-nav col-sm-8 hidden-xs">
-        <ul class="nav-menu fr">
-            <li id="loginbox" class="nav-li">
-                <span><a href="/">登录</a></span>&nbsp;|
-                <span><a href="/">注册</a></span>
-            </li>
-            <li id="hasloginbox" class="nav-li">
-                <span><a href="/">你好，tui**mo</a></span>&nbsp;|
-                <span><a href="/">退出</a></span>
-            </li>
-        </ul>
-    </nav> -->
-        </div>
-    </div>
-
+    @@include('./include/header.html')
     <div class="container wrap">
         <div id="uploader-demo">
             <!--用来存放item-->
@@ -46,20 +21,12 @@
             <div id="filePicker" class="">选择图片</div>
         </div>
     </div>
-    <div id="footer" class="footer">
-        <div class="container">
-            <div class="col-sm-12 text-c">
-                <span id="_ideConac"><a href="/" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" src="//dcs.conac.cn/image/blue.png" data-bd-imgshare-binded="1"></a></span>
-                <small>主办：厦门市经济和信息化局&nbsp;&nbsp;&nbsp;&nbsp;运行管理：厦门市信息中心&nbsp;&nbsp;&nbsp;&nbsp;闽ICP备14010412号-1&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-earphone">：0592-5051516</span></small>
-            </div>
-        </div>
-    </div>
-
+    @@include('./include/footer.html')
     <script src="./js/lib/require.js"></script>
     <script>
-    require(['脚本upload'], function() {
+        require(['脚本upload'], function() {
 
-    });
+        });
     </script>
 </body>
 

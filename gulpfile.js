@@ -117,7 +117,7 @@ gulp.task('scripts', function() {
     gulp.src('./src/js/*.js')
         //.pipe(jsmin())
         .pipe(gulp.dest('./dist/js'));
-    gulp.src(['./src/js/lib/*.js', '!./src/js/lib/WebUploader.js']) //库文件不再压缩
+    gulp.src(['./src/js/lib/*.js', './src/js/lib/WebUploader.js']) //库文件不再压缩
         //.pipe(jsmin())
         .pipe(gulp.dest('./dist/js/lib'));
 });
