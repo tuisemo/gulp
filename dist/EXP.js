@@ -88,7 +88,8 @@ EXP.post('/upload', function(req, res) {
 //Ajax上传图片文件
 EXP.post('/uploadpic', function(req, res){
     //接收前台POST过来的base64
-    var imgData = req.body.imgData;
+    //需要 require('body-parser');中间件！！！
+    var imgData = req.body.name[imgData];
     console.log(req.body);
     //过滤data:URL
     var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
