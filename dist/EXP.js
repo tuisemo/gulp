@@ -39,7 +39,7 @@ EXP.post('/sever/data', function(req, res) {
 });
 //文件上传组件
 EXP.post('/upload', function(req, res) {
-    // parse a file upload  
+    // parse a file upload
     var form = new formidable.IncomingForm(),
         files = [],
         fields = [],
@@ -84,6 +84,22 @@ EXP.post('/upload', function(req, res) {
         console.log('parsing done');
     });
 
+});
+//Ajax上传图片文件
+EXP.post('/uploadpic', function(req, res){
+    //接收前台POST过来的base64
+    var imgData = req.body.imgData;
+    console.log(req.body);
+    //过滤data:URL
+    var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+    var dataBuffer = new Buffer(base64Data, 'base64');
+    fs.writeFile("image.png", dataBuffer, function(err) {
+        if(err){
+          res.send(err);
+        }else{
+          res.send("保存成功！");
+        }
+    });
 });
 //预置404
 EXP.use(function(req, res, next) {

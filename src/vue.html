@@ -22,8 +22,8 @@
             </div>
             <div class="col-xs-3">
                 <img v-if="inputfile.seen" v-bind:src="inputfile.src" />
+                <input type="file" v-on:change="uploadpic" />
             </div>
-            <input type="file" v-on:change="uploadpic"/>
         </div>
     </div>
     @@include('./include/footer.html')
