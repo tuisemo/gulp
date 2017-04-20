@@ -36,15 +36,15 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
                     console.log(e);
                     app.inputfile.seen = true;
                     app.inputfile.src = reader.result;
-/*                    var imgData = new FormData();
-                    imgData.append('imgData', reader.result);*/
-                    var imgData=reader.result;
+                    /*                    var imgData = new FormData();
+                                        imgData.append('imgData', reader.result);*/
+                    var imgData = reader.result;
                     $.ajax({
                             url: '/uploadpic',
                             type: 'POST',
                             //contentType: false,
                             //processData: false,
-                            data: imgData,
+                            data: { imgData: imgData },
                             success: function(data) {
                                 console.log(data);
                             }
