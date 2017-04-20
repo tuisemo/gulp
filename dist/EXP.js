@@ -91,21 +91,22 @@ EXP.post('/uploadpic', function(req, res) {
     //接收前台POST过来的base64
     //需要 require('body-parser');中间件！！！
     var imgData = req.body.imgData;
-    //console.log(imgData);
     //过滤data:URL
-    var REX = /(?<=data:image\/)\w+(?=\;base64,)/;
+    var REX = /\w+(?=\;base64,)/;
     var imgtype = imgData.match(REX);
     var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
     var dataBuffer = new Buffer(base64Data, 'base64');
-    var imgName = Math.random() + '.' + imgtype; 
-    console.log(imgName);
-fs.writeFile(imgName, dataBuffer, function(err) {
-    if (err) {
-        res.send(err);
-    } else {
-        res.send("保存成功！");
-    }
-});
+    var imgName = Math.random() + '.' + imgtype;
+    console.log('this picfile is ' + imgName);
+    fs.writeFile('tmp/' + imgName, dataBuffer, function(err) {
+        if (err) {
+            res.send(err);
+            console.log(err);
+        } else {
+            res.send("保存成功！");
+            console.log("image save succcess!");
+        }
+    });
 });
 //预置404
 EXP.use(function(req, res, next) {
