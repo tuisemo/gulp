@@ -29,11 +29,9 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
                 var that = this;
                 var element = obj.target;
                 var file = element.files[0];
-                console.log(file);
                 var reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = function(e) {
-                    console.log(e);
                     app.inputfile.seen = true;
                     app.inputfile.src = reader.result;
                     var imgData = reader.result;
