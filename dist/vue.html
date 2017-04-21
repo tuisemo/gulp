@@ -39,14 +39,18 @@
     </div>
 
     <div class="container wrap">
-        <div id="app">
+        <form class="form-horizontal col-sm-4 col-xs-8">
+            <input-username></input-username>
+            <input-tel></input-tel>
+            <input-validatecode></input-validatecode>
+        </form>
+        <div class="col-xs-8">
             <div class="col-xs-3" v-for="list in lists">
                 <img v-bind:data-original="list.imgsrc" class="lazy" />
-                <!-- <img v-bind:src="list.imgsrc" class="lazy" /> -->
                 <p>{{ list.title }}</p>
             </div>
             <div class="col-xs-3">
-                <img v-if="inputfile.seen" v-bind:src="inputfile.src" />
+                <img v-if="inputfile.seen" v-bind:src="inputfile.src" style="width: 100%;overflow:hidden; " />
                 <input type="file" v-on:change="uploadpic" />
             </div>
         </div>
@@ -60,11 +64,11 @@
         </div>
     </div>
 
-    <!-- inject:xxx:js -->
-    <!-- endinject -->
+    <!-- inject:require:js -->
     <script src="js/lib/require.js"></script>
+    <!-- endinject -->
     <script>
-    require(['脚本vueController'], function() {});
+    require(['脚本vuetools', '脚本vueController'], function() {});
     </script>
 </body>
 

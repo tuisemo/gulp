@@ -1,21 +1,22 @@
-define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
+define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue, Vuetmp) {
+ 
     var app = new Vue({
-        el: '#app',
+        el: '.wrap',
         data: {
             lists: [{
-                imgsrc: 'https://unsplash.it/200/200/?random=' + Math.random(),
+                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
             }, {
-                imgsrc: 'https://unsplash.it/200/200/?random=' + Math.random(),
+                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
             }, {
-                imgsrc: 'https://unsplash.it/200/200/?random=' + Math.random(),
+                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
             }, {
-                imgsrc: 'https://unsplash.it/200/200/?random=' + Math.random(),
+                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
             }, {
-                imgsrc: 'https://unsplash.it/200/200/?random=' + Math.random(),
+                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
             }],
             inputfile: {
@@ -57,6 +58,11 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
 
                 };
             }
+        },
+        components: {
+            'input-username': input_username,
+            'input-tel': input_tel,
+            'input-validatecode': input_validatecode
         }
     });
     window.app = app;

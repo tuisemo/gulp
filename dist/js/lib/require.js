@@ -30,6 +30,7 @@ require.config({
         脚本WebUploader: "./lib/WebUploader",
         脚本upload: "./upload",
         脚本tool: "./tool",
-        脚本vueController: "./vueController"
+        脚本vueController: "./vueController",
+        脚本vuetools: "./vuetools"
     }
 });

@@ -56,7 +56,7 @@ gulp.task('cssmin', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 //include公共文件
-gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
+gulp.task('fileinclude',/* ['less', 'cssmin', 'scripts'],*/ function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
@@ -70,8 +70,9 @@ gulp.task('fileinclude', ['less', 'cssmin', 'scripts'], function() {
             indent: true
         }))
         .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/PassportStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
-        .pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
-        .pipe(inject(gulp.src(['./src/js/lib/vue.js'], { reda: false }), { starttag: '<!-- inject:vue:{{ext}} -->', relative: true }))
+        //.pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        //.pipe(inject(gulp.src(['./src/js/lib/vue.js'], { reda: false }), { starttag: '<!-- inject:vue:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/js/lib/require.js'], { reda: false }), { starttag: '<!-- inject:require:{{ext}} -->', relative: true }))
         .pipe(gulp.dest('dist'));
 });
 //格式化html
