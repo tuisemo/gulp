@@ -1,5 +1,5 @@
-define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue, Vuetmp) {
- 
+define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
+
     var app = new Vue({
         el: '.wrap',
         data: {
@@ -22,10 +22,14 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue, Vuetmp) {
             inputfile: {
                 seen: false,
                 src: ""
+            },
+            validate:{
+            	imgsrc:'http://www.ixm.gov.cn/dis/passport/authCode/show'
             }
 
         },
         methods: {
+        	//Ajax-post方式，以base64格式上传图片文件
             uploadpic: function(obj) {
                 var that = this;
                 var element = obj.target;
@@ -60,9 +64,9 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue, Vuetmp) {
             }
         },
         components: {
-            'input-username': input_username,
-            'input-tel': input_tel,
-            'input-validatecode': input_validatecode
+            'input-username': Vuetemplate.input_username,
+            'input-tel': Vuetemplate.input_tel,
+            'input-validatecode': Vuetemplate.input_validatecode
         }
     });
     window.app = app;
