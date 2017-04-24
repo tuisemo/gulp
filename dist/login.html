@@ -135,7 +135,34 @@
 </body>
 <script src="js/lib/require.js"></script>
 <script>
-require(['脚本handlejs', '脚本tool'], function() {});
+require(['脚本handlejs', '脚本tool'], function() {
+ $.ajax({
+
+         type : "get", //jquey是不支持post方式跨域的
+
+         async:false,
+
+         url : "https://api.douban.com/v2/book/1220562", //跨域请求的URL
+
+         dataType : "jsonp",
+
+         //传递给请求处理程序，用以获得jsonp回调函数名的参数名(默认为:callback)
+
+         //jsonp: "jsoncallback",
+
+         //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+
+         //jsonpCallback:"success_jsonpCallback",
+
+         //成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+
+         success : function(json){ 
+
+             alert(json);   
+         } 
+     });
+    
+});
 </script>
 
 </html>

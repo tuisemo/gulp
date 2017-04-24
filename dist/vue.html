@@ -7,39 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HOME</title>
     <!-- inject:base:css -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
-        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
-        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+    <!--IEhack@include('./include/IEhack.html')-->
 </head>
 
 <body>
-    <div id="header">
-        <div class="container">
-            <a href="/">
-                <div class="logo"></div>
-            </a>
-            <!-- <nav class="header-nav col-sm-8 hidden-xs">
-        <ul class="nav-menu fr">
-            <li id="loginbox" class="nav-li">
-                <span><a href="/">登录</a></span>&nbsp;|
-                <span><a href="/">注册</a></span>
-            </li>
-            <li id="hasloginbox" class="nav-li">
-                <span><a href="/">你好，tui**mo</a></span>&nbsp;|
-                <span><a href="/">退出</a></span>
-            </li>
-        </ul>
-    </nav> -->
-        </div>
-    </div>
-
+    @@include('./include/header.html')
     <div class="container wrap">
         <form class="form-horizontal col-sm-4 col-xs-8">
+            <input-username></input-username>
+            <input-tel></input-tel>
+            <input-validatecode></input-validatecode>
+        </form>
+        <div class="col-xs-8">
+            <div class="col-xs-3" v-for="list in lists">
+                <img v-bind:data-original="list.imgsrc" class="lazy" />
+                <p>{{ list.title }}</p>
+            </div>
+            <div class="col-xs-3">
+                <img v-if="inputfile.seen" v-bind:src="inputfile.src" style="width: 100%;overflow:hidden; " />
+                <input type="file" v-on:change="uploadpic" />
+            </div>
+        </div>
+    </div>
+    @@include('./include/footer.html')
+    <!-- inject:require:js -->
+    <!-- endinject -->
+    <script>
+        require(['脚本vuetools', '脚本vueController'], function() {});
+    </script>
+</body>
+
+</html>form class="form-horizontal col-sm-4 col-xs-8">
             <input-username></input-username>
             <input-tel></input-tel>
             <input-validatecode></input-validatecode>
