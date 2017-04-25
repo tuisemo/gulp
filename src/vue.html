@@ -13,13 +13,14 @@
 
 <body>
     @@include('./include/header.html')
-    <div class="container wrap">
-        <form class="form-horizontal col-sm-4 col-xs-8">
-            <input-username></input-username>
-            <input-tel></input-tel>
-            <input-validatecode></input-validatecode>
-        </form>
+    <div class="wrap">
         <div class="col-xs-8">
+            <div class="input-group">
+                <input id="search" type="text" class="form-control" placeholder="请输入您要搜索的图书信息">
+                <div class="input-group-btn">
+                    <div id="searchBtn" class="btn btn-default">搜索</div>
+                </div>
+            </div>
             <div class="col-xs-3" v-for="list in lists">
                 <img v-bind:data-original="list.imgsrc" class="lazy" />
                 <p>{{ list.title }}</p>

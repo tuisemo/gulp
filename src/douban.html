@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HOME</title>
+    <!-- inject:base:css -->
+    <!-- endinject -->
+    <link rel="stylesheet" href="css/unslider.css">
+    <!--IEhack@include('./include/IEhack.html')-->
+</head>
+
+<body>
+    @@include('./include/header.html')
+    <div class="wrap">
+        <div class="banner">
+            <ul>
+                <li v-for="bannerlist in bannerlists"><img v-bind:data-original="bannerlist.imgsrc" class="lazy"></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="form-group col-xs-12">
+                <div class="input-group input-group-lg">
+                    <input id="search" type="text" class="form-control" placeholder="请输入您要搜索的图书信息">
+                    <div class="input-group-btn">
+                        <div id="searchBtn" class="btn btn-default">搜索</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="col-xs-3" v-for="list in lists">
+                    <img v-bind:data-original="list.imgsrc" class="lazy" />
+                    <p>{{ list.title }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('./include/footer.html')
+    <!-- inject:require:js -->
+    <!-- endinject -->
+    <script>
+    require(['脚本vuedouban', '脚本unslider'], function() {
+
+        $(function() {
+            var unslider = $('.banner').unslider({
+                speed: 500, //  切换的速度
+                delay: 3000, //  切换的速度
+                keys: true, //  是否启用左右按钮控制slider切换
+                fluid: true, // 是否每次在容器大小改变的时候，修正slider的大小
+                pause: true, //鼠标以上去是否暂停播放
+                arrows: false, //  是否显示左右箭头，用于slider切换
+                dots: true //  是否显示白色圆点，用于slider切换      
+            });
+            $('.unslider-arrow').click(function() {
+                var fn = this.className.split(' ')[1];
+                unslider.data('unslider')[fn]();
+            });
+        });
+
+    });
+    </script>
+</body>
+
+</html>

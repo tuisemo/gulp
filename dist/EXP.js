@@ -43,11 +43,10 @@ EXP.get('/checkTel', function(req, res) {
 EXP.post('/sever/data', function(req, res) {
     res.send('this is post request');
 });
-EXP.get('https://api.douban.com/v2/book/1220562', function(req, res) {
-    //res.send(pathName + '/index.html');
+//豆瓣电影搜索
+EXP.get('https://api.douban.com/v2/movie/search', function(req, res) {
     req.pipe(request.post(url, { form: req.body })).pipe(res);
     res.send();
-
 });
 //文件上传组件
 EXP.post('/upload', function(req, res) {

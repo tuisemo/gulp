@@ -102,9 +102,17 @@ body {
 .wrap {
   margin-top: -100px;
   margin-bottom: -131px;
-  padding-top: 130px;
+  padding-top: 100px;
   padding-bottom: 131px;
   min-height: 100%;
+}
+.wrap:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
 }
 .login-form {
   border: 1px solid #eee;

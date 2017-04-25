@@ -3,6 +3,16 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
     var app = new Vue({
         el: '.wrap',
         data: {
+            bannerlists: [{
+                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
+                title: Math.random()
+            }, {
+                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
+                title: Math.random()
+            }, {
+                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
+                title: Math.random()
+            }],
             lists: [{
                 imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                 title: Math.random()
@@ -23,13 +33,13 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
                 seen: false,
                 src: ""
             },
-            validate:{
-            	imgsrc:'http://www.ixm.gov.cn/dis/passport/authCode/show'
+            validate: {
+                imgsrc: 'http://www.ixm.gov.cn/dis/passport/authCode/show'
             }
 
         },
         methods: {
-        	//Ajax-post方式，以base64格式上传图片文件
+            //Ajax-post方式，以base64格式上传图片文件
             uploadpic: function(obj) {
                 var that = this;
                 var element = obj.target;
@@ -49,17 +59,7 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
                             success: function(data) {
                                 console.log(data);
                             }
-                        })
-                        .done(function() {
-                            console.log("success");
-                        })
-                        .fail(function() {
-                            console.log("error");
-                        })
-                        .always(function() {
-                            console.log("complete");
                         });
-
                 };
             }
         },

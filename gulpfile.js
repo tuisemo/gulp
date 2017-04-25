@@ -41,7 +41,7 @@ gulp.task('less', function() {
 });
 //补全前缀+压缩css
 gulp.task('cssmin', function() {
-    gulp.src(['./src/css/normalize.css', './src/css/layer.css'])
+    gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css'])
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
     gulp.src(['./src/css/bootstrapStyle.css', './src/css/Style.css'])
@@ -56,7 +56,7 @@ gulp.task('cssmin', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 //include公共文件
-gulp.task('fileinclude',/* ['less', 'cssmin', 'scripts'],*/ function() {
+gulp.task('fileinclude', /* ['less', 'cssmin', 'scripts'],*/ function() {
     gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
@@ -125,7 +125,7 @@ gulp.task('scripts', function() {
 
 // 默认任务
 gulp.task('default', function() {
-    gulp.run('jshint', 'fileinclude', 'imagemin');
+    gulp.run('cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin');
 
     // 监听文件变化
     gulp.watch('./src/js/*.js', function() {
