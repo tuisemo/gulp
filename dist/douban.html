@@ -42,21 +42,21 @@
     <div class="wrap">
         <div class="banner">
             <ul>
-                <li v-for="bannerlist in bannerlists"><img v-bind:data-original="bannerlist.imgsrc" class="lazy"></li>
+                <li v-for="bannerlist in bannerlists"><img v-bind:src="bannerlist.imgsrc" class="lazy"></li>
             </ul>
         </div>
         <div class="container">
             <div class="form-group col-xs-12">
                 <div class="input-group input-group-lg">
-                    <input id="search" type="text" class="form-control" placeholder="请输入您要搜索的图书信息">
+                    <input id="search_key" type="text" class="form-control" placeholder="请输入您要搜索的图书信息">
                     <div class="input-group-btn">
-                        <div id="searchBtn" class="btn btn-default">搜索</div>
+                        <div id="searchBtn" class="btn btn-default" v-on:click="moviesearch">搜索</div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-8">
                 <div class="col-xs-3" v-for="list in lists">
-                    <img v-bind:data-original="list.imgsrc" class="lazy" />
+                    <img v-bind:src="list.imgsrc" class="lazy" />
                     <p>{{ list.title }}</p>
                 </div>
             </div>
