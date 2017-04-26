@@ -53,6 +53,16 @@
                         <div id="searchBtn" class="btn btn-default" v-on:click="moviesearch">搜索</div>
                     </div>
                 </div>
+                <div class="tag-list">
+                    <label class="active" v-if="taglist.checked == true" v-for="taglist in taglists">
+                        {{taglist.keyword}}
+                        <input hidden type="radio" name="tag" v-bind:value="taglist.keyword" checked="checked">
+                    </label>
+                    <label v-else>
+                        {{taglist.keyword}}
+                        <input hidden type="radio" name="tag" v-bind:value="taglist.keyword">
+                    </label>
+                </div>
             </div>
             <div id="searchresult" class="col-xs-12">
                 <div class="col-xs-2 resultlist" v-for="list in lists">

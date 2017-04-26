@@ -7,12 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>首页</title>
     <!-- inject:base:css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    <!--IEhack@include('./include/IEhack.html')-->
+    	<!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
 </head>
 
 <body>
-    @@include('./include/header.html')
+    <div id="header">
+        <div class="container">
+            <a href="/">
+                <div class="logo"></div>
+            </a>
+            <!-- <nav class="header-nav col-sm-8 hidden-xs">
+        <ul class="nav-menu fr">
+            <li id="loginbox" class="nav-li">
+                <span><a href="/">登录</a></span>&nbsp;|
+                <span><a href="/">注册</a></span>
+            </li>
+            <li id="hasloginbox" class="nav-li">
+                <span><a href="/">你好，tui**mo</a></span>&nbsp;|
+                <span><a href="/">退出</a></span>
+            </li>
+        </ul>
+    </nav> -->
+        </div>
+    </div>
+
     <div class="container wrap">
         <form class="form-horizontal col-sm-4 col-offset-sm-3 col-xs-12 pad-t30">
             <div class="form-group">
@@ -34,34 +59,6 @@
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="inputPassword" placeholder="Password">
                     <span class="help-block">8-30位字符包含数字和英文字符</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div id="submit" class="btn btn-default">Sign in</div>
-                </div>
-            </div>
-        </form>
-    </div>
-    @@include('./include/footer.html')
-    <!-- inject:none:js -->
-    <!-- endinject -->
-</body>
-<script src="js/lib/require.js"></script>
-<script>
-    require(['脚本handlejs'], function() {});
-</script>
-
-</html>k">8-30位字符包含数字和英文字符</span>
                 </div>
             </div>
             <div class="form-group">

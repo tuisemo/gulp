@@ -19,6 +19,52 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
                 imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
                 title: Math.random()
             }],
+            taglists: [{
+                keyword: "热门",
+                checked: true
+            }, {
+                keyword: "喜剧",
+                checked: false
+            }, {
+                keyword: "爱情",
+                checked: false
+            }, {
+                keyword: "文化",
+                checked: false
+            }, {
+                keyword: "科幻",
+                checked: false
+            }, {
+                keyword: "恐怖",
+                checked: false
+            }, {
+                keyword: "动画",
+                checked: false
+            }, {
+                keyword: "台湾",
+                checked: false
+            }, {
+                keyword: "动作",
+                checked: false
+            }, {
+                keyword: "欧美",
+                checked: false
+            }, {
+                keyword: "纪录片",
+                checked: false
+            }, {
+                keyword: "穿越",
+                checked: false
+            }, {
+                keyword: "武侠",
+                checked: false
+            }, {
+                keyword: "传记",
+                checked: false
+            }, {
+                keyword: "青春",
+                checked: false
+            }],
             lists: [
                 /*{
                                 imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
@@ -36,7 +82,7 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
         },
         methods: {
             movielist: function() {
-                var that=this;
+                var that = this;
                 $.ajax({
                     url: 'https://api.douban.com/v2/movie/in_theaters',
                     type: 'GET',

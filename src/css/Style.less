@@ -8,29 +8,35 @@
 
 /* 基础样式及工具 */
 
-html, body {
+html,
+body {
     height: 100%;
 }
+
 @media (max-width: 767px) {
     .hidden-xs {
         display: none !important;
     }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
     .hidden-sm {
         display: none !important;
     }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
     .hidden-md {
         display: none !important;
     }
 }
+
 @media (min-width: 1200px) {
     .hidden-lg {
         display: none !important;
     }
 }
+
 
 /* 自定义样式 */
 
@@ -86,6 +92,7 @@ html, body {
         }
     }
 }
+
 .wrap {
     margin-top: -100px;
     margin-bottom: -131px;
@@ -96,6 +103,7 @@ html, body {
         .clearfix
     }
 }
+
 #searchresult {
     .resultlist {
         .cover {
@@ -118,6 +126,34 @@ html, body {
         }
     }
 }
+
+.tag-list {
+    padding: 15px 0;
+    label {
+        position: relative;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 1px 10px;
+        color: #666;
+        font-weight: normal;
+        border-radius: 2px;
+        &.active {
+            color: #fff;
+            background-color: #4b8ccb;
+            &:hover {
+                background-color: #4b8ccb;
+            }
+        }
+        &:hover {
+            background-color: #efefef;
+        }
+    }
+    &:after {
+        .clearfix
+    }
+}
+
 .login-form {
     border: 1px solid #eee;
     border-radius: 5px;
@@ -136,9 +172,11 @@ html, body {
         }
     }
 }
+
 .form-group .help-block {
     margin-bottom: 0;
 }
+
 
 /* 底部自定义样式 */
 

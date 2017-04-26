@@ -130,6 +130,37 @@ body {
   -o-text-overflow: ellipsis;
   overflow: hidden;
 }
+.tag-list {
+  padding: 15px 0;
+}
+.tag-list label {
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 1px 10px;
+  color: #666;
+  font-weight: normal;
+  border-radius: 2px;
+}
+.tag-list label.active {
+  color: #fff;
+  background-color: #4b8ccb;
+}
+.tag-list label.active:hover {
+  background-color: #4b8ccb;
+}
+.tag-list label:hover {
+  background-color: #efefef;
+}
+.tag-list:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
+}
 .login-form {
   border: 1px solid #eee;
   border-radius: 5px;
