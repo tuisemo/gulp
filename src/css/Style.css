@@ -114,6 +114,22 @@ body {
   display: block;
   visivilty: hidden;
 }
+#searchresult .resultlist .cover {
+  height: 140px;
+  overflow: hidden;
+  text-align: center;
+}
+#searchresult .resultlist .cover img {
+  position: relative;
+  text-align: center;
+}
+#searchresult .resultlist .resultinfo p {
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
 .login-form {
   border: 1px solid #eee;
   border-radius: 5px;

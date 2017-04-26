@@ -2,7 +2,13 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
 
     var app = new Vue({
         el: '.wrap',
+        created: function() {
+            var that = this;
+            that.movielist();
+            console.log("success");
+        },
         data: {
+            search_key: "",
             bannerlists: [{
                 imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
                 title: Math.random()
@@ -17,18 +23,6 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
                 /*{
                                 imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
                                 title: Math.random()
-                            }, {
-                                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                                title: Math.random()
-                            }, {
-                                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                                title: Math.random()
-                            }, {
-                                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                                title: Math.random()
-                            }, {
-                                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                                title: Math.random()
                             }*/
             ],
             inputfile: {
@@ -41,9 +35,30 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
 
         },
         methods: {
+            movielist: function() {
+                var that=this;
+                $.ajax({
+                    url: 'https://api.douban.com/v2/movie/in_theaters',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    data: {},
+                    success: function(data) {
+                        that.lists = [];
+                        for (var i = 0; i < data.subjects.length; i++) {
+                            that.lists.push({
+                                alt: data.subjects[i].alt,
+                                imgsrc: data.subjects[i].images.medium,
+                                title: data.subjects[i].title,
+                                year: data.subjects[i].year
+                            });
+                        }
+                    },
+                    erroe: function() {}
+                });
+            },
             moviesearch: function() {
                 var that = this;
-                var q = $('#search_key').val();
+                var q = that.search_key;
                 var tag = $('search_tag').val();
                 $.ajax({
                     url: 'https://api.douban.com/v2/movie/search',
@@ -56,13 +71,14 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
                         count: 10
                     },
                     success: function(data) {
+                        that.lists = [];
                         for (var i = 0; i < data.subjects.length; i++) {
-                            imgsrc: data.subjects[i].casts[0].avatars.medium,
-
                             that.lists.push({
-                                imgsrc: data.subjects[i].casts[0].avatars.medium,
-                                title: data.subjects[i].title
-                            })
+                                alt: data.subjects[i].alt,
+                                imgsrc: data.subjects[i].images.medium,
+                                title: data.subjects[i].title,
+                                year: data.subjects[i].year
+                            });
                         }
                     },
                     erroe: function() {}
