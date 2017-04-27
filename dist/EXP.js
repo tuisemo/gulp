@@ -44,10 +44,10 @@ EXP.post('/sever/data', function(req, res) {
     res.send('this is post request');
 });
 //豆瓣电影搜索
-EXP.get('https://api.douban.com/v2/movie/search', function(req, res) {
+/*EXP.get('https://api.douban.com/v2/movie/search', function(req, res) {
     req.pipe(request.post(url, { form: req.body })).pipe(res);
     res.send();
-});
+});*/
 //文件上传组件
 EXP.post('/upload', function(req, res) {
     // parse a file upload
