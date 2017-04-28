@@ -6,7 +6,6 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
             var that = this;
             that.movielist();
             that.hotmovielist();
-            console.log("success");
         },
         data: {
             search_key: "",
@@ -44,10 +43,6 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
             }, {
                 keyword: "纪录片"
             }, {
-                keyword: "穿越"
-            }, {
-                keyword: "武侠"
-            }, {
                 keyword: "传记"
             }, {
                 keyword: "青春"
@@ -71,6 +66,11 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
             }
 
         },
+        //计算属性，根据data变量变化做，实时响应
+        computed:{
+
+        },
+        //事件触发函数定义
         methods: {
             movielist: function() {
                 var that = this;
