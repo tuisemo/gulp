@@ -67,9 +67,14 @@ define(['脚本lazyload', 'vue'], function(lazyload, Vue) {
 
         },
         //计算属性，根据data变量变化做，实时响应
-        computed:{
-
+        computed: {
+            //可监听变量，根据变量被取值get，赋值set时执行不同的语句
+            argument: { 
+                get: function() {},
+                set: function(newValue) {}
+            }
         },
+
         //事件触发函数定义
         methods: {
             movielist: function() {

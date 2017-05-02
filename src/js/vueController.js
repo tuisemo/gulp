@@ -1,40 +1,17 @@
-define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
+define(['vue'], function(Vue) {
 
     var app = new Vue({
         el: '.wrap',
         data: {
-            bannerlists: [{
-                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/1500/300/?random=' + Math.random(),
-                title: Math.random()
-            }],
-            lists: [{
-                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                title: Math.random()
-            }, {
-                imgsrc: 'https://unsplash.it/150/150/?random=' + Math.random(),
-                title: Math.random()
-            }],
             inputfile: {
                 seen: false,
                 src: ""
             },
             validate: {
                 imgsrc: 'http://www.ixm.gov.cn/dis/passport/authCode/show'
+            },
+            sendMsgBtn: {
+
             }
 
         },
@@ -51,24 +28,29 @@ define(['脚本lazyload', 'vue', 'vuetools'], function(lazyload, Vue) {
                     app.inputfile.src = reader.result;
                     var imgData = reader.result;
                     $.ajax({
-                            url: '/uploadpic',
-                            type: 'POST',
-                            //contentType: false,
-                            //processData: false,
-                            data: { imgData: imgData },
-                            success: function(data) {
-                                console.log(data);
-                            }
-                        });
+                        url: '/uploadpic',
+                        type: 'POST',
+                        //contentType: false,
+                        //processData: false,
+                        data: { imgData: imgData },
+                        success: function(data) {
+                            console.log(data);
+                        }
+                    });
                 };
+            },
+            //刷新图片验证码
+            reloadvalidate: function() {
+                var that = this;
+                that.validate.imgsrc = 'http://www.ixm.gov.cn/dis/passport/authCode/show?random=' + Math.random();
             }
-        },
-        components: {
-            'input-username': Vuetemplate.input_username,
-            'input-tel': Vuetemplate.input_tel,
-            'input-validatecode': Vuetemplate.input_validatecode
         }
+        /*,
+                components: {
+                    'input-username': Vuetemplate.input_username,
+                    'input-tel': Vuetemplate.input_tel,
+                    'input-validatecode': Vuetemplate.input_validatecode
+                }*/
     });
     window.app = app;
-    $('img.lazy').lazyload();
 });
