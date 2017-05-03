@@ -3,6 +3,7 @@ define(['vue'], function(Vue) {
     var app = new Vue({
         el: '.wrap',
         data: {
+            userNameVal: '',
             inputfile: {
                 seen: false,
                 src: ""
@@ -16,6 +17,32 @@ define(['vue'], function(Vue) {
 
         },
         methods: {
+            //用户名唯一性检测
+            checkuserName: function() {
+                var that = this;
+                var userNameVal = that.userNameVal;
+                var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
+                if (!userNameRE.test(userNameVal)) {
+                    console.log('wrong');
+                } else {
+                    $.ajax({
+                        url: '/api',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            'attributeName': 'userName',
+                            'attributeValue': userNameVal
+                        },
+                        success: function(data) {
+                            if (data.result) {
+                                console.log('right');
+                            } else {
+                                console.log('wrong');
+                            }
+                        }
+                    });
+                }
+            },
             //Ajax-post方式，以base64格式上传图片文件
             uploadpic: function(obj) {
                 var that = this;

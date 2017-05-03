@@ -6,6 +6,7 @@ const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const bodyParser = require('body-parser');
+const proxy = require('http-proxy-middleware');
 //const multer = require('multer'); 
 const EXP = express();
 const pathName = 'E:/gulp/dist'
@@ -18,7 +19,7 @@ EXP.use(express.static(pathName + '/images'));
 EXP.use(bodyParser.json({ limit: '50mb' }));
 EXP.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //EXP.use(multer());
-
+EXP.use('/api', proxy({ target: 'https://api.douban.com/v2/movie/in_theaters', changeOrigin: true }));
 /*============请求路由===========*/
 EXP.get('/', function(req, res) {
     res.send(pathName + '/index.html');
@@ -48,6 +49,12 @@ EXP.post('/sever/data', function(req, res) {
     req.pipe(request.post(url, { form: req.body })).pipe(res);
     res.send();
 });*/
+//跨域请求
+EXP.get('/api', function(req, res) {
+    console.log("try");
+    res.send();
+});
+
 //文件上传组件
 EXP.post('/upload', function(req, res) {
     // parse a file upload
