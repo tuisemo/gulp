@@ -6,7 +6,7 @@ const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const bodyParser = require('body-parser');
-const proxy = require('http-proxy-middleware');
+const proxy = require('express-http-proxy');
 //const multer = require('multer'); 
 const EXP = express();
 const pathName = 'E:/gulp/dist'
@@ -19,7 +19,8 @@ EXP.use(express.static(pathName + '/images'));
 EXP.use(bodyParser.json({ limit: '50mb' }));
 EXP.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //EXP.use(multer());
-EXP.use('/api', proxy({ target: 'https://api.douban.com/v2/movie/in_theaters', changeOrigin: true }));
+//EXP.use('/api', proxy({ target: 'http://202.109.255.101/dis/passport/authCode/check', changeOrigin: true, rejectUnauthorized: false }));
+EXP.use('/api', proxy('http://op.juhe.cn/onebox/weather/query'));
 /*============请求路由===========*/
 EXP.get('/', function(req, res) {
     res.send(pathName + '/index.html');

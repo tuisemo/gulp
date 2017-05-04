@@ -30,8 +30,9 @@ define(['vue'], function(Vue) {
                         type: 'get',
                         dataType: 'json',
                         data: {
-                            'attributeName': 'userName',
-                            'attributeValue': userNameVal
+                            'key': '7552c97c9be5d98b8d643249fb2bfb07',
+                            'cityname': '%E5%8E%A6%E9%97%A8',
+                            'dtype': 'json'
                         },
                         success: function(data) {
                             if (data.result) {
