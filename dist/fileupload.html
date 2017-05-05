@@ -7,37 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>文件上传</title>
     <!-- inject:base:css -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
-        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
-        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+    <!--IEhack@include('./include/IEhack.html')-->
 </head>
 
 <body>
-    <div id="header">
-        <div class="container">
-            <a href="/">
-                <div class="logo"></div>
-            </a>
-            <!-- <nav class="header-nav col-sm-8 hidden-xs">
-        <ul class="nav-menu fr">
-            <li id="loginbox" class="nav-li">
-                <span><a href="/">登录</a></span>&nbsp;|
-                <span><a href="/">注册</a></span>
-            </li>
-            <li id="hasloginbox" class="nav-li">
-                <span><a href="/">你好，tui**mo</a></span>&nbsp;|
-                <span><a href="/">退出</a></span>
-            </li>
-        </ul>
-    </nav> -->
-        </div>
-    </div>
-
+    @@include('./include/header.html')
     <div class="container wrap">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
@@ -55,71 +30,90 @@
         <!-- The container for the uploaded files -->
         <div id="files" class="files"></div>
     </div>
-    <div id="footer" class="footer">
-        <div class="container">
-            <div class="col-sm-12 text-c">
-                <span id="_ideConac"><a href="/" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" src="//dcs.conac.cn/image/blue.png" data-bd-imgshare-binded="1"></a></span>
-                <small>主办：厦门市经济和信息化局&nbsp;&nbsp;&nbsp;&nbsp;运行管理：厦门市信息中心&nbsp;&nbsp;&nbsp;&nbsp;闽ICP备14010412号-1&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-earphone">：0592-5051516</span></small>
-            </div>
-        </div>
-    </div>
-
+    @@include('./include/footer.html')
     <script src="./js/lib/require.js"></script>
     <script>
-    require(['脚本MSG','脚本WebUploader'], function() {
-        $('#fileupload').fileupload({
-                url: '/upload',
-                dataType: 'json',
-                //autoUpload: false,  
-                //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,  
-                maxFileSize: 5000000, // 5 MB  
-                // Enable image resizing, except for Android and Opera,  
-                // which actually support image resizing, but fail to  
-                // send Blob objects via XHR requests:  
-                disableImageResize: /Android(?!.*Chrome)|Opera/
-                    .test(window.navigator.userAgent),
-                previewMaxWidth: 100,
-                previewMaxHeight: 100,
-                previewCrop: true
-            }).on('fileuploadadd', function(e, data) {
-                data.context = $('<div/>').appendTo('#files');
-                $.each(data.files, function(index, file) {
-                    var node = $('<p/>')
-                        .append($('<span/>').text(file.name));
-                    //if (!index) {  
-                    //    node  
-                    //        .append('<br>')  
-                    //        .append(uploadButton.clone(true).data(data));  
-                    //}  
-                    node.appendTo(data.context);
-                });
-            }).on('fileuploadprocessalways', function(e, data) {
-                var index = data.index,
-                    file = data.files[index],
-                    node = $(data.context.children()[index]);
-                if (file.preview) {
-                    node
-                        .prepend('<br>')
-                        .prepend(file.preview);
-                }
-                if (file.error) {
-                    node
-                        .append('<br>')
-                        .append($('<span class="text-danger"/>').text(file.error));
-                }
-                if (index + 1 === data.files.length) {
-                    data.context.find('button')
-                        .text('Upload')
-                        .prop('disabled', !!data.files.error);
-                }
-            }).on('fileuploadprogressall', function(e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-            }).on('fileuploaddone', function(e, data) {
-                $.each(data.result.files, function(index, file) {
+        require(['脚本MSG', '脚本WebUploader'], function() {
+            $('#fileupload').fileupload({
+                    url: '/upload',
+                    dataType: 'json',
+                    //autoUpload: false,  
+                    //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,  
+                    maxFileSize: 5000000, // 5 MB  
+                    // Enable image resizing, except for Android and Opera,  
+                    // which actually support image resizing, but fail to  
+                    // send Blob objects via XHR requests:  
+                    disableImageResize: /Android(?!.*Chrome)|Opera/
+                        .test(window.navigator.userAgent),
+                    previewMaxWidth: 100,
+                    previewMaxHeight: 100,
+                    previewCrop: true
+                }).on('fileuploadadd', function(e, data) {
+                    data.context = $('<div/>').appendTo('#files');
+                    $.each(data.files, function(index, file) {
+                        var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                        //if (!index) {  
+                        //    node  
+                        //        .append('<br>')  
+                        //        .append(uploadButton.clone(true).data(data));  
+                        //}  
+                        node.appendTo(data.context);
+                    });
+                }).on('fileuploadprocessalways', function(e, data) {
+                    var index = data.index,
+                        file = data.files[index],
+                        node = $(data.context.children()[index]);
+                    if (file.preview) {
+                        node
+                            .prepend('<br>')
+                            .prepend(file.preview);
+                    }
+                    if (file.error) {
+                        node
+                            .append('<br>')
+                            .append($('<span class="text-danger"/>').text(file.error));
+                    }
+                    if (index + 1 === data.files.length) {
+                        data.context.find('button')
+                            .text('Upload')
+                            .prop('disabled', !!data.files.error);
+                    }
+                }).on('fileuploadprogressall', function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                }).on('fileuploaddone', function(e, data) {
+                    $.each(data.result.files, function(index, file) {
+                        if (file.url) {
+                            var link = $('<a>')
+                                .attr('target', '_blank')
+                                .prop('href', file.url);
+                            $(data.context.children()[index])
+                                .wrap(link);
+                        } else if (file.error) {
+                            var error = $('<span class="text-danger"/>').text(file.error);
+                            $(data.context.children()[index])
+                                .append('<br>')
+                                .append(error);
+                        }
+                    });
+                }).on('fileuploadfail', function(e, data) {
+                    $.each(data.files, function(index, file) {
+                        var error = $('<span class="text-danger"/>').text('File upload failed.');
+                        $(data.context.children()[index])
+                            .append('<br>')
+                            .append(error);
+                    });
+                }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+</body>
+
+</html>on(index, file) {
                     if (file.url) {
                         var link = $('<a>')
                             .attr('target', '_blank')

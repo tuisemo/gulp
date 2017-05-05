@@ -6,7 +6,8 @@ const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const bodyParser = require('body-parser');
-const proxy = require('express-http-proxy');
+//const proxy = require('express-http-proxy');
+const request = require('request'); //解决服务请求转发
 //const multer = require('multer'); 
 const EXP = express();
 const pathName = 'E:/gulp/dist'
@@ -19,8 +20,6 @@ EXP.use(express.static(pathName + '/images'));
 EXP.use(bodyParser.json({ limit: '50mb' }));
 EXP.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //EXP.use(multer());
-//EXP.use('/api', proxy({ target: 'http://202.109.255.101/dis/passport/authCode/check', changeOrigin: true, rejectUnauthorized: false }));
-EXP.use('/api', proxy('http://op.juhe.cn/onebox/weather/query'));
 /*============请求路由===========*/
 EXP.get('/', function(req, res) {
     res.send(pathName + '/index.html');
@@ -45,15 +44,19 @@ EXP.get('/checkTel', function(req, res) {
 EXP.post('/sever/data', function(req, res) {
     res.send('this is post request');
 });
-//豆瓣电影搜索
-/*EXP.get('https://api.douban.com/v2/movie/search', function(req, res) {
-    req.pipe(request.post(url, { form: req.body })).pipe(res);
-    res.send();
-});*/
-//跨域请求
-EXP.get('/api', function(req, res) {
-    console.log("try");
-    res.send();
+//GET跨域请求转发
+EXP.get('/api/authCode/check', function(req, res) {
+    var url = 'http://www.ixm.gov.cn/dis/passport/authCode/check';
+    req.pipe(request(url)).pipe(res);
+});
+EXP.get('/api/checkUserPwd', function(req, res) {
+    var url = 'http://www.ixm.gov.cn/dis/ids/checkUserPwd';
+    req.pipe(request(url)).pipe(res);
+});
+//POST跨域请求转发
+EXP.post('/api/checkUserAttribute', function(req, res) {
+    var url = 'http://www.ixm.gov.cn/dis/passport/checkUserAttribute';
+    request.post(url, { form: req.body }).pipe(res);
 });
 
 //文件上传组件

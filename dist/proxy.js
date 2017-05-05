@@ -7,6 +7,7 @@ const url = require('url');
 const querystring = require('querystring');
 const bodyParser = require('body-parser');
 const proxy = require('express-http-proxy');
+const request = require('request');//解决服务请求转发
 //const multer = require('multer'); 
 const EXP = express();
 const pathName = 'E:/gulp/dist'
@@ -50,8 +51,9 @@ EXP.post('/sever/data', function(req, res) {
 });*/
 //跨域请求
 EXP.get('/api', function(req, res) {
-    console.log("try");
-    res.send();
+    console.log(req.url);
+    var url='http://www.ixm.gov.cn/dis/passport/authCode/check';
+    req.pipe(request(url)).pipe(res);
 });
 
 //预置404
