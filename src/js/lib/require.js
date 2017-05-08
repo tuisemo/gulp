@@ -32,6 +32,7 @@ require.config({
         脚本upload: "./upload",
         脚本tool: "./tool",
         脚本vueController: "./vueController",
+        脚本commonJS: "./commonJS",
         脚本vuetools: "./vuetools",
         脚本vuedouban: "./vuedouban"
     }

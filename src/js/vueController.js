@@ -1,7 +1,10 @@
-define(['vue', '脚本MSG'], function(Vue) {
+define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
 
     var app = new Vue({
         el: '.wrap',
+        created: function() {
+            var that = this;
+        },
         data: {
             bannerstyle: {
                 background: 'url(https://unsplash.it/1500/900?blur&random=' + Math.random() + ')'

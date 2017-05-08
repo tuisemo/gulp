@@ -23,18 +23,18 @@
             <a href="/">
                 <div class="logo"></div>
             </a>
-            <!-- <nav class="header-nav col-sm-8 hidden-xs">
-        <ul class="nav-menu fr">
-            <li id="loginbox" class="nav-li">
-                <span><a href="/">登录</a></span>&nbsp;|
-                <span><a href="/">注册</a></span>
-            </li>
-            <li id="hasloginbox" class="nav-li">
-                <span><a href="/">你好，tui**mo</a></span>&nbsp;|
-                <span><a href="/">退出</a></span>
-            </li>
-        </ul>
-    </nav> -->
+            <nav class="header-nav col-sm-8 hidden-xs"  v-html="loginDrawHTML">
+                <!-- <ul class="nav-menu fr">
+                    <li id="loginbox" class="nav-li">
+                        <span><a href="/">登录</a></span>&nbsp;|
+                        <span><a href="/">注册</a></span>
+                    </li>
+                    <li id="hasloginbox" class="nav-li">
+                        <span><a href="/">你好，tui**mo</a></span>&nbsp;|
+                        <span><a href="/">退出</a></span>
+                    </li>
+                </ul> -->
+            </nav>
         </div>
     </div>
 
@@ -100,7 +100,7 @@
                         <div class="col-sm-offset-3 col-sm-9">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"><small>我已阅读并接受 <a href="/" target="_blank">“市民通行证”服务协议</a></small>
+                                    <input type="checkbox" checked="checked"><small>我已阅读并接受 <a href="/" target="_blank">“市民通行证”服务协议</a></small>
                                 </label>
                             </div>
                         </div>
