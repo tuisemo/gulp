@@ -6,9 +6,25 @@ define(['vue'], function(Vue) {
             var that = this;
             that.Alltemplate();
             that.loginDraw();
+            that.setTimerFunc();
         },
         data: {
-            loginDrawHTML: ''
+            loginDrawHTML: '',
+            loginStatue: false
+        },
+        computed: {
+            loginStatue: {
+                get: function() {
+                    // body...
+                },
+                set: function(newValue) {
+                    if (newValue) {
+                        console.log('成功');
+                    } else {
+                        console.log('失败');
+                    }
+                }
+            }
         },
         methods: {
             //初始化全部模板
@@ -34,8 +50,9 @@ define(['vue'], function(Vue) {
             loginDraw: function(haslogin, userName) {
                 var that = this;
                 $.ajax({
-                    url: 'https://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
+                    url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
                     type: 'GET',
+                    async: true,
                     dataType: 'jsonp',
                     jsonp: 'callback',
                     jsonpCallback: 'ssoUser_for_login',
@@ -47,11 +64,13 @@ define(['vue'], function(Vue) {
                                 hello: data.user.hello,
                                 userName: data.user.userName
                             });
+                            that.loginStatue = true;
                         } else {
                             that.loginDrawHTML = that.TMPheader({
                                 haslogin: false,
                                 userName: ''
                             });
+                            that.loginStatue = false;
                         }
                     },
                     error: function() {
@@ -59,9 +78,17 @@ define(['vue'], function(Vue) {
                             haslogin: false,
                             userName: ''
                         });
-                        return false;
+                        that.loginStatue = false;
                     }
                 });
+            },
+            //定时轮循
+            setTimerFunc: function() {
+                var that = this;
+                setTimeout(function() {
+                    that.loginDraw();
+                    that.setTimerFunc();
+                }, 10000);
             }
         }
     });
