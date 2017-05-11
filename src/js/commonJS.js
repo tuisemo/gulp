@@ -12,17 +12,12 @@ define(['vue'], function(Vue) {
             loginDrawHTML: '',
             loginStatue: false
         },
-        computed: {
-            loginStatue: {
-                get: function() {
-                    // body...
-                },
-                set: function(newValue) {
-                    if (newValue) {
-                        console.log('成功');
-                    } else {
-                        console.log('失败');
-                    }
+        watch: {
+            loginStatue: function(newValue) {
+                if (newValue) {
+                    console.log('成功');
+                } else {
+                    console.log('失败');
                 }
             }
         },
@@ -64,12 +59,18 @@ define(['vue'], function(Vue) {
                                 hello: data.user.hello,
                                 userName: data.user.userName
                             });
+                            var logmsg = $('#log').html();
+                            $('#log').html(logmsg + "...登录成功...==> \n" + new Date());
+                            $('#log').scrollTop($('#log')[0].scrollHeight);
                             that.loginStatue = true;
                         } else {
                             that.loginDrawHTML = that.TMPheader({
                                 haslogin: false,
                                 userName: ''
                             });
+                            var logmsg = $('#log').html();
+                            $('#log').html(logmsg + "============登录失败=========== \n" + new Date());
+                            $('#log').scrollTop($('#log')[0].scrollHeight);
                             that.loginStatue = false;
                         }
                     },
@@ -88,7 +89,7 @@ define(['vue'], function(Vue) {
                 setTimeout(function() {
                     that.loginDraw();
                     that.setTimerFunc();
-                }, 10000);
+                }, 60000);
             }
         }
     });
