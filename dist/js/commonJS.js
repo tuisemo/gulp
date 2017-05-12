@@ -6,7 +6,7 @@ define(['vue'], function(Vue) {
             var that = this;
             that.Alltemplate();
             that.loginDraw();
-            that.setTimerFunc();
+            //that.setTimerFunc();
         },
         data: {
             loginDrawHTML: '',
@@ -59,18 +59,12 @@ define(['vue'], function(Vue) {
                                 hello: data.user.hello,
                                 userName: data.user.userName
                             });
-                            var logmsg = $('#log').html();
-                            $('#log').html(logmsg + "...登录成功...==> \n" + new Date());
-                            $('#log').scrollTop($('#log')[0].scrollHeight);
                             that.loginStatue = true;
                         } else {
                             that.loginDrawHTML = that.TMPheader({
                                 haslogin: false,
                                 userName: ''
                             });
-                            var logmsg = $('#log').html();
-                            $('#log').html(logmsg + "============登录失败=========== \n" + new Date());
-                            $('#log').scrollTop($('#log')[0].scrollHeight);
                             that.loginStatue = false;
                         }
                     },
