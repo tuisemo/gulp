@@ -31,7 +31,7 @@ define(['vue'], function(Vue) {
                     '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
                     '                <li id="loginbox" class="nav-li">' +
                     '                    <span><a href="/">登录</a></span>&nbsp;|' +
-                    '                    <span><a href="/">注册</a></span>' +
+                    '                    <span><a href="/vue.html">注册</a></span>' +
                     '                </li>' +
                     '<% } else { %>' +
                     '                <li id="hasloginbox" class="nav-li">' +
