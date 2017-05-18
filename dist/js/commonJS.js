@@ -6,7 +6,6 @@ define(['vue'], function(Vue) {
             var that = this;
             that.Alltemplate();
             that.loginDraw();
-            //that.setTimerFunc();
         },
         data: {
             loginDrawHTML: '',

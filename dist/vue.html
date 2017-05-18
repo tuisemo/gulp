@@ -7,37 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HOME</title>
     <!-- inject:base:css -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
-        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
-        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+    <!--IEhack@include('./include/IEhack.html')-->
 </head>
 
 <body>
-    <div id="header">
-        <div class="container">
-            <a href="/">
-                <div class="logo"></div>
-            </a>
-            <nav class="header-nav col-sm-8 hidden-xs"  v-html="loginDrawHTML">
-                <!-- <ul class="nav-menu fr">
-                    <li id="loginbox" class="nav-li">
-                        <span><a href="/">登录</a></span>&nbsp;|
-                        <span><a href="/">注册</a></span>
-                    </li>
-                    <li id="hasloginbox" class="nav-li">
-                        <span><a href="/">你好，tui**mo</a></span>&nbsp;|
-                        <span><a href="/">退出</a></span>
-                    </li>
-                </ul> -->
-            </nav>
-        </div>
-    </div>
-
+    @@include('./include/header.html')
     <div class="wrap" v-bind:style="bannerstyle">
         <div class="container mar-t20">
             <div class="col-sm-5 col-xs-12 login-form">
@@ -101,6 +76,31 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" checked="checked"><small>我已阅读并接受 <a href="/agreement.html" target="_blank">“市民通行证”服务协议</a></small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
+                            <a href="/" target="_blank">
+                                <div class="btn btn-default fr">忘记密码？</div>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @@include('./include/footer.html')
+    <!-- inject:require:js -->
+    <!-- endinject -->
+    <script>
+        require(['脚本vueController'], function() {});
+    </script>
+</body>
+
+</html>hecked="checked"><small>我已阅读并接受 <a href="/agreement.html" target="_blank">“市民通行证”服务协议</a></small>
                                 </label>
                             </div>
                         </div>

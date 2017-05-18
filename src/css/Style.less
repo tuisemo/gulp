@@ -153,7 +153,45 @@ body {
         .clearfix
     }
 }
-
+.account-container{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 60px;
+    padding: 15px 25px;
+    max-width: 400px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 15px 30px 0 rgba(0,0,1,.1);
+    &:after {
+        .clearfix
+    }
+}
+ul.login-tab{
+    li{
+        position: relative;
+        width: 50%;
+        float: left;
+        font-size: 18px;
+        line-height: 2.4;
+        color: #aeaeae;
+        text-align: center;
+        cursor: pointer;
+        &.active{
+        font-weight: bold;        
+        color: #337ab7;
+        border-bottom:2px solid #337ab7;
+        }
+    }
+}
+.qcodebtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
 .login-form {
     border: 1px solid #eee;
     border-radius: 5px;

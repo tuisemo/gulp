@@ -6,6 +6,8 @@ define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
             var that = this;
         },
         data: {
+            CodeLogin: true,
+            CitizenLogin: true,
             bannerstyle: {
                 background: 'url(https://unsplash.it/1500/900?blur&random=' + Math.random() + ')'
             },
@@ -60,6 +62,16 @@ define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
                 var msgnum = element.attr('data-msgnum');
                 parents.removeClass("has-success has-warring has-error");
                 next.html(MSG[msgnum]);
+            },
+            //切换登录类型
+            changeLoginType: function() {
+                var that = this;
+                that.CitizenLogin = !that.CitizenLogin;
+            },
+            //切换登录类型
+            codeLoginType: function() {
+                var that = this;
+                that.CodeLogin = !that.CodeLogin;
             },
             //用户名唯一性检测
             checkuserName: function(obj) {
