@@ -53,6 +53,10 @@ EXP.get('/api/checkUserPwd', function(req, res) {
     var url = 'http://www.ixm.gov.cn/dis/ids/checkUserPwd';
     req.pipe(request(url)).pipe(res);
 });
+EXP.get('/api/request', function(req, res) {
+    var url = 'http://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp';
+    req.pipe(request(url)).pipe(res);
+});
 //POST跨域请求转发
 EXP.post('/api/checkUserAttribute', function(req, res) {
     var url = 'http://www.ixm.gov.cn/dis/passport/checkUserAttribute';

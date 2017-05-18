@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HOME</title>
-    <!-- inject:base:css -->
-    <!-- endinject -->
-    <!--IEhack@include('./include/IEhack.html')-->
-</head>
-
-<body>
-    @@include('./include/header.html')
-    <div class="wrap" v-bind:style="bannerstyle">
-        <div class="container mar-t20">
-            <div class="col-sm-5 col-xs-12 login-form">
-                <div class="col-sm-12 form-title">市民通行证<a href="/"><span class="smalltitle">港澳台侨外人员注册</span></a></div>
-                <form class="form-horizontal col-sm-12 col-xs-12">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"><small>用户名:</small></label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="用户名" v-bind:data-msgnum="userName.MsgNum" v-on:focus="commonReset" v-model="userName.value" v-on:blur="checkuserName">
-                            <span class="help-block">以英文字母开头，可包含3-20个字符</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"><small>手&nbsp;&nbsp;&nbsp;&nbsp;机:</small></label>
-                        <div class="col-sm-9">
-                            <input type="tel" class="form-control" placeholder="手机" v-bind:data-msgnum="Tel.MsgNum" v-on:focus="commonReset" v-model="Tel.value" v-on:blur="checkTel">
-                            <span class="help-block">请输入您的手机号(仅支持中国大陆)</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"><small>图片验证码:</small></label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="图片验证码" v-bind:data-msgnum="validateCode.MsgNum" v-on:focus="commonReset" v-model="validateCode.value" v-on:blur="checkvalidateCode">
-                                <div class="input-group-btn">
-                                    <img id="codeimg" class="btn btn-default" style="padding:0;height:34px;" v-bind:src="validateCode.imgsrc" v-on:click="reloadvalidate">
-                                    <div id="reloadBtn" class="btn btn-default" v-on:click="reloadvalidate">刷新</div>
-                                </div>
-                            </div>
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
-                        <div class="col-sm-9">
-                            <div class="input-group ">
-                                <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
-                                <span class="input-group-btn">
-                            <div id="sendmsg" class="btn btn-primary" style="display:none;" onclick="sendMsgFor('01','Citizen')">发送校验码</div>
-                            <div id="msgtimer" class="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HOME</title></head><body>@@include('./include/header.html')<div class="wrap" v-bind:style="bannerstyle"><div class="container mar-t20"><div class="col-sm-5 col-xs-12 login-form"><div class="col-sm-12 form-title">市民通行证<a href="/"><span class="smalltitle">港澳台侨外人员注册</span></a></div><form class="form-horizontal col-sm-12 col-xs-12"><div class="form-group"><label class="col-sm-3 control-label"><small>用户名:</small></label><div class="col-sm-9"><input type="text" class="form-control" placeholder="用户名" v-bind:data-msgnum="userName.MsgNum" v-on:focus="commonReset" v-model="userName.value" v-on:blur="checkuserName"><span class="help-block">以英文字母开头，可包含3-20个字符</span></div></div><div class="form-group"><label class="col-sm-3 control-label"><small>手&nbsp;&nbsp;&nbsp;&nbsp;机:</small></label><div class="col-sm-9"><input type="tel" class="form-control" placeholder="手机" v-bind:data-msgnum="Tel.MsgNum" v-on:focus="commonReset" v-model="Tel.value" v-on:blur="checkTel"><span class="help-block">请输入您的手机号(仅支持中国大陆)</span></div></div><div class="form-group"><label class="col-sm-3 control-label"><small>图片验证码:</small></label><div class="col-sm-9"><div class="input-group"><input type="text" class="form-control" placeholder="图片验证码" v-bind:data-msgnum="validateCode.MsgNum" v-on:focus="commonReset" v-model="validateCode.value" v-on:blur="checkvalidateCode"><div class="input-group-btn"><img id="codeimg" class="btn btn-default" style="padding:0;height:34px;" v-bind:src="validateCode.imgsrc" v-on:click="reloadvalidate"><div id="reloadBtn" class="btn btn-default" v-on:click="reloadvalidate">刷新</div></div></div><span class="help-block"></span></div></div><div class="form-group"><label class="col-sm-3 control-label"><small>短信验证码:</small></label><div class="col-sm-9"><div class="input-group "><input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码"><span class="input-group-btn"><div id="sendmsg" class="btn btn-primary" style="display:none;" onclick="sendMsgFor('01','Citizen')">发送校验码</div><div id="msgtimer" class="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div></span></div><span class="help-block"></span></div></div><div class="form-group"><label class="col-sm-3 control-label"><small>设置密码:</small></label><div class="col-sm-9"><input type="password" class="form-control password" placeholder="设置密码" v-bind:data-msgnum="Password.MsgNum" v-on:focus="commonReset" v-model="Password.value" v-on:blur="checkpassword"><span class="help-block">8-30位字符包含数字和英文字符</span></div></div><div class="form-group"><div class="col-sm-offset-3 col-sm-9"><div class="checkbox"><label><input type="checkbox" checked="checked"><small>我已阅读并接受 <a href="/agreement.html" target="_blank">“市民通行证”服务协议</a></small></label></div></div></div><div class="form-group"><div class="col-sm-offset-3 col-sm-9"><div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div><a href="/" target="_blank"><div class="btn btn-default fr">忘记密码？</div></a></div></div></form></div></div></div>@@include('./include/footer.html')<script>require(["脚本vueController"],function(){});</script></body></html>ss="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div>
                         </span>
                             </div>
                             <span class="help-block"></span>
@@ -97,40 +43,6 @@
     <!-- endinject -->
     <script>
         require(['脚本vueController'], function() {});
-    </script>
-</body>
-
-</html>hecked="checked"><small>我已阅读并接受 <a href="/agreement.html" target="_blank">“市民通行证”服务协议</a></small>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
-                            <a href="/" target="_blank">
-                                <div class="btn btn-default fr">忘记密码？</div>
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div id="footer" class="footer">
-        <div class="container">
-            <div class="col-sm-12 text-c">
-                <span id="_ideConac"><a href="/" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" src="//dcs.conac.cn/image/blue.png" data-bd-imgshare-binded="1"></a></span>
-                <small>主办：厦门市经济和信息化局&nbsp;&nbsp;&nbsp;&nbsp;运行管理：厦门市信息中心&nbsp;&nbsp;&nbsp;&nbsp;闽ICP备14010412号-1&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-earphone">：0592-5051516</span></small>
-            </div>
-        </div>
-    </div>
-
-    <!-- inject:require:js -->
-    <script src="js/lib/require.js"></script>
-    <!-- endinject -->
-    <script>
-    require(['脚本vueController'], function() {});
     </script>
 </body>
 

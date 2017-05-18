@@ -6,10 +6,12 @@ define(['vue'], function(Vue) {
             var that = this;
             that.Alltemplate();
             that.loginDraw();
+            that.setTimerFunc();
         },
         data: {
             loginDrawHTML: '',
-            loginStatue: false
+            loginStatue: false,
+            idsCode: 'http://www.ixm.gov.cn/ids/admin/abc.code?'
         },
         watch: {
             loginStatue: function(newValue) {
@@ -76,13 +78,43 @@ define(['vue'], function(Vue) {
                     }
                 });
             },
+            //模拟请求
+            requset: function() {
+                var that = this;
+                that.idsCode = that.idsCode + Math.random();
+                $.ajax({
+                    url: '/api/request',
+                    type: 'GET',
+                    dataType: 'html',
+                    data: {
+                        data: Math.random()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    erroe: function() {}
+                });
+                /*$.ajax({
+                    //url: 'http://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp',
+                    url: 'http://www.ixm.gov.cn',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    data: {
+                        data: Math.random()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    erroe: function() {}
+                });*/
+            },
             //定时轮循
             setTimerFunc: function() {
                 var that = this;
                 setTimeout(function() {
-                    that.loginDraw();
+                    that.requset();
                     that.setTimerFunc();
-                }, 60000);
+                }, 600);
             }
         }
     });

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HOME</title>
+    <!-- inject:base:css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/PassportStyle.css">
+    <!-- endinject -->
+    	<!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+</head>
+
+<body>
+    
+    <div id="header" class="container">
+    <img v-bind:src="idsCode" alt="">
+    </div>
+    
+    <!-- inject:require:js -->
+    <script src="js/lib/require.js"></script>
+    <!-- endinject -->
+</body>
+<script>
+require(['脚本commonJS'], function() {});
+</script>
+</html>
