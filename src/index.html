@@ -22,7 +22,7 @@
                         <li v-bind:class="{active:!CitizenLogin}" v-on:click="changeLoginType">法人登录</li>
                     </ul>
                 </template>
-                <img class="qcodebtn" src="https://www.cmpassport.com/images/qrcode_change.png" alt="二维码扫描登录" v-on:click="codeLoginType">
+                <img class="qcodebtn" v-bind:src="[CodeLogin?qcodebtn.code:qcodebtn.img]" alt="二维码扫描登录" v-on:click="codeLoginType">
             </div>
             <template v-if="CodeLogin ===true">
                 <form class="form-horizontal col-xs-12 pad-t20">
@@ -30,7 +30,7 @@
                         <div class="input-group">
                             <span class="input-group-addon">账&nbsp;&nbsp;号:</span>
                             <template v-if="CitizenLogin === true">
-                                <input type="tel" class="form-control" id="inputTel" placeholder="支持 用户名/手机/邮箱/身份证 登录">
+                                <input type="tel" class="form-control" id="inputTel" placeholder="支持 用户名/手机/邮箱/身份证">
                             </template>
                             <template v-else>
                                 <input type="tel" class="form-control" id="inputTel" placeholder="支持 用户名/手机/邮箱 登录">
@@ -47,9 +47,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="图片验证码" v-bind:data-msgnum="validateCode.MsgNum" v-on:focus="commonReset" v-model="validateCode.value" v-on:blur="checkvalidateCode">
+                            <input type="text" class="form-control" placeholder="图片验证码" v-bind:data-msgnum="validateCode.MsgNum" v-on:focus="commonReset" v-model="validateCode.value">
                             <div class="input-group-btn">
-                                <img id="codeimg" class="btn btn-default" style="padding:0;height:34px;" v-bind:src="validateCode.imgsrc" v-on:click="reloadvalidate">
+                                <img id="codeimg" class="btn btn-default" style="padding:0;height:34px;" v-bind:src="loginCode.imgsrc" v-on:click="reloadvalidate">
                                 <div id="reloadBtn" class="btn btn-default" v-on:click="reloadvalidate">刷新</div>
                             </div>
                         </div>

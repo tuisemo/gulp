@@ -8,6 +8,10 @@ define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
         data: {
             CodeLogin: true,
             CitizenLogin: true,
+            qcodebtn: {
+                code: 'https://www.cmpassport.com/images/pc_change.png',
+                img: 'https://www.cmpassport.com/images/qrcode_change.png'
+            },
             bannerstyle: {
                 background: 'url(https://unsplash.it/1500/900?blur&random=' + Math.random() + ')'
             },
@@ -23,6 +27,11 @@ define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
                 value: '',
                 MsgNum: 401,
                 imgsrc: 'http://www.ixm.gov.cn/dis/passport/authCode/show'
+            },
+            loginCode: {
+                value: '',
+                MsgNum: 401,
+                imgsrc: 'http://www.ixm.gov.cn/ids/admin/abc.code'
             },
             Password: {
                 value: '',
@@ -155,6 +164,8 @@ define(['vue', '脚本commonJS', '脚本MSG'], function(Vue) {
                 var that = this;
                 that.validateCode.value = '';
                 that.validateCode.imgsrc = 'http://www.ixm.gov.cn/dis/passport/authCode/show?random=' + Math.random();
+                that.loginCode.value = '';
+                that.loginCode.imgsrc = 'http://www.ixm.gov.cn/ids/admin/abc.code?random=' + Math.random();
             },
             //密码安全性校验
             checkpassword: function(obj) {

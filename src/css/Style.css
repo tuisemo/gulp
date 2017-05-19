@@ -26,20 +26,32 @@ body {
   .hidden-xs {
     display: none !important;
   }
+  .account-container {
+    max-width: 96%;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-sm {
     display: none !important;
+  }
+  .account-container {
+    max-width: 350px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .hidden-md {
     display: none !important;
   }
+  .account-container {
+    max-width: 350px;
+  }
 }
 @media (min-width: 1200px) {
   .hidden-lg {
     display: none !important;
+  }
+  .account-container {
+    max-width: 350px;
   }
 }
 /* 自定义样式 */
@@ -166,7 +178,6 @@ body {
   margin: 0 auto;
   margin-top: 60px;
   padding: 15px 25px;
-  max-width: 400px;
   border: 1px solid #eee;
   border-radius: 5px;
   background-color: #fff;
