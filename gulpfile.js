@@ -72,7 +72,7 @@ gulp.task('fileinclude', /* ['less', 'cssmin', 'scripts'],*/ function() {
             suffix: '-->',
             basepath: '@file',
             indent: true
-        }))        
+        }))
         .pipe(gulp.dest('dist'));
 });
 //格式化html
@@ -124,20 +124,12 @@ gulp.task('scripts', function() {
 });
 
 // 默认任务
-gulp.task('default', function() {
-    gulp.run('cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin');
+gulp.task('default', ['cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'], function() {
+    //gulp.run('cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin');
 
     // 监听文件变化
-    gulp.watch('./src/js/*.js', function() {
-        gulp.run('jshint', 'scripts');
-    });
-    gulp.watch('./src/css/*.less', function() {
-        gulp.run('less');
-    });
-    gulp.watch('./src/css/*.css', function() {
-        gulp.run('cssmin');
-    });
-    gulp.watch(['./src/*.html', './src/include/*.html'], function() {
-        gulp.run('htmlminify', 'htmlbeautify', 'fileinclude'); //html文件必须先压缩再执行include引入
-    });
+    gulp.watch('./src/js/*.js', ['jshint', 'scripts']);
+    gulp.watch('./src/css/*.less', ['less']);
+    gulp.watch('./src/css/*.css', ['cssmin']);
+    gulp.watch(['./src/*.html', './src/include/*.html'], ['htmlminify', 'htmlbeautify', 'fileinclude']);
 });
