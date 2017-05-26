@@ -21,6 +21,12 @@ const watch = require("gulp-watch");
 const cache = require("gulp-cache");
 const autoprefixer = require("gulp-autoprefixer");
 
+var banner =
+"/** \n\
+* By 慎独\n\
+* vue项目练习\n \
+*/\n";
+
 // 检查脚本
 gulp.task('jshint', function() {
     gulp.src('./src/js/*.js')
