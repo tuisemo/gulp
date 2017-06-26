@@ -15,6 +15,7 @@ define(['脚本MSG'], function() {
         this.$reloadBtn = $("#reloadBtn");
         this.$Password = $(".password");
         this.$SubmitBtn = $("#submit");
+        this.$FileUploadBtn = $("#FileUploadBtn");
         this.init(); //定义声明，默认执行函数
     };
     CheckFunc.prototype = {
@@ -184,6 +185,32 @@ define(['脚本MSG'], function() {
         removeClass: function(Obj) {
             Obj.parents('.form-group').removeClass("has-success has-warring has-error");
         },
+        //文件上传处理
+        uploadpic:function(obj) {
+            var that = this;
+            //var element = obj.target;
+            var element = obj[0];
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+                $('#inputfileimg').show();
+                $('#inputfileimg').attr('src',reader.result);
+                var imgData = reader.result;
+                $.ajax({
+                    url: '/uploadpic',
+                    type: 'POST',
+                    //contentType: false,
+                    //processData: false,
+                    data: {
+                        imgData: imgData
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            };
+        },
         listen: function() { //设置监听
             var that = this;
             that.$userName.on("blur", function() {
@@ -229,6 +256,9 @@ define(['脚本MSG'], function() {
             });
             that.$SubmitBtn.on("click", function() {
                 //that.checkTel();
+            });
+            that.$FileUploadBtn.on("change", function() {
+                that.uploadpic($(this));
             });
         }
     };

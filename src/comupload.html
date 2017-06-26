@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件上传</title>
+    <!-- inject:base:css -->
+    <!-- endinject -->
+    <!--IEhack@include('./include/IEhack.html')-->
+</head>
+
+<body>
+    @@include('./include/header.html')
+    <div class="container wrap">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <!-- The file input field used as target for the file upload widget -->
+        <input id="fileupload" type="file" name="files[]" multiple>
+        </span>
+        <br>
+        <br>
+        <!-- The global progress bar -->
+        <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+        <!-- The container for the uploaded files -->
+        <div id="files" class="files"></div>
+        <input id="FileUploadBtn" type="file">
+        <img id="inputfileimg" src="" alt="" style="display: none;">
+    </div>
+    @@include('./include/footer.html')
+    <script src="./js/lib/require.js"></script>
+    <script>
+    require(['脚本handlejs'], function() {
+
+    });
+    </script>
+</body>
+
+</html>
