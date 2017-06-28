@@ -1,4 +1,4 @@
-define(['jquery','脚本WebUploader'], function(jquery,WebUploader) {
+define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
     var $list = $('#fileList'),
         // 优化retina, 在retina下这个值是2
         ratio = window.devicePixelRatio || 1,
@@ -13,14 +13,29 @@ define(['jquery','脚本WebUploader'], function(jquery,WebUploader) {
 
         // 文件接收服务端。
         server: '../upload',
-
-        // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        pick: '#filePicker',
+        pick: {
+            id: '#filePicker', //文件选择器（按钮），即input=file元素
+            innerHTML: '上传文件', //按钮文字
+            multiple: false, //是否开启支持多文件选择
+        },
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/jpg,image/jpeg,image/png' 
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        },
+        thumb: { //配置生成缩略图的选项
+            width: 110,
+            height: 110,
+            // 图片质量，只有type为`image/jpeg`的时候才有效。
+            quality: 70,
+            // 是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false.
+            allowMagnify: true,
+            // 是否允许裁剪。
+            crop: true,
+            // 为空的话则保留原有图片格式。
+            // 否则强制转换成指定的类型。
+            type: 'image/jpeg'
         },
         // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
         resize: false
