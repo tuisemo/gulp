@@ -8,7 +8,7 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
 
     var uploader = WebUploader.create({
         //是否自动上传文件，当设置为false时，调用手动调用
-        auto: false,
+        auto: true,
         method: 'POST', //默认为post方式提交
         //duplicate: true,
         // swf文件路径
@@ -96,7 +96,7 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
 
         // 避免重复创建
         if (!$percent.length) {
-            $percent = $('<p class="webuploader-progress"><span></span></p>')
+            $percent = $('<p class="webuploader-progress"><span>' + percentage * 100 + '%' + '</span></p>')
                 .appendTo($li)
                 .find('span');
         }
