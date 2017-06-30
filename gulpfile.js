@@ -140,5 +140,5 @@ gulp.task('default', ['cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'],
     gulp.watch('./src/js/*.js', ['jshint', 'scripts']);
     gulp.watch('./src/css/*.less', ['less']);
     gulp.watch('./src/css/*.css', ['cssmin']);
-    gulp.watch(['./src/*.html', './src/include/*.html'], ['htmlminify', 'htmlbeautify', 'fileinclude']);
+    gulp.watch(['./src/*.html', './src/include/*.html'], ['fileinclude','htmlminify', 'htmlbeautify']);
 });

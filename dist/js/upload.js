@@ -1,10 +1,17 @@
 define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
-    var $list = $('#fileList'),
+    //var $list = $('#fileList'),
+    var $curlist,
         // 优化retina, 在retina下这个值是2
         ratio = window.devicePixelRatio || 1,
         // 缩略图大小
-        thumbnailWidth = 100 * ratio,
-        thumbnailHeight = 100 * ratio;
+        thumbnailWidth = 200 * ratio,
+        thumbnailHeight = 200 * ratio,
+        curBtn;
+    $('.uploadtable').on('click', '.uploadBtn', function() {
+        curBtn = $(this).attr('id');
+        $curList=$('#'+curBtn+'List');
+
+    });
 
     var uploader = WebUploader.create({
         //是否自动上传文件，当设置为false时，调用手动调用
@@ -67,7 +74,7 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
 
 
         // $list为容器jQuery实例
-        $list.append($li);
+        $curList.append($li);
 
         // 创建缩略图
         // 如果为非图片文件，可以不用调用此方法。
@@ -96,11 +103,10 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
 
         // 避免重复创建
         if (!$percent.length) {
-            $percent = $('<p class="webuploader-progress"><span>' + percentage * 100 + '%' + '</span></p>')
+            $percent = $('<p class="webuploader-progress"><span></span></p>')
                 .appendTo($li)
                 .find('span');
         }
-        console.log(percentage);
         $percent.css('width', percentage * 100 + '%');
     });
 

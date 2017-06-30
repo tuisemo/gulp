@@ -15,12 +15,32 @@
 <body>
     @@include('./include/header.html')
     <div class="container wrap">
-        <div id="uploader-demo">
+        <div id="uploader-demo container">
             <!--用来存放item-->
-            <div id="fileList" class="uploader-list"></div>
-            <div id="ZM_Picker"></div>
-            <div id="FM_Picker"></div>
-            <div id="SC_Picker"></div>
+            <div class="uploadtable col-sm-12">
+                <div class="col-sm-4">证件正面：</div>
+                <div class="col-sm-4">
+                    <div id="ZM_PickerList" class="uploader-list"></div>
+                    <div id="ZM_Picker" class="uploadBtn"></div>
+                </div>
+                <div class="col-sm-4">示例</div>
+            </div>
+            <div class="uploadtable col-sm-12">
+                <div class="col-sm-4">证件正面：</div>
+                <div class="col-sm-4">
+                    <div id="FM_PickerList" class="uploader-list"></div>
+                    <div id="FM_Picker" class="uploadBtn"></div>
+                </div>
+                <div class="col-sm-4">示例</div>
+            </div>
+            <div class="uploadtable col-sm-12">
+                <div class="col-sm-4">证件正面：</div>
+                <div class="col-sm-4">
+                    <div id="SC_PickerList" class="uploader-list"></div>
+                    <div id="SC_Picker" class="uploadBtn"></div>
+                </div>
+                <div class="col-sm-4">示例</div>
+            </div>
             <!-- <div class="webuploader-progress"><span></span></div> -->
         </div>
     </div>

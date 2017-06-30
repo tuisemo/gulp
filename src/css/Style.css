@@ -249,3 +249,14 @@ ul.login-tab li.active {
 #footer #imgConac {
   width: 50px;
 }
+/*文件上传样式*/
+.uploadtable .uploader-list {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 15px 0;
+  border: 2px dashed #e6e6e6;
+}
+.uploadtable .uploadBtn {
+  margin: 0 auto;
+}
