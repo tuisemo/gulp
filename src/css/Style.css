@@ -250,13 +250,42 @@ ul.login-tab li.active {
   width: 50px;
 }
 /*文件上传样式*/
-.uploadtable .uploader-list {
+.uploadtable {
+  padding: 15px 0;
+}
+.uploadtable label {
+  float: left;
+  width: 150px;
+  padding: 0 10px 0 40px;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+}
+.uploadtable .upload_container {
+  float: left;
+  width: 500px;
+}
+.uploadtable .upload_container .uploader-list {
   display: block;
-  width: 200px;
-  height: 200px;
-  margin: 15px 0;
+  width: 250px;
+  height: 250px;
   border: 2px dashed #e6e6e6;
 }
-.uploadtable .uploadBtn {
+.uploadtable .upload_container .uploadBtn {
+  z-index: 99;
+  display: block;
   margin: 0 auto;
+  padding-top: 15px;
+}
+.uploadtable .upload_exmaple {
+  width: 500px;
+}
+.uploadtable:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
 }

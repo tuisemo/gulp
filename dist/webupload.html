@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
         <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
         <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -24,7 +24,7 @@
             <a href="/">
                 <div class="logo"></div>
             </a>
-            <nav class="header-nav col-sm-8 hidden-xs"  v-html="loginDrawHTML">
+            <nav class="header-nav col-sm-8 hidden-xs" v-html="loginDrawHTML">
                 <!-- <ul class="nav-menu fr">
                     <li id="loginbox" class="nav-li">
                         <span><a href="/">登录</a></span>&nbsp;|
@@ -42,29 +42,29 @@
     <div class="container wrap">
         <div id="uploader-demo container">
             <!--用来存放item-->
-            <div class="uploadtable col-sm-12">
-                <div class="col-sm-4">证件正面：</div>
-                <div class="col-sm-4">
+            <div class="uploadtable">
+                <label>证件正面：</label>
+                <div class="upload_container">
                     <div id="ZM_PickerList" class="uploader-list"></div>
-                    <div id="ZM_Picker" class="uploadBtn"></div>
+                    <div id="ZM_Picker" class="uploadBtn">&nbsp;</div>
                 </div>
-                <div class="col-sm-4">示例</div>
+                <div class="upload_example">示例</div>
             </div>
-            <div class="uploadtable col-sm-12">
-                <div class="col-sm-4">证件正面：</div>
-                <div class="col-sm-4">
+            <div class="uploadtable">
+                <label>证件反面：</label>
+                <div class="upload_container">
                     <div id="FM_PickerList" class="uploader-list"></div>
-                    <div id="FM_Picker" class="uploadBtn"></div>
+                    <div id="FM_Picker" class="uploadBtn">&nbsp;</div>
                 </div>
-                <div class="col-sm-4">示例</div>
+                <div class="upload_example">示例</div>
             </div>
-            <div class="uploadtable col-sm-12">
-                <div class="col-sm-4">证件正面：</div>
-                <div class="col-sm-4">
+            <div class="uploadtable">
+                <label>手持证件照：</label>
+                <div class="upload_container">
                     <div id="SC_PickerList" class="uploader-list"></div>
-                    <div id="SC_Picker" class="uploadBtn"></div>
+                    <div id="SC_Picker" class="uploadBtn">&nbsp;</div>
                 </div>
-                <div class="col-sm-4">示例</div>
+                <div class="upload_example">示例</div>
             </div>
             <!-- <div class="webuploader-progress"><span></span></div> -->
         </div>
@@ -80,9 +80,9 @@
 
     <script src="./js/lib/require.js"></script>
     <script>
-    require(['脚本upload'], function() {
+        require(['脚本upload'], function() {
 
-    });
+        });
     </script>
 </body>
 

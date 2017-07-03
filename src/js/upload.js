@@ -7,9 +7,15 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
         thumbnailWidth = 200 * ratio,
         thumbnailHeight = 200 * ratio,
         curBtn;
-    $('.uploadtable').on('click', '.uploadBtn', function() {
+    $('.upload_container').on('click', '.uploadBtn', function() {
         curBtn = $(this).attr('id');
-        $curList=$('#'+curBtn+'List');
+        $curList = $('#' + curBtn + 'List');
+
+    });
+    //兼容ie8
+    $('.upload_container').on('click', 'object', function() {
+        curBtn = $(this).parent('.uploadBtn').attr('id');
+        $curList = $('#' + curBtn + 'List');
 
     });
 
@@ -64,6 +70,7 @@ define(['jquery', '脚本WebUploader'], function(jquery, WebUploader) {
     });
     // 当有文件添加进来的时候
     uploader.on('fileQueued', function(file) {
+    	var that=this;
         var $li = $(
                 '<div id="' + file.id + '" class="file-item thumbnail">' +
                 '<img>' +

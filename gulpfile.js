@@ -79,6 +79,7 @@ gulp.task('fileinclude', /* ['less', 'cssmin', 'scripts'],*/ function() {
             basepath: '@file',
             indent: true
         }))
+        .pipe(htmlbeautify())
         .pipe(gulp.dest('dist'));
 });
 //格式化html
@@ -140,5 +141,6 @@ gulp.task('default', ['cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'],
     gulp.watch('./src/js/*.js', ['jshint', 'scripts']);
     gulp.watch('./src/css/*.less', ['less']);
     gulp.watch('./src/css/*.css', ['cssmin']);
-    gulp.watch(['./src/*.html', './src/include/*.html'], ['fileinclude','htmlminify', 'htmlbeautify']);
+    gulp.watch(['./src/*.html'], ['fileinclude']);
+    gulp.watch(['./src/include/*.html'], ['fileinclude','htmlminify', 'htmlbeautify']);
 });

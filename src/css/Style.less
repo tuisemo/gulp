@@ -244,14 +244,40 @@ ul.login-tab{
 }
 /*文件上传样式*/
 .uploadtable {
-    .uploader-list {
-        display: block;
-        width: 200px;
-        height: 200px;
-        margin:15px 0;
-        border:2px dashed #e6e6e6;
+    padding: 15px 0;
+    label {
+        float: left;
+        width: 150px;
+        padding: 0 10px 0 40px;
+        //height: 35px;
+        line-height: 32px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #666;
     }
-    .uploadBtn{
-        margin: 0 auto;
+    .upload_container {
+        float: left;
+        width: 500px;
+        .uploader-list {
+            display: block;
+            width: 250px;
+            height: 250px;
+            border: 2px dashed #e6e6e6;
+        }
+        .uploadBtn {
+            z-index: 99;
+            display: block;
+            margin: 0 auto;
+            padding-top: 15px;
+        }
+    }
+    .upload_exmaple{
+        width: 500px;
+    }
+    &:after {
+        .clearfix
     }
 }
+
+
+
