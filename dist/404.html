@@ -19,7 +19,7 @@
                 <div style="margin:50px auto 30px;">
                     <div class="col-md-12 col-xs-6 text-c" style="position: relative;float: left;font-size: 170px;color: #00b4e9;line-height: 170px;">404
                     </div>
-                    <h4 style="color: #00b4e9;text-align: center;"><span id="msgtimer">5</span> 秒后将自动跳转至i厦门首页...</h4>
+                    <h4 style="color: #00b4e9;text-align: center;"><span id="msgtimer">5</span>  秒后将自动跳转至i厦门首页...</h4>
                     <div class="clear"></div>
                 </div>
                 <div class="col-md-6 col-md-offset-3 text-c" style="font-size: 16px;">
@@ -38,22 +38,22 @@
     </footer>
 </body>
 <script>
-    var wait = 5;
+var wait = 5;
 
-    function time() {
-        if (wait == 0) {
-            document.location = 'http://www.ixm.gov.cn/'
-        } else {
-            document.getElementById("msgtimer").innerHTML = wait;
-            wait--;
-            setTimeout(function() {
-                time();
-            }, 1000);
-        }
+function time() {
+    if (wait == 0) {
+        document.location = 'http://www.ixm.gov.cn/'
+    } else {
+        document.getElementById("msgtimer").innerHTML = wait;
+        wait--;
+        setTimeout(function() {
+            time();
+        }, 1000);
     }
+}
 </script>
 <script>
-    //time();
+//time();
 </script>
 
 </html>
