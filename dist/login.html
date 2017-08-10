@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
-    	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
         <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
         <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -23,7 +23,7 @@
             <a href="/">
                 <div class="logo"></div>
             </a>
-            <nav class="header-nav col-sm-8 hidden-xs"  v-html="loginDrawHTML">
+            <nav class="header-nav col-sm-8 hidden-xs" v-html="loginDrawHTML">
                 <!-- <ul class="nav-menu fr">
                     <li id="loginbox" class="nav-li">
                         <span><a href="/">登录</a></span>&nbsp;|
@@ -115,7 +115,9 @@
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
                         <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
-                        <a href="/" target="_blank"><div class="btn btn-default fr">忘记密码？</div></a>
+                        <a href="/" target="_blank">
+                            <div class="btn btn-default fr">忘记密码？</div>
+                        </a>
                     </div>
                 </div>
             </form>
@@ -135,34 +137,34 @@
 </body>
 <script src="js/lib/require.js"></script>
 <script>
-require(['脚本handlejs', '脚本tool'], function() {
- $.ajax({
+    require(['脚本handlejs', '脚本tool'], function() {
+        $.ajax({
 
-         type : "get", //jquey是不支持post方式跨域的
+            type: "get", //jquey是不支持post方式跨域的
 
-         async:false,
+            async: false,
 
-         url : "https://api.douban.com/v2/book/1220562", //跨域请求的URL
+            url: "https://api.douban.com/v2/book/1220562", //跨域请求的URL
 
-         dataType : "jsonp",
+            dataType: "jsonp",
 
-         //传递给请求处理程序，用以获得jsonp回调函数名的参数名(默认为:callback)
+            //传递给请求处理程序，用以获得jsonp回调函数名的参数名(默认为:callback)
 
-         //jsonp: "jsoncallback",
+            //jsonp: "jsoncallback",
 
-         //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+            //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
 
-         //jsonpCallback:"success_jsonpCallback",
+            //jsonpCallback:"success_jsonpCallback",
 
-         //成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+            //成功获取跨域服务器上的json数据后,会动态执行这个callback函数
 
-         success : function(json){ 
+            success: function(json) {
 
-             alert(json);   
-         } 
-     });
-    
-});
+                alert(json);
+            }
+        });
+
+    });
 </script>
 
 </html>

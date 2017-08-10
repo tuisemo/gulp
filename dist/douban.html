@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/PassportStyle.css">
     <!-- endinject -->
     <link rel="stylesheet" href="css/unslider.css">
-    	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
         <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
         <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -24,7 +24,7 @@
             <a href="/">
                 <div class="logo"></div>
             </a>
-            <nav class="header-nav col-sm-8 hidden-xs"  v-html="loginDrawHTML">
+            <nav class="header-nav col-sm-8 hidden-xs" v-html="loginDrawHTML">
                 <!-- <ul class="nav-menu fr">
                     <li id="loginbox" class="nav-li">
                         <span><a href="/">登录</a></span>&nbsp;|
@@ -100,25 +100,25 @@
     <script src="js/lib/require.js"></script>
     <!-- endinject -->
     <script>
-    require(['脚本commonJS','脚本vuedouban', '脚本unslider'], function() {
+        require(['脚本commonJS', '脚本vuedouban', '脚本unslider'], function() {
 
-        $(function() {
-            var unslider = $('.banner').unslider({
-                speed: 500, //  切换的速度
-                delay: 3000, //  切换的速度
-                keys: true, //  是否启用左右按钮控制slider切换
-                fluid: true, // 是否每次在容器大小改变的时候，修正slider的大小
-                pause: true, //鼠标以上去是否暂停播放
-                arrows: false, //  是否显示左右箭头，用于slider切换
-                dots: true //  是否显示白色圆点，用于slider切换      
+            $(function() {
+                var unslider = $('.banner').unslider({
+                    speed: 500, //  切换的速度
+                    delay: 3000, //  切换的速度
+                    keys: true, //  是否启用左右按钮控制slider切换
+                    fluid: true, // 是否每次在容器大小改变的时候，修正slider的大小
+                    pause: true, //鼠标以上去是否暂停播放
+                    arrows: false, //  是否显示左右箭头，用于slider切换
+                    dots: true //  是否显示白色圆点，用于slider切换      
+                });
+                $('.unslider-arrow').click(function() {
+                    var fn = this.className.split(' ')[1];
+                    unslider.data('unslider')[fn]();
+                });
             });
-            $('.unslider-arrow').click(function() {
-                var fn = this.className.split(' ')[1];
-                unslider.data('unslider')[fn]();
-            });
+
         });
-
-    });
     </script>
 </body>
 
