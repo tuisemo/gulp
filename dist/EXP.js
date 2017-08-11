@@ -22,7 +22,7 @@ EXP.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //EXP.use(multer());
 /*============请求路由===========*/
 EXP.get('/', function(req, res) {
-    res.send(pathName + '/index.html');
+    res.send(pathName + '/login.html');
 });
 //手机校验
 EXP.get('/checkTel', function(req, res) {
@@ -59,7 +59,7 @@ EXP.get('/api/request', function(req, res) {
 });
 //POST跨域请求转发
 EXP.post('/api/checkUserAttribute', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/checkUserAttribute';
+    var url = 'http://202.109.255.101/dis/passport/checkUserAttribute';
     request.post(url, { form: req.body }).pipe(res);
 });
 

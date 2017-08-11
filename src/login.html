@@ -50,8 +50,8 @@
                         <div class="input-group ">
                             <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
                             <span class="input-group-btn">
-                            <div id="sendmsg" class="btn btn-primary" style="display:none;" onclick="sendMsgFor('01','Citizen')">发送校验码</div>
-                            <div id="msgtimer" class="btn btn-default" style="display:inline-block;" disabled="">发送校验码</div>
+                            <div id="sendmsg" class="btn btn-primary" style="display:inline-block;" onclick="CitizenSignUp.sendMsgFor('01','Citizen')">发送校验码</div>
+                            <div id="msgtimer" class="btn btn-default" style="display:none;" disabled="">发送校验码</div>
                         </span>
                         </div>
                         <span class="help-block"></span>
@@ -82,7 +82,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
-                        <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div>
+                        <!-- <div id="submit" class="btn btn-primary" onclick="checkFunc.confirmpwd();">提交注册</div> -->
+                        <div id="submit" class="btn btn-primary" >提交注册</div>
                         <a href="/" target="_blank"><div class="btn btn-default fr">忘记密码？</div></a>
                     </div>
                 </div>
@@ -93,11 +94,11 @@
     <!-- inject:none:js -->
     <!-- endinject -->
 </body>
-<script src="js/lib/require.js"></script>
+<script src="js/lib/jquery.js"></script>
+<script src="js/ixmSign.js"></script>
 <script>
-require(['脚本handlejs', '脚本tool'], function() {
-
-});
+/*require(['脚本handlejs', '脚本tool'], function() {
+});*/
 </script>
 
 </html>

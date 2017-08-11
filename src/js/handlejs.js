@@ -5,9 +5,11 @@ define(['脚本MSG'], function() {
         this.$Tel = $("input[type='tel']");
         this.$Email = $("input[type='email']");
         this.$validateCode = $("#validateCode");
+        this.$msgCode = $("#msgCode");
         this.$codeimg = $("#codeimg");
         this.$reloadBtn = $("#reloadBtn");
         this.$Password = $(".password");
+        this.$CPassword = $("#CPassword");
         this.$SubmitBtn = $("#submit");
         this.$FileUploadBtn = $("#FileUploadBtn");
         this.init(); //定义声明，默认执行函数
@@ -24,6 +26,28 @@ define(['脚本MSG'], function() {
             } else {
                 Obj.parents('.form-group').addClass('has-error');
                 Obj.next('.help-block').html(MSG["false"] + MSG[MSGnum]);
+            }
+        },
+        //计时器
+        Timesetter: function(o) {
+
+            if (wait == 0) {
+                $("#msgtimer").HTML("发送校验码");
+                $("#sendmsg").show();
+                $("#msgtimer").hide();
+                wait = 180;
+                timeBoo = true;
+            } else {
+                if (wait == 180) {
+                    $("#sendmsg").hide();
+                    $("#msgtimer").show();
+                }
+                timeBoo = false;
+                document.getElementById("msgtimer").innerHTML = wait + "秒后再重试";
+                wait--;
+                setTimeout(function() {
+                    time(o);
+                }, 1000);
             }
         },
         //用户名唯一性校验
@@ -134,7 +158,169 @@ define(['脚本MSG'], function() {
         },
         //再次确认密码
         confirmpwd: function() {
-            alert('ok');
+            //alert('ok');
+        },
+        CitizenSignUp: function() {
+            var that = this;
+            //Promise.resolve()
+            $.ajax({
+                url: "/api/checkUserAttribute", //请求的url地址
+                dataType: "json", //服务器返回的值类型
+                async: true, //请求是否异步，默认为异步
+                data: {
+                    "attributeValue": "tuisemo3",
+                    "attributeName": "userName",
+                    "domainName": "Citizen"
+                }, //发送到服务器的参数
+                type: "POST"
+            }).done(function(data) {
+                switch (data.code) {
+                    case 200:
+                        {
+                            return $.ajax({
+                                url: "/api/checkUserAttribute", //请求的url地址
+                                dataType: "json", //服务器返回的值类型
+                                async: true, //请求是否异步，默认为异步
+                                data: {
+                                    "attributeValue": "18248639098",
+                                    "attributeName": "mobile",
+                                    "domainName": "Citizen"
+                                }, //发送到服务器的参数
+                                type: "POST"
+                            })
+                        }
+                    case -1:
+                        {
+                            $("#valimsg").addClass('text-danger');
+                            $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 1001:
+                        {
+                            $("#usermsg").addClass('text-danger');
+                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 1002:
+                        {
+                            $("#usermsg").addClass('text-danger');
+                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 1003:
+                        {
+                            $("#usermsg").addClass('text-danger');
+                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 2001:
+                        {
+                            $("#mobilemsg").addClass('text-danger');
+                            $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 2002:
+                        {
+                            $("#mobilemsg").addClass('text-danger');
+                            $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    case 2003:
+                        {
+                            $("#usermsg").addClass('text-danger');
+                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            return false;
+                        }
+                    default:
+                        {
+                            $("#valimsg").addClass('text-danger');
+                            $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                            break;
+                        }
+                }
+            }).done(function(data) {
+                $.ajax({
+                    url: '/path/to/file',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'userName': that.$userName.val(),
+                        'mobile': that.$Tel.val(),
+                        'Code': that.$validateCode.val(),
+                        'msgCode': that.$msgCode.val(),
+                        'password': that.$CPassword.val()
+                    },
+                    success: function(data) {
+                        switch (data.code) {
+                            case 200:
+                                {
+                                    return $.ajax({
+                                        url: "/api/checkUserAttribute", //请求的url地址
+                                        dataType: "json", //服务器返回的值类型
+                                        async: true, //请求是否异步，默认为异步
+                                        data: {
+                                            "attributeValue": "18248639098",
+                                            "attributeName": "mobile",
+                                            "domainName": "Citizen"
+                                        }, //发送到服务器的参数
+                                        type: "POST"
+                                    })
+                                }
+                            case -1:
+                                {
+                                    $("#valimsg").addClass('text-danger');
+                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 1001:
+                                {
+                                    $("#usermsg").addClass('text-danger');
+                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 1002:
+                                {
+                                    $("#usermsg").addClass('text-danger');
+                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 1003:
+                                {
+                                    $("#usermsg").addClass('text-danger');
+                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 2001:
+                                {
+                                    $("#mobilemsg").addClass('text-danger');
+                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 2002:
+                                {
+                                    $("#mobilemsg").addClass('text-danger');
+                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            case 2003:
+                                {
+                                    $("#usermsg").addClass('text-danger');
+                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    return false;
+                                }
+                            default:
+                                {
+                                    $("#valimsg").addClass('text-danger');
+                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
+                                    break;
+                                }
+                        }
+                    }
+                })
+            }).fail(function(error) {
+                console.log(error);
+            });
+            /*================测试代码分割线==================*/
         },
         //提示复位清除样式
         removeClass: function(Obj) {
@@ -174,7 +360,7 @@ define(['脚本MSG'], function() {
                 $(this).next('.help-block').html(MSG["501"]);
             });
             that.$SubmitBtn.on("click", function() {
-                //that.checkTel();
+                that.CitizenSignUp();
             });
         }
     };
