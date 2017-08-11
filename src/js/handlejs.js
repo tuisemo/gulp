@@ -1,11 +1,5 @@
 define(['脚本MSG'], function() {
-    var Opt = {
-        userNameTrue: false,
-        telTrue: false,
-        emailTrue: false,
-        validateTrue: false,
-        pwdTrue: false
-    };
+
     var CheckFunc = function() {
         this.$userName = $("#userName");
         this.$Tel = $("input[type='tel']");
@@ -38,7 +32,6 @@ define(['脚本MSG'], function() {
             var userNameVal = that.$userName.val();
             var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
             if (!userNameRE.test(userNameVal)) {
-                Opt.userNameTrue = false;
                 that.optMsg(that.$userName, false, "102");
             } else {
                 $.ajax({
@@ -51,7 +44,6 @@ define(['脚本MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            Opt.userNameTrue = true;
                             that.optMsg(that.$userName, true);
                         } else {
                             that.optMsg(that.$userName, false, 202);
@@ -66,7 +58,6 @@ define(['脚本MSG'], function() {
             var TelVal = that.$Tel.val();
             var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
-                Opt.telTrue = true;
                 that.optMsg(that.$Tel, false, 202);
             } else {
                 $.ajax({
@@ -79,40 +70,10 @@ define(['脚本MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            Opt.telTrue = true;
                             that.optMsg(that.$Tel, true);
                         } else {
                             telTrue = false;
                             that.optMsg(that.$Tel, false, 203);
-                        }
-                    }
-                });
-            }
-        },
-        //邮箱唯一性校验
-        checkEmail: function() {
-            var that = this;
-            var EmailVal = that.$Email.val();
-            var emailVal = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
-            if (!emailVal.test(EmailVal)) {
-                Opt.emailTrue = false;
-                that.optMsg(that.$Email, false, 302);
-            } else {
-                $.ajax({
-                    url: '/checkTel',
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        'attributeName': 'email',
-                        'attributeValue': EmailVal
-                    },
-                    success: function(data) {
-                        if (data.result) {
-                            Opt.emailTrue = true;
-                            that.optMsg(that.$Email, true);
-                        } else {
-                            emailTrue = false;
-                            that.optMsg(that.$Email, false, 302);
                         }
                     }
                 });
@@ -129,10 +90,8 @@ define(['脚本MSG'], function() {
                 },
                 success: function(data) {
                     if (data.result) {
-                        Opt.validateTrue = true;
                         that.optMsg(that.$validateCode, true);
                     } else {
-                        Opt.validateTrue = false;
                         that.optMsg(that.$validateCode, false, 302);
                     }
                 }
@@ -151,10 +110,8 @@ define(['脚本MSG'], function() {
             var pwdVal = that.$Password.val();
             var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
             if (!pwdRE.test(pwdVal)) {
-                Opt.pwdTrue = false;
                 that.optMsg(that.$Password, false, 502);
             } else if (pwdVal.length < 8 || pwdVal.length > 30) {
-                Opt.pwdTrue = false;
                 that.optMsg(that.$Password, false, 502);
             } else {
                 $.ajax({
@@ -167,10 +124,8 @@ define(['脚本MSG'], function() {
                     },
                     success: function(data) {
                         if (data.result) {
-                            Opt.pwdTrue = true;
                             that.optMsg(that.$Password, true);
                         } else {
-                            Opt.pwdTrue = false;
                             that.optMsg(that.$Password, false, 302);
                         }
                     }
@@ -184,32 +139,6 @@ define(['脚本MSG'], function() {
         //提示复位清除样式
         removeClass: function(Obj) {
             Obj.parents('.form-group').removeClass("has-success has-warring has-error");
-        },
-        //文件上传处理
-        uploadpic:function(obj) {
-            var that = this;
-            //var element = obj.target;
-            var element = obj[0];
-            var file = element.files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function(e) {
-                $('#inputfileimg').show();
-                $('#inputfileimg').attr('src',reader.result);
-                var imgData = reader.result;
-                $.ajax({
-                    url: '/uploadpic',
-                    type: 'POST',
-                    //contentType: false,
-                    //processData: false,
-                    data: {
-                        imgData: imgData
-                    },
-                    success: function(data) {
-                        console.log(data);
-                    }
-                });
-            };
         },
         listen: function() { //设置监听
             var that = this;
@@ -227,9 +156,6 @@ define(['脚本MSG'], function() {
                 that.removeClass($(this));
                 $(this).next('.help-block').html(MSG["201"]);
             });
-            that.$validateCode.on("blur", function() {
-                that.checkvalidateCode($(this));
-            });
             that.$validateCode.on("focus", function() {
                 that.removeClass($(this));
                 $(this).next('.help-block').html(MSG["401"]);
@@ -240,13 +166,6 @@ define(['脚本MSG'], function() {
             that.$reloadBtn.on("click", function() {
                 that.reloadvalidate($(this));
             });
-            that.$Email.on("blur", function() {
-                that.checkEmail();
-            });
-            that.$Email.on("focus", function() {
-                that.removeClass($(this));
-                $(this).next('.help-block').html(MSG["301"]);
-            });
             that.$Password.on("blur", function() {
                 that.checkpassword();
             });
@@ -256,9 +175,6 @@ define(['脚本MSG'], function() {
             });
             that.$SubmitBtn.on("click", function() {
                 //that.checkTel();
-            });
-            that.$FileUploadBtn.on("change", function() {
-                that.uploadpic($(this));
             });
         }
     };

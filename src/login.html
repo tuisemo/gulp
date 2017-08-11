@@ -14,25 +14,25 @@
 <body>
     @@include('./include/header.html')
     <div class="container wrap">
-        <div class="col-sm-5 col-xs-12 login-form">
-            <div class="col-sm-12 form-title">市民通行证<a href="/"><span class="smalltitle">港澳台侨外人员注册</span></a></div>
+    <div class="col-sm-12 container-top">市民通行证</div>
+        <div class="col-sm-6 col-xs-12">            
             <form class="form-horizontal col-sm-12 col-xs-12">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>用户名:</small></label>
+                    <label class="col-sm-3 control-label">用户名:</label>
                     <div class="col-sm-9">
                         <input id="userName" type="text" class="form-control" placeholder="用户名">
                         <span class="help-block">以英文字母开头，可包含3-20个字符</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>手机:</small></label>
+                    <label class="col-sm-3 control-label">手&nbsp;&nbsp;&nbsp;&nbsp;机:</label>
                     <div class="col-sm-9">
                         <input type="tel" class="form-control" id="inputTel" placeholder="手机">
                         <span class="help-block">请输入您的手机号(仅支持中国大陆)</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>图片验证码:</small></label>
+                    <label class="col-sm-3 control-label">图片验证码:</label>
                     <div class="col-sm-9">
                         <div class="input-group">
                             <input id="validateCode" type="text" class="form-control" placeholder="图片验证码">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>短信验证码:</small></label>
+                    <label class="col-sm-3 control-label">短信验证码:</label>
                     <div class="col-sm-9">
                         <div class="input-group ">
                             <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
@@ -57,22 +57,15 @@
                         <span class="help-block"></span>
                     </div>
                 </div>
-                <!--             <div class="form-group">
-    <label class="col-sm-2 control-label">邮箱:</label>
-    <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-        <span class="help-block">请输入您的邮箱地址</span>
-    </div>
-</div> -->
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>设置密码:</small></label>
+                    <label class="col-sm-3 control-label">设置密码:</label>
                     <div class="col-sm-9">
                         <input type="password" class="form-control password" id="Password" placeholder="设置密码">
                         <span class="help-block">8-30位字符包含数字和英文字符</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><small>确认密码:</small></label>
+                    <label class="col-sm-3 control-label">确认密码:</label>
                     <div class="col-sm-9">
                         <input type="password" class="form-control password" id="CPassword" placeholder="确认密码">
                         <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
@@ -103,32 +96,7 @@
 <script src="js/lib/require.js"></script>
 <script>
 require(['脚本handlejs', '脚本tool'], function() {
- $.ajax({
 
-         type : "get", //jquey是不支持post方式跨域的
-
-         async:false,
-
-         url : "https://api.douban.com/v2/book/1220562", //跨域请求的URL
-
-         dataType : "jsonp",
-
-         //传递给请求处理程序，用以获得jsonp回调函数名的参数名(默认为:callback)
-
-         //jsonp: "jsoncallback",
-
-         //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-
-         //jsonpCallback:"success_jsonpCallback",
-
-         //成功获取跨域服务器上的json数据后,会动态执行这个callback函数
-
-         success : function(json){ 
-
-             alert(json);   
-         } 
-     });
-    
 });
 </script>
 

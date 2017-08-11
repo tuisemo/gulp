@@ -33,7 +33,7 @@ define(['脚本layer'], function(layer) {
                 //'        <a href="/">' +
                 //'            <div class="logo"></div>' +
                 //'        </a>' +
-                '        <nav class="header-nav col-sm-8 hidden-xs">' +
+                '        <nav class="header-nav col-sm-4 hidden-xs">' +
                 '            <ul class="nav-menu fr">' +
                 '<% if (!haslogin) { %>' +
                 '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
