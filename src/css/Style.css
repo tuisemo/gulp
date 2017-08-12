@@ -87,7 +87,6 @@ body {
 #header .logo {
   display: block;
   position: relative;
-  width: 600px;
   height: 69px;
   float: left;
   background: url('http://www.ixm.gov.cn/dis/images/trs_logo.png') no-repeat;
@@ -130,10 +129,10 @@ body {
   visivilty: hidden;
 }
 .wrap {
-  margin-top: -100px;
+  margin-top: -115px;
   margin-bottom: -86px;
-  padding-top: 100px;
-  padding-bottom: 101px;
+  padding-top: 115px;
+  padding-bottom: 86px;
   min-height: 100%;
   background-color: #f9f9f9;
 }
@@ -189,6 +188,35 @@ body {
 }
 #footer #imgConac {
   width: 50px;
+}
+/* =================按钮颜色重定义============= */
+.btn-primary {
+  border-color: #00b4e9;
+  background-color: #00bff7;
+  background-image: -webkit-linear-gradient(top, #00c5ff, #00b4e9);
+  background-image: -o-linear-gradient(top, #00c5ff, #00b4e9);
+  background-image: linear-gradient(top, #00c5ff, #00b4e9);
+  background-image: -ms-linear-gradient(top, #00c5ff, #00b4e9);
+  background-image: -moz-linear-gradient(top, #00c5ff, #00b4e9);
+}
+.btn-primary:hover {
+  color: #fff;
+  border-color: #00a4d4;
+  background-color: #00bff7;
+}
+.btn-primary:active,
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open > .dropdown-toggle.btn-primary.focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.open > .dropdown-toggle.btn-primary:hover {
+  color: #fff;
+  border-color: #00a4d4;
+  background-color: #00bff7;
 }
 /*================以上代码仅用于i厦门=================*/
 #searchresult .resultlist .cover {

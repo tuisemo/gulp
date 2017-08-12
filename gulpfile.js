@@ -51,11 +51,11 @@ gulp.task('cssmin', function() {
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
     gulp.src(['./src/css/bootstrapStyle.css', './src/css/Style.css'])
-        .pipe(autoprefixer({
-            browsers: ['last 4 versions']
+        //.pipe(autoprefixer({
+            //browsers: ['last 4 versions']
             //cascade: true, //是否美化属性值 默认：true 像这样：
             //remove: true //是否去掉不必要的前缀 默认：true 
-        }))
+        //}))
         .pipe(cache(cssmin()))
         .pipe(concat('PassportStyle.css'))
         .pipe(gulp.dest('./src/css'))

@@ -4,6 +4,7 @@
 
 
 
+
 /**
 *Author:alone
 *CreatTime:2017/3/31
@@ -64,6 +65,7 @@ body {
 
 
 
+
 /* 自定义样式 */
 
 #header {
@@ -86,7 +88,7 @@ body {
     .logo {
         display: block;
         position: relative;
-        width: 600px;
+        //width: 600px;
         height: 69px;
         float: left;
         background: url('http://www.ixm.gov.cn/dis/images/trs_logo.png') no-repeat;
@@ -94,11 +96,10 @@ body {
     .header-nav {
         display: block;
         position: relative;
-        float: right;
-        //padding: 15px;
+        float: right; //padding: 15px;
         .nav-menu {
             line-height: 34px;
-            color:#fff;
+            color: #fff;
             li {
                 display: inline-block;
                 position: relative;
@@ -127,10 +128,10 @@ body {
 }
 
 .wrap {
-    margin-top: -100px;
+    margin-top: -115px;
     margin-bottom: -86px;
-    padding-top: 100px;
-    padding-bottom: 101px;
+    padding-top: 115px;
+    padding-bottom: 86px;
     min-height: 100%;
     background-color: #f9f9f9;
     &:after {
@@ -148,14 +149,16 @@ body {
         }
     }
 }
-.warm-text{    
+
+.warm-text {
     padding-left: 20px;
     padding-right: 40px;
     font-size: 14px;
     line-height: 32px;
-    color:#a0a0a0;
+    color: #a0a0a0;
     border-left: 1px #dedede solid;
 }
+
 .container-top {
     padding-top: 25px;
     padding-bottom: 25px;
@@ -163,6 +166,7 @@ body {
     line-height: 35px;
     text-indent: 50px;
 }
+
 
 
 
@@ -181,6 +185,37 @@ body {
     #imgConac {
         width: 50px;
     }
+}
+/* =================按钮颜色重定义============= */
+.btn-primary {
+    border-color: #00b4e9;
+    background-color: #00bff7;
+    background-image: -webkit-linear-gradient(top, #00c5ff, #00b4e9);
+    background-image: -o-linear-gradient(top, #00c5ff, #00b4e9);
+    background-image: linear-gradient(top, #00c5ff, #00b4e9);
+    background-image: -ms-linear-gradient(top, #00c5ff, #00b4e9);
+    background-image: -moz-linear-gradient(top, #00c5ff, #00b4e9)
+}
+
+.btn-primary:hover {
+    color: #fff;
+    border-color: #00a4d4;
+    background-color: #00bff7
+}
+
+.btn-primary:active,
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open>.dropdown-toggle.btn-primary.focus,
+.open>.dropdown-toggle.btn-primary:focus,
+.open>.dropdown-toggle.btn-primary:hover {
+    color: #fff;
+    border-color: #00a4d4;
+    background-color: #00bff7
 }
 
 
@@ -309,6 +344,7 @@ ul.login-tab {
 
 
 
+
 /*文件上传样式*/
 
 .uploadtable {
@@ -345,6 +381,7 @@ ul.login-tab {
         .clearfix
     }
 }
+
 
 
 

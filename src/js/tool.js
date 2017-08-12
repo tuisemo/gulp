@@ -23,14 +23,15 @@ define(['脚本layer'], function(layer) {
         loginCheck: function() {
             var that = this;
             $.ajax({
-                url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
+                //url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
+                url: 'http://www.ixm.gov.cn/dis/interface/passport_inferface_v1.0.jsp',
                 type: 'GET',
                 dataType: 'jsonp',
                 jsonpCallback: "ssoUser_for_login",
                 data: {},
                 success: function(data) {
                     if (data.result) {
-                        that.loginDraw(data.result, data.user.info);
+                        that.loginDraw(data.result, data.user);
                     } else {
                         that.loginDraw(false);
                     }
@@ -54,7 +55,8 @@ define(['脚本layer'], function(layer) {
                 '                </li>' +
                 '<% } else { %>' +
                 '                <li id="hasloginbox" class="nav-li">' +
-                '                    <span><%=userName%></span>' +
+                '                    <span><%=user.hello%>，<%=user.userName%></span>' +
+                '                    <span><a href="http://www.ixm.gov.cn/ids/admin/logout.jsp?returnUrl=/ids/custom/xiamen/login_xm.jsp">退出账号</a></span>' +
                 '                    <span><a href="/">个人中心</a></span>' +
                 '                    <span><a href="/">i厦门</a></span>' +
                 '                </li>' +
@@ -62,11 +64,11 @@ define(['脚本layer'], function(layer) {
                 '            </ul>'
             );
         },
-        loginDraw: function(haslogin, userName) {
+        loginDraw: function(haslogin, user) {
             var that = this;
             that.$headercon.append(that.TMPheader({
                 haslogin: haslogin,
-                userName: userName
+                user: user
             }));
         },
         msg: function(data) {
@@ -160,11 +162,33 @@ define(['脚本layer'], function(layer) {
                     }
                 default:
                     {
-                        this.$msgCode.addClass('text-danger').html(MSG["false"] + data.msg);
+                        layer.msg('请求异常，请稍后重试');
                         break;
                     }
             }
         }
     };
     window.ResultOpt = new ResultOpt();
+    window.MSG = {
+        "true": '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
+        "false": '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',
+        "101": '以英文字母开头，可包含3-20个字符',
+        "102": '用户名格式不正确！',
+        "103": '该用户名已被占用！',
+        "104": '该账号不存在！',
+        "201": '请输入您的手机号(仅支持中国大陆)',
+        "202": '手机号码格式有误！',
+        "203": '该手机号已被占用！',
+        "301": '请输入您的邮箱地址',
+        "302": '请输入正确的邮箱地址！',
+        "303": '该邮箱已被占用！',
+        "401": '',//请输入图片验证码
+        "402": '验证码过期或有误！',
+        "501": '8-30位字符包含数字和英文字符',
+        "502": '密码格式不符合，请重设！',
+        "503": '密码强度太弱，请重设！',
+        "504": '密码要求8-30位！',
+        "505": '两次密码不一致！',
+        "601": '校验码过期或有误！',
+    };    
 });
