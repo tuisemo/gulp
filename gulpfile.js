@@ -22,7 +22,7 @@ const cache = require("gulp-cache");
 const autoprefixer = require("gulp-autoprefixer");
 
 var banner =
-"/** \n\
+    "/** \n\
 * By 慎独\n\
 * vue项目练习\n \
 */\n";
@@ -47,14 +47,14 @@ gulp.task('less', function() {
 });
 //补全前缀+压缩css
 gulp.task('cssmin', function() {
-    gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css','./src/css/webuploader.css'])
+    gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css', './src/css/webuploader.css'])
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
     gulp.src(['./src/css/bootstrapStyle.css', './src/css/Style.css'])
         .pipe(autoprefixer({
             browsers: ['last 4 versions']
-                //cascade: true, //是否美化属性值 默认：true 像这样：
-                //remove: true //是否去掉不必要的前缀 默认：true 
+            //cascade: true, //是否美化属性值 默认：true 像这样：
+            //remove: true //是否去掉不必要的前缀 默认：true 
         }))
         .pipe(cache(cssmin()))
         .pipe(concat('PassportStyle.css'))
@@ -69,7 +69,7 @@ gulp.task('fileinclude', /* ['less', 'cssmin', 'scripts'],*/ function() {
             basepath: '@file',
             indent: true
         }))
-        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/PassportStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
+        .pipe(inject(gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/PassportStyle.css'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         //.pipe(inject(gulp.src(['./src/js/MSG.js', './src/js/lib/jquery.js'], { reda: false }), { starttag: '<!-- inject:base:{{ext}} -->', relative: true }))
         //.pipe(inject(gulp.src(['./src/js/lib/vue.js'], { reda: false }), { starttag: '<!-- inject:vue:{{ext}} -->', relative: true }))
         .pipe(inject(gulp.src(['./src/js/lib/require.js'], { reda: false }), { starttag: '<!-- inject:require:{{ext}} -->', relative: true }))
@@ -142,5 +142,5 @@ gulp.task('default', ['cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'],
     gulp.watch('./src/css/*.less', ['less']);
     gulp.watch('./src/css/*.css', ['cssmin']);
     gulp.watch(['./src/*.html'], ['fileinclude']);
-    gulp.watch(['./src/include/*.html'], ['fileinclude','htmlminify', 'htmlbeautify']);
+    gulp.watch(['./src/include/*.html'], ['fileinclude', 'htmlminify', 'htmlbeautify']);
 });

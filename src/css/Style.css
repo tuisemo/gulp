@@ -47,6 +47,12 @@ body {
   }
 }
 @media (min-width: 1200px) {
+  .ixm-container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .hidden-lg {
     display: none !important;
   }
@@ -60,10 +66,23 @@ body {
   display: block;
   width: 100%;
   background-color: #00b4e9;
+  margin-bottom: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #00a9de;
-  box-shadow: 0px 0px 15px 0px #ccc;
+  box-shadow: 0 2px 6px #d1d1d1;
+}
+#header .ixm-nav {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#header .ixm-nav:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
 }
 #header .logo {
   display: block;
@@ -77,10 +96,10 @@ body {
   display: block;
   position: relative;
   float: right;
-  padding: 15px auto;
 }
 #header .header-nav .nav-menu {
   line-height: 34px;
+  color: #fff;
 }
 #header .header-nav .nav-menu li {
   display: inline-block;
@@ -89,19 +108,18 @@ body {
   padding: 0 15px;
 }
 #header .header-nav .nav-menu li a {
-  display: block;
-  font-size: 16px;
-  color: #333;
+  font-size: 14px;
+  color: #fff;
   text-align: center;
 }
 #header .header-nav .nav-menu li a:hover {
-  color: #a2a2a2;
+  color: #ffffff;
 }
 #header .header-nav .nav-menu li span {
   display: inline-block;
   position: relative;
   padding: 0px 5px;
-  color: #333;
+  color: #fff;
 }
 #header .header-nav .nav-menu:after {
   clear: both;
@@ -113,10 +131,11 @@ body {
 }
 .wrap {
   margin-top: -100px;
-  margin-bottom: -101px;
+  margin-bottom: -86px;
   padding-top: 100px;
   padding-bottom: 101px;
   min-height: 100%;
+  background-color: #f9f9f9;
 }
 .wrap:after {
   clear: both;
@@ -126,11 +145,50 @@ body {
   display: block;
   visivilty: hidden;
 }
+.wrap .ixm-body {
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+.wrap .ixm-body:after {
+  clear: both;
+  content: ' ';
+  height: 0;
+  width: 0;
+  display: block;
+  visivilty: hidden;
+}
+.warm-text {
+  padding-left: 20px;
+  padding-right: 40px;
+  font-size: 14px;
+  line-height: 32px;
+  color: #a0a0a0;
+  border-left: 1px #dedede solid;
+}
 .container-top {
   padding-top: 25px;
   padding-bottom: 25px;
   font-size: 20px;
   line-height: 35px;
+  text-indent: 50px;
+}
+/* 底部自定义样式 */
+#footer {
+  position: relative;
+  display: block;
+  margin-top: 15px;
+  padding: 10px 0px;
+  margin-bottom: 0;
+  color: #3e3e3e;
+  background-color: #f6f6f6;
+  border-top: 1px solid #e0e0e0;
+}
+#footer #imgConac {
+  width: 50px;
 }
 /*================以上代码仅用于i厦门=================*/
 #searchresult .resultlist .cover {
@@ -241,20 +299,6 @@ ul.login-tab li.active {
 }
 .form-group .help-block {
   margin-bottom: 0;
-}
-/* 底部自定义样式 */
-#footer {
-  position: relative;
-  display: block;
-  margin-top: 30px;
-  padding: 10px 0px;
-  margin-bottom: 0;
-  color: #3e3e3e;
-  background-color: #f6f6f6;
-  border-top: 1px solid #e0e0e0;
-}
-#footer #imgConac {
-  width: 50px;
 }
 /*文件上传样式*/
 .uploadtable {

@@ -23,6 +23,119 @@ $(function() {
     };
 });
 $(function() {
+    var ResultOpt = function() {
+        this.$userName = $("#userName");
+        this.$Tel = $("input[type='tel']");
+        this.$validateCode = $("#validateCode");
+        this.$msgCode = $("#msgCode");
+        this.$codeimg = $("#codeimg");
+        this.$reloadBtn = $("#reloadBtn");
+        this.$Password = $(".password");
+        this.$FPassword = $("#FPassword");
+        this.$CPassword = $("#CPassword");
+    };
+    ResultOpt.prototype = {
+        Opt: function(data) {
+            switch (data.code) {
+                case 200:
+                    {
+                        break;
+                    }
+                case -1:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 1001:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 1002:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 1003:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 2001:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 2002:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 2003:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 2005:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 3001:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 3002:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 3003:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 3005:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 4004:
+                    {
+                        this.$validateCode.parents('.form-group').addClass('has-error');
+                        this.$validateCode.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                case 4006:
+                    {
+                        this.$validateCode.parents('.form-group').addClass('has-error');
+                        this.$validateCode.next('.help-block').html(MSG["false"] + data.result);
+                        break;
+                    }
+                default:
+                    {
+                        this.$msgCode.addClass('text-danger').html(MSG["false"] + data.result);
+                        break;
+                    }
+            }
+        }
+    };
+    window.ResultOpt = new ResultOpt();
+});
+$(function() {
     var CitizenSignUp = function() {
         this.wait = 10;
         this.timeBoo = true;
@@ -36,6 +149,7 @@ $(function() {
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
         this.$SubmitBtn = $("#submit");
+        this.$Check = $("#check");
         this.init();
     };
     CitizenSignUp.prototype = {
@@ -68,8 +182,11 @@ $(function() {
             that.$reloadBtn.on("click", function() {
                 that.reloadvalidate($(this));
             });
-            that.$Password.on("blur", function() {
+            that.$FPassword.on("blur", function() {
                 that.checkpassword();
+            });
+            that.$CPassword.on("blur", function() {
+                that.confirmpwd();
             });
             that.$Password.on("focus", function() {
                 that.removeClass($(this));
@@ -95,7 +212,7 @@ $(function() {
         },
         Timesetter: function(o) {
             var that = this;
-            if (that.wait == 0) {
+            if (that.wait === 0) {
                 $("#msgtimer").html("发送校验码");
                 $("#sendmsg").show();
                 $("#msgtimer").hide();
@@ -121,7 +238,7 @@ $(function() {
             var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
             if (!userNameRE.test(userNameVal)) {
                 that.optMsg(that.$userName, false, "102");
-            };
+            }
         },
         //手机唯一性校验
         checkTel: function() {
@@ -130,7 +247,7 @@ $(function() {
             var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
                 that.optMsg(that.$Tel, false, 202);
-            };
+            }
         },
         //刷新图片验证码
         reloadvalidate: function() {
@@ -140,38 +257,45 @@ $(function() {
             validateTrue = false;
         },
         //密码安全性校验
-        checkpassword: function(argument) {
+        checkpassword: function() {
             var that = this;
-            var pwdVal = that.$Password.val();
+            var pwdVal = that.$FPassword.val();
             var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
             if (!pwdRE.test(pwdVal)) {
-                that.optMsg(that.$Password, false, 502);
+                that.optMsg(that.$FPassword, false, 502);
             } else if (pwdVal.length < 8 || pwdVal.length > 30) {
-                that.optMsg(that.$Password, false, 502);
+                that.optMsg(that.$FPassword, false, 502);
             } else {
                 $.ajax({
-                    url: '/checkTel',
+                    url: '/api/checkUserPwd',
                     type: 'GET',
-                    dataType: 'json',
+                    dataType: 'text',
+                    cache:false,
                     data: {
                         'userName': that.$userName.val() || '',
-                        'password': pwdVal
+                        'password': that.$FPassword.val()
                     },
                     success: function(data) {
-                        if (data.result) {
-                            that.optMsg(that.$Password, true);
+                        if (data.indexOf("success") != -1) {
+                            that.optMsg(that.$FPassword, true);
                         } else {
-                            that.optMsg(that.$Password, false, 302);
+                            that.optMsg(that.$FPassword, false, 503);
                         }
+                        /*if (data.result) {
+                            that.optMsg(that.$FPassword, true);
+                        } else {
+                            that.optMsg(that.$FPassword, false, 503);
+                        }*/
                     }
                 });
             }
         },
         //再次确认密码
         confirmpwd: function() {
-            var that=this;
-            if (that.$FPassword.val()!=that.$CPassword) {
-                that.optMsg(that.$Password, false, 502);
+            var that = this;
+            if (that.$FPassword.val() != that.$CPassword.val()) {
+                that.optMsg(that.$FPassword, false, 505);
+                that.optMsg(that.$CPassword, false, 505);
             }
         },
         /*==================================*/
@@ -179,13 +303,13 @@ $(function() {
             var that = this;
             var TelOrEmail = $("#TelOrEmail").val();
             var validateCode = $("#validateCode").val();
-            if (that.timeBoo == false) {
+            if (that.timeBoo === false) {
                 return false;
             } else {
                 $.ajax({
-                    url: "/dis/passport/sendMsg", //请求的url地址
-                    dataType: "json", //服务器返回的值类型
-                    async: true, //请求是否异步，默认为异步
+                    url: "/dis/passport/sendMsg",
+                    dataType: "json",
+                    async: true,
                     cache: false,
                     data: {
                         "operationType": operationType,
@@ -193,101 +317,22 @@ $(function() {
                         "sendType": sendType,
                         "mobile": TelOrEmail,
                         "code": validateCode,
-                    }, //发送到服务器的参数
-                    type: "POST", //请求方式
+                    },
+                    type: "POST",
                     success: function(data) {
                         //请求成功时处理
-                        var code = data.code;
-                        var resultmsg = data.result;
-                        switch (code) {
-                            case 200:
-                                {
-                                    $("#msgtimer").hide();
-                                    $("#sendmsg").show();
-                                    $("#mobilemsg").addClass('text-success');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>' + resultmsg);
-                                    that.Timesetter();
-                                    break;
-                                }
-                            case -1:
-                                {
-                                    $("#valimsg").addClass('text-danger');
-                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 2001:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    mobileBoo = false;
-                                    break;
-                                }
-                            case 2002:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 2003:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 2005:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 3001:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 3002:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 3003:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 3005:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 4004:
-                                {
-                                    $("#valimsg").addClass('text-danger');
-                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            case 4006:
-                                {
-                                    $("#valimsg").addClass('text-danger');
-                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
-                            default:
-                                {
-                                    $("#codemsg").addClass('text-danger');
-                                    $("#codemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + resultmsg);
-                                    break;
-                                }
+                        if (data.code == 200) {
+                            $("#msgtimer").hide();
+                            $("#sendmsg").show();
+                            $("#mobilemsg").addClass('text-success').html(MSG["true"] + data.result);
+                            that.Timesetter();
+                            return;
                         }
+                        ResultOpt.Opt(data);
                     },
                     error: function(data) {
                         //请求出错处理
-                        $("#codemsg").addClass('text-danger');
-                        $("#codemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + "请求出错请重试！");
+                        $("#codemsg").addClass('text-danger').html(MSG["false"] + "请求出错请重试！");
                         return false;
                     }
                 });
@@ -296,153 +341,60 @@ $(function() {
         /*==================================*/
         SignUp: function() {
             var that = this;
+            if (!that.$Check.is(':checked')) {
+                return;
+            }
+            var attributeValue = that.$userName.val() + ";" + that.$Tel.val();
             $.ajax({
-                url: "/api/checkUserAttribute", //请求的url地址
-                dataType: "json", //服务器返回的值类型
-                async: true, //请求是否异步，默认为异步
-                data: {
-                    "attributeValue": "tuisemo3",
-                    "attributeName": "userName",
-                    "domainName": "Citizen"
-                }, //发送到服务器的参数
-                type: "POST"
-            }).done(function(data) {
-                switch (data.code) {
-                    case 200:
-                        {
-                            return $.ajax({
-                                url: "/api/checkUserAttribute", //请求的url地址
-                                dataType: "json", //服务器返回的值类型
-                                async: true, //请求是否异步，默认为异步
-                                data: {
-                                    "attributeValue": "18248639098",
-                                    "attributeName": "mobile",
-                                    "domainName": "Citizen"
-                                }, //发送到服务器的参数
-                                type: "POST"
-                            });
-                        }
-                    case -1:
-                        {
-                            $("#valimsg").addClass('text-danger');
-                            $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 1001:
-                        {
-                            $("#usermsg").addClass('text-danger');
-                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 1002:
-                        {
-                            $("#usermsg").addClass('text-danger');
-                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 1003:
-                        {
-                            $("#usermsg").addClass('text-danger');
-                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 2001:
-                        {
-                            $("#mobilemsg").addClass('text-danger');
-                            $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 2002:
-                        {
-                            $("#mobilemsg").addClass('text-danger');
-                            $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    case 2003:
-                        {
-                            $("#usermsg").addClass('text-danger');
-                            $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            return false;
-                        }
-                    default:
-                        {
-                            $("#valimsg").addClass('text-danger');
-                            $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                            break;
-                        }
-                }
-            }).done(function(data) {
-                $.ajax({
-                    url: '/path/to/file',
-                    type: 'POST',
-                    dataType: 'json',
+                    url: "/api/checkUserAttribute",
+                    dataType: "json",
+                    async: true,
                     data: {
-                        'userName': that.$userName.val(),
-                        'mobile': that.$Tel.val(),
-                        'Code': that.$validateCode.val(),
-                        'msgCode': that.$msgCode.val(),
-                        'password': that.$CPassword.val()
+                        "attributeValue": attributeValue,
+                        "attributeName": "userName;mobile",
+                        "domainName": "Citizen"
                     },
-                    success: function(data) {
-                        switch (data.code) {
-                            case 200:
-                                {
-                                    return true;
+                    type: "POST"
+                })
+                /*.done(function(data) {
+                                if (data.code == 200) {
+                                    return $.ajax({
+                                        url: "/api/checkUserAttribute",
+                                        dataType: "json",
+                                        async: true,
+                                        data: {
+                                            "attributeValue": "13900000008",
+                                            "attributeName": "mobile",
+                                            "domainName": "Citizen"
+                                        },
+                                        type: "POST"
+                                    });
                                 }
-                            case -1:
-                                {
-                                    $("#valimsg").addClass('text-danger');
-                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 1001:
-                                {
-                                    $("#usermsg").addClass('text-danger');
-                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 1002:
-                                {
-                                    $("#usermsg").addClass('text-danger');
-                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 1003:
-                                {
-                                    $("#usermsg").addClass('text-danger');
-                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 2001:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 2002:
-                                {
-                                    $("#mobilemsg").addClass('text-danger');
-                                    $("#mobilemsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            case 2003:
-                                {
-                                    $("#usermsg").addClass('text-danger');
-                                    $("#usermsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    return false;
-                                }
-                            default:
-                                {
-                                    $("#valimsg").addClass('text-danger');
-                                    $("#valimsg").html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + data.result);
-                                    break;
-                                }
+                                ResultOpt.Opt(data);
+                            })*/
+                .done(function(data) {
+                    $.ajax({
+                        url: '/api/reg',
+                        type: 'POST',
+                        dataType: 'json',
+                        cache: false,
+                        data: {
+                            'userName': $(that.$userName).val() || "tuisemo",
+                            'mobile': $(that.$Tel).val() || "18248639098",
+                            'Code': $(that.$validateCode).val() || "resj",
+                            'msgCode': $(that.$msgCode).val() || "234567",
+                            'password': $(that.$CPassword).val() || "czp20mhkdurl"
+                        },
+                        success: function(data) {
+                            if (data.code === 200) {
+                                window.location = "";
+                            }
+                            ResultOpt.Opt(data);
                         }
-                    }
+                    });
+                }).fail(function(error) {
+                    console.log(error);
                 });
-            }).fail(function(error) {
-                console.log(error);
-            });
         }
     };
     window.CitizenSignUp = new CitizenSignUp();

@@ -1,4 +1,7 @@
-@import './variables.less';
+@import 'variables.less';
+
+
+
 
 
 /**
@@ -42,6 +45,12 @@ body {
 }
 
 @media (min-width: 1200px) {
+    .ixm-container {
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
     .hidden-lg {
         display: none !important;
     }
@@ -52,6 +61,9 @@ body {
 
 
 
+
+
+
 /* 自定义样式 */
 
 #header {
@@ -59,10 +71,18 @@ body {
     display: block;
     width: 100%;
     background-color: @header-bg;
+    margin-bottom: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid @header-bg - 11;
-    box-shadow: 0px 0px 15px 0px #ccc;
+    border-bottom: 1px solid @header-bg - 11; //box-shadow: 0px 0px 15px 0px #ccc;
+    box-shadow: 0 2px 6px #d1d1d1;
+    .ixm-nav {
+        padding-left: 15px;
+        padding-right: 15px;
+        &:after {
+            .clearfix
+        }
+    }
     .logo {
         display: block;
         position: relative;
@@ -75,17 +95,17 @@ body {
         display: block;
         position: relative;
         float: right;
-        padding: 15px auto;
+        //padding: 15px;
         .nav-menu {
             line-height: 34px;
+            color:#fff;
             li {
                 display: inline-block;
                 position: relative;
-                float: left; //width: 80px;
+                float: left;
                 padding: 0 15px;
                 a {
-                    display: block;
-                    font-size: 16px;
+                    font-size: 14px;
                     color: @nav-text;
                     text-align: center;
                     &:hover {
@@ -108,21 +128,61 @@ body {
 
 .wrap {
     margin-top: -100px;
-    margin-bottom: -101px;
+    margin-bottom: -86px;
     padding-top: 100px;
     padding-bottom: 101px;
     min-height: 100%;
+    background-color: #f9f9f9;
     &:after {
         .clearfix
     }
+    .ixm-body {
+        width: 100%;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        &:after {
+            .clearfix
+        }
+    }
 }
-
+.warm-text{    
+    padding-left: 20px;
+    padding-right: 40px;
+    font-size: 14px;
+    line-height: 32px;
+    color:#a0a0a0;
+    border-left: 1px #dedede solid;
+}
 .container-top {
     padding-top: 25px;
     padding-bottom: 25px;
     font-size: 20px;
     line-height: 35px;
+    text-indent: 50px;
 }
+
+
+
+
+/* 底部自定义样式 */
+
+#footer {
+    position: relative;
+    display: block;
+    margin-top: 15px;
+    padding: 10px 0px;
+    margin-bottom: 0;
+    color: @text-dark+11;
+    background-color: @footer-bg;
+    border-top: 1px solid @footer-bg - 22;
+    #imgConac {
+        width: 50px;
+    }
+}
+
 
 
 /*================以上代码仅用于i厦门=================*/
@@ -243,21 +303,10 @@ ul.login-tab {
 
 
 
-/* 底部自定义样式 */
 
-#footer {
-    position: relative;
-    display: block;
-    margin-top: 30px;
-    padding: 10px 0px;
-    margin-bottom: 0;
-    color: @text-dark+11;
-    background-color: @footer-bg;
-    border-top: 1px solid @footer-bg - 22;
-    #imgConac {
-        width: 50px;
-    }
-}
+
+
+
 
 
 /*文件上传样式*/
@@ -296,6 +345,9 @@ ul.login-tab {
         .clearfix
     }
 }
+
+
+
 
 
 /*i厦门首页*/

@@ -24,6 +24,9 @@ EXP.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 EXP.get('/', function(req, res) {
     res.send(pathName + '/login.html');
 });
+EXP.get('/sign', function(req, res) {
+    res.render(pathName + '/signup.html');
+});
 //手机校验
 EXP.get('/checkTel', function(req, res) {
     var data = url.parse(req.url, true).query;
@@ -50,7 +53,7 @@ EXP.get('/api/authCode/check', function(req, res) {
     req.pipe(request(url)).pipe(res);
 });
 EXP.get('/api/checkUserPwd', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/ids/checkUserPwd';
+    var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
     req.pipe(request(url)).pipe(res);
 });
 EXP.get('/api/request', function(req, res) {
@@ -59,8 +62,30 @@ EXP.get('/api/request', function(req, res) {
 });
 //POST跨域请求转发
 EXP.post('/api/checkUserAttribute', function(req, res) {
-    var url = 'http://202.109.255.101/dis/passport/checkUserAttribute';
+    var url = 'http://ixm.terton.com.cn/dis/passport/checkUserAttribute';
     request.post(url, { form: req.body }).pipe(res);
+});
+EXP.post('/api/reg', function(req, res) {
+    var url = 'http://ixm.terton.com.cn/dis/passport/reg';
+    request.post(url, { form: req.body }).pipe(res);
+});
+EXP.post('/api/checkUser', function(req, res) {
+    var url = 'http://ixm.terton.com.cn/dis/passport/checkUser';
+    request.post(url, { form: req.body }).pipe(res);
+});
+EXP.post('/api/resetPwdChooseUI', function(req, res) {
+    var url = 'http://ixm.terton.com.cn/dis/passport/resetPwdChooseUI';
+    request.post(url, { form: req.body }).pipe(res);
+});
+EXP.post('/api/sendMsg', function(req, res) {
+    var url = 'http://ixm.terton.com.cn/dis/passport/sendMsg';
+    //request.post(url, { form: req.body }).pipe(res);
+    res.json({
+        result:true,
+        code:200,
+        data:'',
+        msg:''
+    })
 });
 
 //文件上传组件

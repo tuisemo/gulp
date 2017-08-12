@@ -1,24 +1,39 @@
 define(['脚本layer'], function(layer) {
-    var tool = function() {
+    var ResultOpt = function() {
+        this.$userName = $("#userName");
+        this.$Tel = $("input[type='tel']");
+        this.$validateCode = $("#validateCode");
+        this.$msgCode = $("#msgCode");
+        this.$codeimg = $("#codeimg");
+        this.$reloadBtn = $("#reloadBtn");
+        this.$Password = $(".password");
+        this.$FPassword = $("#FPassword");
+        this.$CPassword = $("#CPassword");
         this.$header = $("#header");
-        this.$headercon = $("#header .container");
+        this.$headercon = $("#header .header-nav");
         this.init();
     };
-    tool.prototype = {
+    ResultOpt.prototype = {
         init: function() {
             this.Alltemplate();
             this.loginCheck();
+            //this.Opt();
         },
         //检查登录状态
         loginCheck: function() {
             var that = this;
             $.ajax({
-                url: 'www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp?callback=ssoUser_for_login',
+                url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
                 type: 'GET',
                 dataType: 'jsonp',
+                jsonpCallback: "ssoUser_for_login",
                 data: {},
                 success: function(data) {
-                    that.loginDraw(data.result,data.user.info);
+                    if (data.result) {
+                        that.loginDraw(data.result, data.user.info);
+                    } else {
+                        that.loginDraw(false);
+                    }
                 },
                 error: function() {
                     that.loginDraw(false);
@@ -30,10 +45,6 @@ define(['脚本layer'], function(layer) {
         Alltemplate: function() {
             var that = this;
             that.TMPheader = _.template(
-                //'        <a href="/">' +
-                //'            <div class="logo"></div>' +
-                //'        </a>' +
-                '        <nav class="header-nav col-sm-4 hidden-xs">' +
                 '            <ul class="nav-menu fr">' +
                 '<% if (!haslogin) { %>' +
                 '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
@@ -43,12 +54,12 @@ define(['脚本layer'], function(layer) {
                 '                </li>' +
                 '<% } else { %>' +
                 '                <li id="hasloginbox" class="nav-li">' +
-                '                    <span><a href="/"><%=userName%></a></span>&nbsp;|' +
-                '                    <span><a href="/">退出</a></span>' +
+                '                    <span><%=userName%></span>' +
+                '                    <span><a href="/">个人中心</a></span>' +
+                '                    <span><a href="/">i厦门</a></span>' +
                 '                </li>' +
                 '<% } %>' +
-                '            </ul>' +
-                '        </nav>'
+                '            </ul>'
             );
         },
         loginDraw: function(haslogin, userName) {
@@ -57,7 +68,103 @@ define(['脚本layer'], function(layer) {
                 haslogin: haslogin,
                 userName: userName
             }));
+        },
+        msg: function(data) {
+            switch (data.code) {
+                case 200:
+                    {
+                        break;
+                    }
+                case -1:
+                    {
+                        layer.msg(data.msg);
+                        break;
+                    }
+                case 1001:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 1002:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 1003:
+                    {
+                        this.$userName.parents('.form-group').addClass('has-error');
+                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 2001:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 2002:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 2003:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 2005:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 3001:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 3002:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 3003:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 3005:
+                    {
+                        this.$Tel.parents('.form-group').addClass('has-error');
+                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 4004:
+                    {
+                        this.$validateCode.parents('.form-group').addClass('has-error');
+                        this.$validateCode.parents('.input-group').next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                case 4006:
+                    {
+                        this.$validateCode.parents('.form-group').addClass('has-error');
+                        this.$validateCode.parents('.input-group').next('.help-block').html(MSG["false"] + data.msg);
+                        break;
+                    }
+                default:
+                    {
+                        this.$msgCode.addClass('text-danger').html(MSG["false"] + data.msg);
+                        break;
+                    }
+            }
         }
     };
-    window.tool = new tool();
+    window.ResultOpt = new ResultOpt();
 });
