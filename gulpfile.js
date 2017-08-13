@@ -35,7 +35,7 @@ gulp.task('jshint', function() {
 });
 //检查html
 gulp.task('htmlhint', function() {
-    gulp.src('./src/*.html')
+    gulp.src(['./src/*.html','!./src/index.html','!./src/HACK.html','!./src/fileupload.html','!./src/comupload.html','!./src/app.html'])
         .pipe(htmlhint())
         .pipe(htmlhint.reporter());
 });
@@ -134,7 +134,7 @@ gulp.task('scripts', function() {
 });
 
 // 默认任务
-gulp.task('default', ['cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'], function() {
+gulp.task('default', ['htmlhint','cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'], function() {
     //gulp.run('cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin');
 
     // 监听文件变化

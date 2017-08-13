@@ -81,10 +81,10 @@ EXP.post('/api/sendMsg', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/sendMsg';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
-        result:true,
-        code:200,
+        result:false,
+        code:-1,
         data:'',
-        msg:''
+        msg:'错误测试'
     })
 });
 

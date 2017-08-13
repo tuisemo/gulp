@@ -11,19 +11,24 @@ define(['脚本layer'], function(layer) {
         this.$CPassword = $("#CPassword");
         this.$header = $("#header");
         this.$headercon = $("#header .header-nav");
+        this.$ixmcontainer = $(".ixm-container");
         this.init();
     };
     ResultOpt.prototype = {
         init: function() {
+            this.logo();
             this.Alltemplate();
             this.loginCheck();
-            //this.Opt();
+        },
+        logo: function() {
+            if (this.$ixmcontainer.attr("data-type") == "enterprise") {
+                $(".logo").css("background", "url(http://www.ixm.gov.cn/dis/images/trs_en_logo.png) no-repeat");
+            }
         },
         //检查登录状态
         loginCheck: function() {
             var that = this;
             $.ajax({
-                //url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
                 url: 'http://www.ixm.gov.cn/dis/interface/passport_inferface_v1.0.jsp',
                 type: 'GET',
                 dataType: 'jsonp',
@@ -84,80 +89,80 @@ define(['脚本layer'], function(layer) {
                     }
                 case 1001:
                     {
-                        this.$userName.parents('.form-group').addClass('has-error');
-                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$userName.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 1002:
                     {
-                        this.$userName.parents('.form-group').addClass('has-error');
-                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$userName.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 1003:
                     {
-                        this.$userName.parents('.form-group').addClass('has-error');
-                        this.$userName.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$userName.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 2001:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 2002:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 2003:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 2005:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 3001:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 3002:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 3003:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 3005:
                     {
-                        this.$Tel.parents('.form-group').addClass('has-error');
-                        this.$Tel.next('.help-block').html(MSG["false"] + data.msg);
+                        this.$Tel.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 4004:
                     {
-                        this.$validateCode.parents('.form-group').addClass('has-error');
-                        this.$validateCode.parents('.input-group').next('.help-block').html(MSG["false"] + data.msg);
+                        this.$validateCode.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 case 4006:
                     {
-                        this.$validateCode.parents('.form-group').addClass('has-error');
-                        this.$validateCode.parents('.input-group').next('.help-block').html(MSG["false"] + data.msg);
+                        this.$validateCode.parents('.form-group').addClass('has-error')
+                        .find('.help-block').html(MSG["false"] + data.msg);
                         break;
                     }
                 default:
@@ -182,7 +187,7 @@ define(['脚本layer'], function(layer) {
         "301": '请输入您的邮箱地址',
         "302": '请输入正确的邮箱地址！',
         "303": '该邮箱已被占用！',
-        "401": '',//请输入图片验证码
+        "401": '', //请输入图片验证码
         "402": '验证码过期或有误！',
         "501": '8-30位字符包含数字和英文字符',
         "502": '密码格式不符合，请重设！',
@@ -190,5 +195,12 @@ define(['脚本layer'], function(layer) {
         "504": '密码要求8-30位！',
         "505": '两次密码不一致！',
         "601": '校验码过期或有误！',
-    };    
+        "En100": '请输入营业执照上的单位名称',
+        "En200": '请填写登记注册地址',
+        "En300": '请输入15位营业执照注册号',
+        "En400": '请输入9位组织机构代码',
+        "En500": '请输入18位统一社会信用代码',
+        "REG": '格式不符合！',
+        "IdReg": '证件号格式不符合！'
+    };
 });
