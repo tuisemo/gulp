@@ -55,15 +55,15 @@ define(['脚本layer'], function(layer) {
                 '<% if (!haslogin) { %>' +
                 '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
                 '                <li id="loginbox" class="nav-li">' +
-                '                    <span><a href="/">登录</a></span>&nbsp;|' +
-                '                    <span><a href="/">注册</a></span>' +
+                '                    <span><a href="https://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp">登录</a></span>&nbsp;|' +
+                '                    <span><a href="http://www.ixm.gov.cn/dis/passport/regUI">注册</a></span>' +
                 '                </li>' +
                 '<% } else { %>' +
                 '                <li id="hasloginbox" class="nav-li">' +
                 '                    <span><%=user.hello%>，<%=user.userName%></span>' +
                 '                    <span><a href="http://www.ixm.gov.cn/ids/admin/logout.jsp?returnUrl=/ids/custom/xiamen/login_xm.jsp">退出账号</a></span>' +
-                '                    <span><a href="/">个人中心</a></span>' +
-                '                    <span><a href="/">i厦门</a></span>' +
+                '                    <span><a href="http://www.ixm.gov.cn/dis/passport/personCenter">个人中心</a></span>' +
+                '                    <span><a href="http://www.ixm.gov.cn">i厦门</a></span>' +
                 '                </li>' +
                 '<% } %>' +
                 '            </ul>'

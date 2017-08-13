@@ -20,6 +20,7 @@ const spriter = require("gulp-css-spriter");
 const watch = require("gulp-watch");
 const cache = require("gulp-cache");
 const autoprefixer = require("gulp-autoprefixer");
+const ext_replace = require('gulp-ext-replace');
 
 var banner =
     "/** \n\
@@ -82,6 +83,18 @@ gulp.task('fileinclude', /* ['less', 'cssmin', 'scripts'],*/ function() {
         .pipe(htmlbeautify())
         .pipe(gulp.dest('dist'));
 });
+//JSP转换
+gulp.task('jspchange', function() {
+    gulp.src(['./src/signup.html','./src/resetPwd.html','./src/forgetPwd.html','./src/Ensignup.html','./src/forgetChoose.html'])
+        .pipe(fileinclude({
+            prefix: '<!--JSP@',
+            suffix: '-->',
+            basepath: '@file',
+            indent: true
+        }))
+        .pipe(ext_replace('.jsp'))
+        .pipe(gulp.dest('dist/jsp'));
+});
 //格式化html
 gulp.task('htmlbeautify', function() {
     gulp.src('./src/*.html')
@@ -134,7 +147,7 @@ gulp.task('scripts', function() {
 });
 
 // 默认任务
-gulp.task('default', ['htmlhint','cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin'], function() {
+gulp.task('default', ['htmlhint','cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin','jspchange'], function() {
     //gulp.run('cssmin', 'jshint', 'scripts', 'fileinclude', 'imagemin');
 
     // 监听文件变化

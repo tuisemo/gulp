@@ -16,6 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-css-spriter": "^0.4.0",
     "gulp-csslint": "^1.0.0",
+    "gulp-ext-replace": "^0.3.0",
     "gulp-file-include": "^1.0.0",
     "gulp-html-beautify": "^1.0.1",
     "gulp-html-minify": "0.0.14",
