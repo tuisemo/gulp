@@ -86,7 +86,7 @@
                         <div class="col-sm-offset-3 col-sm-9">
                             <div class="checkbox">
                                 <label>
-                                    <input id="check" type="checkbox" checked="checked"><small>我已阅读并接受 <a href="/" target="_blank">“市民通行证”服务协议</a></small>
+                                    <input id="check" type="checkbox" checked="checked"><small>我已阅读并接受 <a href="http://www.ixm.gov.cn/sy/fwxy/index.html" target="_blank">“市民通行证”服务协议</a></small>
                                 </label>
                             </div>
                         </div>

@@ -31,7 +31,7 @@ define(['脚本MSG'], function() {
         //计时器
         Timesetter: function(o) {
 
-            if (wait == 0) {
+            if (wait === 0) {
                 $("#msgtimer").HTML("发送校验码");
                 $("#sendmsg").show();
                 $("#msgtimer").hide();
@@ -187,7 +187,7 @@ define(['脚本MSG'], function() {
                                     "domainName": "Citizen"
                                 }, //发送到服务器的参数
                                 type: "POST"
-                            })
+                            });
                         }
                     case -1:
                         {
@@ -264,7 +264,7 @@ define(['脚本MSG'], function() {
                                             "domainName": "Citizen"
                                         }, //发送到服务器的参数
                                         type: "POST"
-                                    })
+                                    });
                                 }
                             case -1:
                                 {
@@ -316,7 +316,7 @@ define(['脚本MSG'], function() {
                                 }
                         }
                     }
-                })
+                });
             }).fail(function(error) {
                 console.log(error);
             });

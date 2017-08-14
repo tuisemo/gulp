@@ -49,7 +49,7 @@ define(['脚本tool', '脚本layer'], function() {
             });
             that.$validateCode.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.input-group').next('.help-block').html(MSG["401"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG["401"]);
             });
             that.$codeimg.on("click", function() {
                 that.reloadvalidate($(this));
@@ -83,31 +83,31 @@ define(['脚本tool', '脚本layer'], function() {
             });
             that.$enterpriseName.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["En100"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG.En100);
             }).on("blur", function() {
                 that.REGEX(03, $(this));
             });
             that.$licenseLocation.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["En200"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG.En200);
             }).on("blur", function() {
                 that.REGEX(03, $(this));
             });
             that.$businessLicense.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["En300"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG.En300);
             }).on("blur", function() {
                 that.REGEX(02, $(this));
             });
             that.$organizationCode.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["En400"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG.En400);
             }).on("blur", function() {
                 that.REGEX(02, $(this));
             });
             that.$unifiedcreditCode.on("focus", function() {
                 that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["En500"]);
+                $(this).parents('.form-group').find('.help-block').html(MSG.En500);
             }).on("blur", function() {
                 that.REGEX(02, $(this));
             });
@@ -333,14 +333,15 @@ define(['脚本tool', '脚本layer'], function() {
                 layer.msg('请勾选通行证协议');
                 return;
             }
+            var attributeValue, attributeName;
             if ($("input[name='idUpdate']:checked").val() == "true") {
-                var attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
                     that.$enterpriseName.val() + ";" + that.$unifiedcreditCode.val();
-                var attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
+                attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
             } else {
-                var attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
                     that.$enterpriseName.val() + ";" + that.$businessLicense.val() + ";" + that.$organizationCode.val();
-                var attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
+                attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
             }
             $.ajax({
                 url: "/api/checkUserAttribute",

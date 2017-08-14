@@ -177,11 +177,11 @@ define(['脚本layer'], function(layer) {
     window.MSG = {
         "true": '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
         "false": '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',
-        "101": '以英文字母开头，可包含3-20个字符',
+        "101": '以英文字母开头，可包含3-20个字符（例：abc123）',
         "102": '用户名格式不正确！',
         "103": '该用户名已被占用！',
         "104": '该账号不存在！',
-        "201": '请输入您的手机号(仅支持中国大陆)',
+        "201": '请输入省内有效手机号码 (不支持170/171/175号段)',
         "202": '手机号码格式有误！',
         "203": '该手机号已被占用！',
         "301": '请输入您的邮箱地址',
