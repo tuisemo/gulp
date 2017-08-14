@@ -1,0 +1,9 @@
+<%@page import="com.sdp.util.RequestUtil"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<!-- include jstl标签库 -->
+<%@ include file="../include/include.jsp" %>
+<%
+    String fromCoAppName = RequestUtil.getParameterAndTrim(request, "fromCoAppName");
+    request.getSession().setAttribute("fromCoAppName", fromCoAppName);
+%>
+<%@page import="com.chinaums.xm.macUtil.DESPlus"%>
