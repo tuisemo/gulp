@@ -220,7 +220,8 @@ define(['脚本tool', '脚本layer'], function() {
         checkpassword: function() {
             var that = this;
             var pwdVal = that.$FPassword.val();
-            var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
+            //var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
+            var pwdRE = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)_\+-=\[\]\{\}\\\|;:'"<,>\.\?\/]{8,30}$/;
             if (!pwdRE.test(pwdVal)) {
                 that.optMsg(that.$FPassword, false, 502);
             } else if (pwdVal.length < 8 || pwdVal.length > 30) {
@@ -236,7 +237,7 @@ define(['脚本tool', '脚本layer'], function() {
                         'password': that.$FPassword.val()
                     },
                     success: function(data) {
-                        if (data.code == 200) {
+                        if (data.result) {
                             that.optMsg(that.$FPassword, true);
                         } else {
                             ResultOpt.msg(data);
@@ -261,7 +262,6 @@ define(['脚本tool', '脚本layer'], function() {
             if (!(that.timeBoo)) {
                 return false;
             } else {
-                $("#sendmsg").attr('disabled');
                 $.ajax({
                         url: "/dis/passport/sendMsg",
                         dataType: "json",
@@ -291,8 +291,6 @@ define(['脚本tool', '脚本layer'], function() {
                         }
                     })
                     .done(function(data) {
-                        $("#sendmsg").removeAttr('disabled');
-                        console.log('111');
                     });
             }
         },
@@ -341,7 +339,7 @@ define(['脚本tool', '脚本layer'], function() {
                 },
                 type: "POST"
             }).done(function(data) {
-                if (data.code == 200) {
+                if (data.code == 200 || data.result) {
                     $('form').submit();
                 } else {
                     ResultOpt.msg(data);
@@ -418,7 +416,7 @@ define(['脚本tool', '脚本layer'], function() {
                     "domainName": domainName
                 },
                 success: function(data) {
-                    if (data.code === 200) {
+                    if (data.code === 200 || data.result) {
                         $('form').submit();
                     } else {
                         ResultOpt.msg(data);

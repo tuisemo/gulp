@@ -51,7 +51,7 @@ gulp.task('cssmin', function() {
     gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css', './src/css/webuploader.css'])
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
-    gulp.src(['./src/css/bootstrapStyle.css', './src/css/Style.css'])
+    gulp.src(['./src/css/bootstrap.min.css', './src/css/Style.css'])
         //.pipe(autoprefixer({
             //browsers: ['last 4 versions']
             //cascade: true, //是否美化属性值 默认：true 像这样：

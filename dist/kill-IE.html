@@ -1,3 +1,4 @@
+<!--JSP@include('./include/JSPinclude.html')-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -5,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HOME</title>
+    <title>通行证</title>
     <!-- inject:base:css -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/layer.css">
@@ -32,10 +33,11 @@
         </div>
     </div>
 
-    <div class="container wrap">
-        <video width="600" height="300" controls autoplay>
-        <source src="images/video.avi" type="video/avi">
-    </video>
+    <div class="ixm-container wrap">
+        <div class="ixm-body">
+            <h1 class="text-c pad-t50">当前浏览器版本太低</h1>
+            <h3 class="text-c">为保障信息的安全和展现，建议升级浏览器</h3>
+        </div>
     </div>
     <div id="footer" class="footer">
         <div class="container">
@@ -46,12 +48,12 @@
         </div>
     </div>
 
-    <!-- inject:require:js -->
-    <script src="js/lib/require.js"></script>
+    <!-- inject:none:js -->
     <!-- endinject -->
+    <script src="js/lib/require.js"></script>
+    <script>
+        require(['脚本tool', '脚本Passport'], function() {});
+    </script>
 </body>
-<script>
-    require(['脚本commonJS'], function() {});
-</script>
 
 </html>

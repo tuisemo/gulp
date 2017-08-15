@@ -119,13 +119,4 @@
     <!-- endinject -->
     @@include('./include/JSinclude.html')
 </body>
-<script>
-(function() {
-    $("input[name='userName']").focus(function() {
-        $("#mobilemsg").removeClass('text-danger text-success');
-        $("#mobilemsg").html("");
-    })
-})
-</script>
-
 </html>

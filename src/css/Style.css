@@ -146,6 +146,7 @@ body {
 }
 .wrap .ixm-body {
   width: 100%;
+  min-height: 450px;
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #fff;
