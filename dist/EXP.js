@@ -48,43 +48,49 @@ EXP.post('/sever/data', function(req, res) {
     res.send('this is post request');
 });
 //GET跨域请求转发
-EXP.get('/api/authCode/check', function(req, res) {
+EXP.get('/dis/passport/authCode/check', function(req, res) {
     var url = 'http://www.ixm.gov.cn/dis/passport/authCode/check';
     req.pipe(request(url)).pipe(res);
 });
-EXP.get('/api/checkUserPwd', function(req, res) {
+EXP.get('/dis/ids/checkUserPwd', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
     req.pipe(request(url)).pipe(res);
 });
-EXP.get('/api/request', function(req, res) {
+EXP.get('/ids/custom/xiamen/login_xm.jsp', function(req, res) {
     var url = 'http://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp';
     req.pipe(request(url)).pipe(res);
 });
 //POST跨域请求转发
-EXP.post('/api/checkUserAttribute', function(req, res) {
+EXP.post('/dis/passport/checkUserAttribute', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/checkUserAttribute';
-    request.post(url, { form: req.body }).pipe(res);
+    //request.post(url, { form: req.body }).pipe(res);
+    res.json({
+        result:false,
+        code:200,
+        data:'',
+        msg:'成功'
+    })
 });
-EXP.post('/api/reg', function(req, res) {
+EXP.post('/dis/passport/reg', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/reg';
     request.post(url, { form: req.body }).pipe(res);
 });
-EXP.post('/api/checkUser', function(req, res) {
+EXP.post('/dis/passport/checkUser', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/checkUser';
     request.post(url, { form: req.body }).pipe(res);
 });
-EXP.post('/api/resetPwdChooseUI', function(req, res) {
+EXP.post('/dis/passport/resetPwdChooseUI', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/resetPwdChooseUI';
     request.post(url, { form: req.body }).pipe(res);
 });
-EXP.post('/api/sendMsg', function(req, res) {
+EXP.post('/dis/passport/sendMsg', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/sendMsg';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
         result:false,
-        code:-1,
+        code:200,
         data:'',
-        msg:'错误测试'
+        msg:'成功'
     })
 });
 

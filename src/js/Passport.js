@@ -13,7 +13,7 @@ define(['脚本tool', '脚本layer'], function() {
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
         this.$SubmitBtn = $("#submit");
-        this.$Check = $("#check");
+        this.$Check = $("#check"); //服务协议勾选
         this.$forgetInput = $("#forgetInput");
         this.$ForgetBtn = $("#ForgetBtn");
         /*=======企业注册dom======*/
@@ -227,7 +227,7 @@ define(['脚本tool', '脚本layer'], function() {
                 that.optMsg(that.$FPassword, false, 502);
             } else {
                 $.ajax({
-                    url: '/api/checkUserPwd',
+                    url: '/dis/ids/checkUserPwd',
                     type: 'GET',
                     dataType: 'json',
                     cache: false,
@@ -263,7 +263,7 @@ define(['脚本tool', '脚本layer'], function() {
             } else {
                 $("#sendmsg").attr('disabled');
                 $.ajax({
-                        url: "/api/sendMsg",
+                        url: "/dis/passport/sendMsg",
                         dataType: "json",
                         async: true,
                         cache: false,
@@ -276,10 +276,10 @@ define(['脚本tool', '脚本layer'], function() {
                         },
                         type: "POST",
                         success: function(data) {
-                            if (data.code == 200) {
+                            if (data.code == 200 || data.result) {
                                 $("#msgtimer").hide();
                                 $("#sendmsg").show();
-                                $("#mobilemsg").addClass('text-success').html(MSG["true"] + data.result);
+                                $("#mobilemsg").addClass('text-success').html(MSG["true"] + data.msg);
                                 that.Timesetter();
                                 return;
                             }
@@ -295,103 +295,6 @@ define(['脚本tool', '脚本layer'], function() {
                         console.log('111');
                     });
             }
-        },
-        /*==================================*/
-        SignUp: function() {
-            var that = this;
-            if (!that.$Check.is(':checked')) {
-                layer.msg('请勾选通行证协议');
-                return;
-            }
-            var attributeValue = that.$userName.val() + ";" + that.$Tel.val();
-            $.ajax({
-                url: "/api/checkUserAttribute",
-                dataType: "json",
-                async: true,
-                data: {
-                    "attributeValue": attributeValue,
-                    "attributeName": "userName;mobile",
-                    "domainName": "Citizen"
-                },
-                type: "POST"
-            }).done(function(data) {
-                if (data.code == 200) {
-                    $('form').submit();
-                } else {
-                    ResultOpt.msg(data);
-                }
-            }).fail(function(error) {
-                console.log(error);
-                layer.msg('请求出错，请稍后重试');
-                return;
-            });
-        },
-        /*==================================*/
-        EnterpriseSignUp: function() {
-            var that = this;
-            if (!that.$Check.is(':checked')) {
-                layer.msg('请勾选通行证协议');
-                return;
-            }
-            var attributeValue, attributeName;
-            if ($("input[name='idUpdate']:checked").val() == "true") {
-                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
-                    that.$enterpriseName.val() + ";" + that.$unifiedcreditCode.val();
-                attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
-            } else {
-                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
-                    that.$enterpriseName.val() + ";" + that.$businessLicense.val() + ";" + that.$organizationCode.val();
-                attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
-            }
-            $.ajax({
-                url: "/api/checkUserAttribute",
-                dataType: "json",
-                async: true,
-                data: {
-                    "attributeValue": attributeValue,
-                    "attributeName": attributeName,
-                    "code": that.$validateCode.val(),
-                    "domainName": "Enterprise"
-                },
-                type: "POST"
-            }).done(function(data) {
-                if (data.code == 200) {
-                    layer.load(2, {
-                        shade: [0.1, '#333'] //0.1透明度的白色背景
-                    });
-                    $('form').submit();
-                } else {
-                    ResultOpt.msg(data);
-                }
-            }).fail(function(error) {
-                console.log(error);
-                layer.msg('请求出错，请稍后重试');
-                return;
-            });
-        },
-        ForgetAccount: function(domainName) {
-            var that = this;
-            $.ajax({
-                url: '/api/checkUser',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    "userName": that.$forgetInput.val(),
-                    "code": that.$validateCode.val(),
-                    "domainName": domainName
-                },
-                success: function(data) {
-                    if (data.code === 200) {
-                        $('form').submit();
-                    } else {
-                        ResultOpt.msg(data);
-                    }
-                },
-                error: function(error) {
-                    layer.msg('请求出错，请稍后重试');
-                    return;
-                }
-            });
         },
         //身份证号格式检测
         checkIDnumber: function(IDnum) {
@@ -419,6 +322,79 @@ define(['脚本tool', '脚本layer'], function() {
                 that.optMsg(that.$certificateNum, false, 'IdReg');
             }
         },
+        /*================市民注册==================*/
+        SignUp: function() {
+            var that = this;
+            if (!that.$Check.is(':checked')) {
+                layer.msg('请勾选通行证协议');
+                return;
+            }
+            var attributeValue = that.$userName.val() + ";" + that.$Tel.val();
+            $.ajax({
+                url: "dis/passport/checkUserAttribute",
+                dataType: "json",
+                async: true,
+                data: {
+                    "attributeValue": attributeValue,
+                    "attributeName": "userName;mobile",
+                    "domainName": "Citizen"
+                },
+                type: "POST"
+            }).done(function(data) {
+                if (data.code == 200) {
+                    $('form').submit();
+                } else {
+                    ResultOpt.msg(data);
+                }
+            }).fail(function(error) {
+                console.log(error);
+                layer.msg('请求出错，请稍后重试');
+                return;
+            });
+        },
+        /*===============法人注册===================*/
+        EnterpriseSignUp: function() {
+            var that = this;
+            if (!that.$Check.is(':checked')) {
+                layer.msg('请勾选通行证协议');
+                return;
+            }
+            var attributeValue, attributeName;
+            if ($("input[name='idUpdate']:checked").val() == "true") {
+                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                    that.$enterpriseName.val() + ";" + that.$unifiedcreditCode.val();
+                attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
+            } else {
+                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                    that.$enterpriseName.val() + ";" + that.$businessLicense.val() + ";" + that.$organizationCode.val();
+                attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
+            }
+            $.ajax({
+                url: "/dis/passport/checkUserAttribute",
+                dataType: "json",
+                async: true,
+                data: {
+                    "attributeValue": attributeValue,
+                    "attributeName": attributeName,
+                    "code": that.$validateCode.val(),
+                    "domainName": "Enterprise"
+                },
+                type: "POST"
+            }).done(function(data) {
+                if (data.code == 200 || data.result) {
+                    layer.load(2, {
+                        shade: [0.1, '#333'] //0.1透明度的白色背景
+                    });
+                    $('form').submit();
+                } else {
+                    ResultOpt.msg(data);
+                }
+            }).fail(function(error) {
+                console.log(error);
+                layer.msg('请求出错，请稍后重试');
+                return;
+            });
+        },
         Enterpriseinfo: function(idUpdate) {
             var that = this;
             if (idUpdate == "true") {
@@ -429,6 +405,31 @@ define(['脚本tool', '脚本layer'], function() {
                 that.$EnBox2.show();
             }
         },
+        /*===============找回密码===================*/
+        ForgetAccount: function(domainName) {
+            var that = this;
+            $.ajax({
+                url: '/dis/passport/checkUser',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "userName": that.$forgetInput.val(),
+                    "code": that.$validateCode.val(),
+                    "domainName": domainName
+                },
+                success: function(data) {
+                    if (data.code === 200) {
+                        $('form').submit();
+                    } else {
+                        ResultOpt.msg(data);
+                    }
+                },
+                error: function(error) {
+                    layer.msg('请求出错，请稍后重试');
+                    return;
+                }
+            });
+        }
     };
     window.Passport = new Passport();
 });
