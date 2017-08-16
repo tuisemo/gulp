@@ -174,9 +174,8 @@ define(['脚本tool', '脚本layer'], function() {
             var that = this;
             this.timeBoo = false;
             if (that.wait === 0) {
-                $("#msgtimer").html("发送校验码");
+                $("#msgtimer").html("发送校验码").hide();
                 $("#sendmsg").show();
-                $("#msgtimer").hide();
                 that.wait = 10;
                 that.timeBoo = true;
             } else {
