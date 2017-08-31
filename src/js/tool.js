@@ -1,8 +1,10 @@
 define(['脚本layer'], function(layer) {
     var ResultOpt = function() {
-        this.$userName = $("#userName");
+        //this.$userName = $("#userName");
+        this.$userName = $('input[name="userName"]');
         this.$Tel = $("input[type='tel']");
-        this.$validateCode = $("#validateCode");
+        //this.$validateCode = $("#validateCode");
+        this.$validateCode = $('input[name="validateCode"]');
         this.$msgCode = $("#msgCode");
         this.$codeimg = $("#codeimg");
         this.$reloadBtn = $("#reloadBtn");
@@ -36,7 +38,7 @@ define(['脚本layer'], function(layer) {
         loginCheck: function() {
             var that = this;
             $.ajax({
-                url: 'http://www.ixm.gov.cn/dis/interface/passport_inferface_v1.0.jsp',
+                url: 'http://ixm.terton.com.cn/dis/interface/passport_inferface_v1.0.jsp',
                 type: 'GET',
                 dataType: 'jsonp',
                 jsonpCallback: "ssoUser_for_login",

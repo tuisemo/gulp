@@ -2,14 +2,15 @@ define(['脚本tool', '脚本layer'], function() {
     var Passport = function(ResultOpt) {
         this.wait = 10;
         this.timeBoo = true;
-        this.$userName = $("#userName");
-        this.$Tel = $("input[type='tel']");
-        this.$validateCode = $("#validateCode");
+        this.$userName = $('input[name="userName"]');
+        this.$mobile = $('input[name="mobile"]');
+        this.$validateCode = $('input[name="validateCode"]');
         this.$sendmsgBtn = $("#sendmsg");
         this.$msgCode = $("#msgCode");
         this.$codeimg = $("#codeimg");
         this.$reloadBtn = $("#reloadBtn");
-        this.$Password = $(".password");
+        //this.$Password = $(".password");
+        this.$Password = $('input[name="password"]');
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
         this.$SubmitBtn = $("#submit");
@@ -26,7 +27,7 @@ define(['脚本tool', '脚本layer'], function() {
         this.$certificateNum = $("#certificateNum");
         this.$EnBox1 = $("#EnBox1");
         this.$EnBox2 = $("#EnBox2");
-        this.$idUpdate = $("input[name='idUpdate']");
+        this.$idUpdate = $("input[name='idUpdate']");        
         this.init();
     };
     Passport.prototype = {
@@ -41,7 +42,7 @@ define(['脚本tool', '脚本layer'], function() {
                 that.removeClass($(this));
                 $(this).parents('.form-group').find('.help-block').html(MSG["101"]);
             });
-            that.$Tel.on("blur", function() {
+            that.$mobile.on("blur", function() {
                 that.checkTel();
             }).on("focus", function() {
                 that.removeClass($(this));
@@ -202,17 +203,17 @@ define(['脚本tool', '脚本layer'], function() {
         //手机唯一性校验
         checkTel: function() {
             var that = this;
-            var TelVal = that.$Tel.val();
+            var TelVal = that.$mobile.val();
             var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
-                that.optMsg(that.$Tel, false, 202);
+                that.optMsg(that.$mobile, false, 202);
             }
         },
         //刷新图片验证码
         reloadvalidate: function() {
             var that = this;
             that.$validateCode.val("");
-            that.$codeimg.attr('src', 'http://www.ixm.gov.cn/dis/passport/authCode/show?' + Math.random());
+            that.$codeimg.attr('src', 'http://ixm.terton.com.cn/dis/passport/authCode/show?' + Math.random());
             validateTrue = false;
         },
         //密码安全性校验
@@ -270,7 +271,7 @@ define(['脚本tool', '脚本layer'], function() {
                             "operationType": operationType,
                             "domainName": domainName,
                             "sendType": sendType,
-                            "mobile": that.$Tel.val() || "",
+                            "mobile": that.$mobile.val() || "",
                             "code": that.$validateCode.val() || "",
                         },
                         type: "POST",
@@ -326,7 +327,7 @@ define(['脚本tool', '脚本layer'], function() {
                 layer.msg('请勾选通行证协议');
                 return;
             }
-            var attributeValue = that.$userName.val() + ";" + that.$Tel.val();
+            var attributeValue = that.$userName.val() + ";" + that.$mobile.val();
             $.ajax({
                 url: "dis/passport/checkUserAttribute",
                 dataType: "json",
@@ -358,11 +359,11 @@ define(['脚本tool', '脚本layer'], function() {
             }
             var attributeValue, attributeName;
             if ($("input[name='idUpdate']:checked").val() == "true") {
-                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                attributeValue = that.$userName.val() + ";" + that.$mobile.val() + ";" +
                     that.$enterpriseName.val() + ";" + that.$unifiedcreditCode.val();
                 attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
             } else {
-                attributeValue = that.$userName.val() + ";" + that.$Tel.val() + ";" +
+                attributeValue = that.$userName.val() + ";" + that.$mobile.val() + ";" +
                     that.$enterpriseName.val() + ";" + that.$businessLicense.val() + ";" + that.$organizationCode.val();
                 attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
             }

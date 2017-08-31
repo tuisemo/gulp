@@ -24,7 +24,7 @@
     @@include('./include/header.html')
     <div class="ixm-container wrap">
         <div class="ixm-body">
-            <div class="col-sm-12 container-top">市民通行证注册</div>
+            <div class="col-sm-12 container-top hidden-xs">市民通行证注册</div>
             <div class="col-sm-5 col-sm-offset-1 col-xs-12">
                 <p class="fr pad-r15"><a class="text-danger" href="/dis/passport/realNameRegUI">港澳侨台外籍注册点击此处</a></p>
                 <form class="form-horizontal col-sm-12 col-xs-12" action="/dis/passport/reg" method="post">
@@ -48,7 +48,7 @@
                             <div class="input-group">
                                 <input id="validateCode" name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                 <div class="input-group-btn">
-                                    <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <img id="codeimg" class="btn btn-default" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
                                     <div id="reloadBtn" class="btn btn-default">刷新</div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <div id="submit" class="btn btn-primary col-sm-12">提交注册</div>
+                            <div id="submit" class="btn btn-primary col-sm-12 col-xs-12">提交注册</div>
                         </div>
                     </div>
                     <div class="form-group">

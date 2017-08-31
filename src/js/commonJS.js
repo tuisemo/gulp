@@ -45,7 +45,7 @@ define(['vue'], function(Vue) {
             loginDraw: function(haslogin, userName) {
                 var that = this;
                 $.ajax({
-                    url: 'http://www.ixm.gov.cn/dis/interface/user_inferface_v1.0.jsp',
+                    url: 'http://ixm.terton.com.cn/dis/interface/user_inferface_v1.0.jsp',
                     type: 'GET',
                     async: true,
                     dataType: 'jsonp',
