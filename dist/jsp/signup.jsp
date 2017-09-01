@@ -21,7 +21,9 @@
 </head>
 
 <body>
+    <!--top-->
     @@include('./include/header.html')
+    <!--body-->
     <div class="ixm-container wrap">
         <div class="ixm-body">
             <div class="col-sm-12 container-top hidden-xs">市民通行证注册</div>
@@ -31,55 +33,54 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">用&nbsp;户&nbsp;名:</label>
                         <div class="col-sm-9">
-                            <input id="userName" name="userName" type="text" class="form-control" placeholder="用户名">
-                            <span class="help-block">以英文字母开头，可包含3-20个字符（例：abc123）</span>
+                            <input name="userName" type="text" class="form-control" placeholder="用户名">
+                            <span class="help-block" data-msg="1000">以英文字母开头，可包含3-20个字符（例：abc123）</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机:</label>
                         <div class="col-sm-9">
-                            <input name="mobile" type="tel" class="form-control" id="Tel" placeholder="建议使用省内手机">
-                            <span class="help-block">请输入省内有效手机号码 (不支持170/171/175号段)</span>
+                            <input name="mobile" type="tel" class="form-control" placeholder="建议使用省内手机">
+                            <span class="help-block" data-msg="2000">请输入省内有效手机号码 (不支持170/171/175号段)</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">图片验证:</label>
                         <div class="col-sm-9">
                             <div class="input-group">
-                                <input id="validateCode" name="validateCode" type="text" class="form-control" placeholder="图片验证码">
+                                <input name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                 <div class="input-group-btn">
-                                    <img id="codeimg" class="btn btn-default" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
-                                    <div id="reloadBtn" class="btn btn-default">刷新</div>
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <div class="btn btn-default reloadBtn">刷新</div>
                                 </div>
                             </div>
-                            <span class="help-block"></span>
+                            <span class="help-block"  data-msg="4000"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">短信验证:</label>
                         <div class="col-sm-9">
                             <div class="input-group ">
-                                <input id="msgCode" name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
+                                <input name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
                                 <span class="input-group-btn">
                             <div id="sendmsg" class="btn btn-primary" data-type="01" data-domainname="Citizen" style="display:inline-block;">发送校验码</div>
                             <div id="msgtimer" class="btn btn-default" style="display:none;" disabled="">发送校验码</div>
                         </span>
                             </div>
-                            <span class="help-block"></span>
+                            <span class="help-block" data-msg="5000"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">设置密码:</label>
                         <div class="col-sm-9">
-                            <input name="password" type="password" class="form-control password" id="FPassword" placeholder="设置密码">
-                            <span class="help-block">8-30位字符包含数字和英文字符</span>
+                            <input name="password" type="password" class="form-control" id="FPassword" placeholder="设置密码">
+                            <span class="help-block" data-msg="6000">8-30位字符包含数字和英文字符</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">确认密码:</label>
                         <div class="col-sm-9">
-                            <input name="password" type="password" class="form-control password" id="CPassword" placeholder="确认密码">
-                            <!-- <span class="help-block">8-30位字符包含数字和英文字符</span> -->
+                            <input name="password" type="password" class="form-control" id="CPassword" placeholder="确认密码">
                         </div>
                     </div>
                     <div class="form-group">
@@ -114,9 +115,11 @@
             </div>
         </div>
     </div>
+    <!--buttom-->
     @@include('./include/footer.html')
     <!-- inject:none:js -->
     <!-- endinject -->
     @@include('./include/JSinclude.html')
 </body>
+
 </html>

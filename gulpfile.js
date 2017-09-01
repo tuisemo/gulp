@@ -136,7 +136,7 @@ gulp.task('CSSspriter', function() {
 // 合并，压缩文件
 gulp.task('scripts', function() {
     gulp.src(['./src/js/*.js'])
-        .pipe(jsmin())
+        //.pipe(jsmin())
         .pipe(gulp.dest('./dist/js'));
     /*gulp.src(['./src/js/lib/lodash.js'])
         .pipe(jsmin())

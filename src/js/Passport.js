@@ -1,15 +1,14 @@
 define(['脚本tool', '脚本layer'], function() {
-    var Passport = function(ResultOpt) {
+    var Passport = function() {
         this.wait = 10;
         this.timeBoo = true;
         this.$userName = $('input[name="userName"]');
         this.$mobile = $('input[name="mobile"]');
         this.$validateCode = $('input[name="validateCode"]');
         this.$sendmsgBtn = $("#sendmsg");
-        this.$msgCode = $("#msgCode");
-        this.$codeimg = $("#codeimg");
-        this.$reloadBtn = $("#reloadBtn");
-        //this.$Password = $(".password");
+        this.$msgCode = $('input[name="msgCode"]');
+        this.$codeimg = $(".codeimg");
+        this.$reloadBtn = $(".reloadBtn");
         this.$Password = $('input[name="password"]');
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
@@ -17,112 +16,75 @@ define(['脚本tool', '脚本layer'], function() {
         this.$Check = $("#check"); //服务协议勾选
         this.$forgetInput = $("#forgetInput");
         this.$ForgetBtn = $("#ForgetBtn");
-        /*=======企业注册dom======*/
-        this.$enterpriseName = $("#enterpriseName");
-        this.$licenseLocation = $("#licenseLocation");
-        this.$businessLicense = $("#businessLicense");
-        this.$organizationCode = $("#organizationCode");
-        this.$unifiedcreditCode = $("#unifiedcreditCode");
-        this.$certificateName = $("#certificateName");
-        this.$certificateNum = $("#certificateNum");
-        this.$EnBox1 = $("#EnBox1");
-        this.$EnBox2 = $("#EnBox2");
-        this.$idUpdate = $("input[name='idUpdate']");        
+        this.$infoSpan = $('span.help-block');
         this.init();
     };
     Passport.prototype = {
         init: function() {
+            this.scan(this.$infoSpan);
             this.listen();
         },
+        //对象扫描，提示信息复位功能
+        scan: function(elements) {
+            var self = this;
+            console.time();
+            $(elements).each(function(index,element) {
+                $(element).html(MSG[$(element).attr('data-msg')]);
+            });
+            console.timeEnd();
+        },
+        //捕获提示对象span
+        catchspan: function(element) {
+            return $(element).parents('.form-group').find('.help-block');
+        },
+        //对象时间监听
         listen: function() {
-            var that = this;
-            that.$userName.on("blur", function() {
-                that.checkuserName();
+            var self = this;
+            self.$userName.on("blur", function() {
+                self.checkuserName();
             }).on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["101"]);
+                self.removeClass(this);
+                self.scan(self.catchspan(this));
             });
-            that.$mobile.on("blur", function() {
-                that.checkTel();
+            self.$mobile.on("blur", function() {
+                self.checkTel();
             }).on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["201"]);
+                self.removeClass(this);
+                self.scan(self.catchspan(this));
             });
-            that.$validateCode.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["401"]);
+            self.$validateCode.on("focus", function() {
+                self.removeClass(this);
+                self.scan(self.catchspan(this));
             });
-            that.$codeimg.on("click", function() {
-                that.reloadvalidate($(this));
+            self.$codeimg.on("click", function() {
+                self.reloadvalidate();
+            });
+            self.$reloadBtn.on("click", function() {
+                self.reloadvalidate();
             });
             //==========短信发送按钮监听============
-            that.$sendmsgBtn.on("click", function(event) {
-                that.sendMsgFor($(this).attr('data-type'), $(this).attr('data-domainname'));
+            self.$sendmsgBtn.on("click", function(event) {
+                self.sendMsgFor($(this).attr('data-type'), $(this).attr('data-domainname'));
             });
-            that.$reloadBtn.on("click", function() {
-                that.reloadvalidate($(this));
+            self.$msgCode.on("focus", function() {
+                self.removeClass(this);
+                self.scan(self.catchspan(this));
             });
-            that.$FPassword.on("blur", function() {
-                that.checkpassword();
+            self.$FPassword.on("blur", function() {
+                self.checkpassword();
             });
-            that.$CPassword.on("blur", function() {
-                that.confirmpwd();
+            self.$CPassword.on("blur", function() {
+                self.confirmpwd();
             });
-            that.$Password.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG["501"]);
+            self.$Password.on("focus", function() {
+                self.removeClass(this);
+                self.scan(self.catchspan(this));
             });
-            that.$SubmitBtn.on("click", function() {
-                that.SignUp();
+            self.$SubmitBtn.on("click", function() {
+                self.SignUp();
             });
-            that.$ForgetBtn.on("click", function() {
-                that.ForgetAccount();
-            });
-            /* =========企业注册=============*/
-            that.$idUpdate.on("click", function() {
-                that.Enterpriseinfo($(this).val());
-            });
-            that.$enterpriseName.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG.En100);
-            }).on("blur", function() {
-                that.REGEX(03, $(this));
-            });
-            that.$licenseLocation.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG.En200);
-            }).on("blur", function() {
-                that.REGEX(03, $(this));
-            });
-            that.$businessLicense.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG.En300);
-            }).on("blur", function() {
-                that.REGEX(02, $(this));
-            });
-            that.$organizationCode.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG.En400);
-            }).on("blur", function() {
-                that.REGEX(02, $(this));
-            });
-            that.$unifiedcreditCode.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html(MSG.En500);
-            }).on("blur", function() {
-                that.REGEX(02, $(this));
-            });
-            that.$certificateName.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html("");
-            }).on("blur", function() {
-                that.REGEX(03, $(this));
-            });
-            that.$certificateNum.on("focus", function() {
-                that.removeClass($(this));
-                $(this).parents('.form-group').find('.help-block').html("");
-            }).on("blur", function() {
-                that.checkIDnumber($(this).val());
+            self.$ForgetBtn.on("click", function() {
+                self.ForgetAccount();
             });
         },
         //操作结果通用提示工具
@@ -137,95 +99,61 @@ define(['脚本tool', '脚本layer'], function() {
         },
         //提示复位清除样式
         removeClass: function(Obj) {
-            Obj.parents('.form-group').removeClass("has-success has-warring has-error");
-        },
-        //正则格式检验
-        REGEX: function(type, Obj) {
-            var that = this;
-            var value = $(Obj).val();
-            var regex1 = /^[0-9]+$/, //限制数字
-                regex2 = /^[0-9a-zA-Z._]*$/g, //限制字母+数字
-                regex3 = /[a-zA-Z|\u4e00-\u9fa5]/, //限制字母+中文
-                regex4 = /(^[a-zA-Z_\u4e00-\u9fa5]+[0-9]*)/; //限制字母+数字
-            switch (type) {
-                case 01:
-                    {
-                        if (!regex1.test(value)) {
-                            that.optMsg(Obj, false, 'REG');
-                        }
-                        break;
-                    }
-                case 02:
-                    {
-                        if (!regex2.test(value)) {
-                            that.optMsg(Obj, false, 'REG');
-                        }
-                        break;
-                    }
-                case 03:
-                    {
-                        if (!regex3.test(value)) {
-                            that.optMsg(Obj, false, 'REG');
-                        }
-                        break;
-                    }
-            }
+            $(Obj).parents('.form-group').removeClass("has-success has-warring has-error");
         },
         Timesetter: function(o) {
-            var that = this;
+            var self = this;
             this.timeBoo = false;
-            if (that.wait === 0) {
+            if (self.wait === 0) {
                 $("#msgtimer").html("发送校验码").hide();
                 $("#sendmsg").show();
-                that.wait = 10;
-                that.timeBoo = true;
+                self.wait = 10;
+                self.timeBoo = true;
             } else {
-                if (that.wait == 10) {
+                if (self.wait == 10) {
                     $("#sendmsg").hide();
                     $("#msgtimer").show();
                 }
-                $("#msgtimer").html(that.wait + "秒后再重试");
-                that.wait--;
+                $("#msgtimer").html(self.wait + "秒后再重试");
+                self.wait--;
                 setTimeout(function() {
-                    that.Timesetter(o);
+                    self.Timesetter(o);
                 }, 1000);
             }
         },
         //用户名唯一性校验
         checkuserName: function() { //定义功能函数
-            var that = this;
-            var userNameVal = that.$userName.val();
+            var self = this;
+            var userNameVal = self.$userName.val();
             var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
             if (!userNameRE.test(userNameVal)) {
-                that.optMsg(that.$userName, false, "102");
+                self.optMsg(self.$userName, false, 1003);
             }
         },
         //手机唯一性校验
         checkTel: function() {
-            var that = this;
-            var TelVal = that.$mobile.val();
+            var self = this;
+            var TelVal = self.$mobile.val();
             var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
-                that.optMsg(that.$mobile, false, 202);
+                self.optMsg(self.$mobile, false, 2003);
             }
         },
         //刷新图片验证码
         reloadvalidate: function() {
-            var that = this;
-            that.$validateCode.val("");
-            that.$codeimg.attr('src', 'http://ixm.terton.com.cn/dis/passport/authCode/show?' + Math.random());
+            var self = this;
+            self.$validateCode.val("");
+            self.$codeimg.attr('src', 'http://ixm.terton.com.cn/dis/passport/authCode/show?' + Math.random());
             validateTrue = false;
         },
         //密码安全性校验
         checkpassword: function() {
-            var that = this;
-            var pwdVal = that.$FPassword.val();
-            //var pwdRE = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
-            var pwdRE = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)_\+-=\[\]\{\}\\\|;:'"<,>\.\?\/]{8,30}$/;
-            if (!pwdRE.test(pwdVal)) {
-                that.optMsg(that.$FPassword, false, 502);
-            } else if (pwdVal.length < 8 || pwdVal.length > 30) {
-                that.optMsg(that.$FPassword, false, 502);
+            var self = this;
+            var pwdVal = self.$FPassword.val();
+            var pwdRE1 = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
+            var pwdRE2 = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)_\+-=\[\]\{\}\\\|;:'"<,>\.\?\/]{8,30}$/;
+            if (!(pwdRE1.test(pwdVal) && pwdRE2.test(pwdVal))) {
+                self.optMsg(self.$FPassword, false, 6001);
             } else {
                 $.ajax({
                     url: '/dis/ids/checkUserPwd',
@@ -233,15 +161,15 @@ define(['脚本tool', '脚本layer'], function() {
                     dataType: 'json',
                     cache: false,
                     data: {
-                        'userName': that.$userName.val() || '',
-                        'password': that.$FPassword.val()
+                        'userName': self.$userName.val() || '',
+                        'password': self.$FPassword.val()
                     },
                     success: function(data) {
                         if (data.result) {
-                            that.optMsg(that.$FPassword, true);
+                            self.optMsg(self.$FPassword, true);
                         } else {
-                            ResultOpt.msg(data);
-                            that.optMsg(that.$FPassword, false, 503);
+                            tools.msg(data);
+                            self.optMsg(self.$FPassword, false, 6002);
 
                         }
                     }
@@ -250,16 +178,19 @@ define(['脚本tool', '脚本layer'], function() {
         },
         //再次确认密码
         confirmpwd: function() {
-            var that = this;
-            if (that.$FPassword.val() != that.$CPassword.val()) {
-                that.optMsg(that.$FPassword, false, 505);
-                that.optMsg(that.$CPassword, false, 505);
+            var self = this;
+            if (self.$FPassword.val() != self.$CPassword.val()) {
+                self.optMsg(self.$FPassword, false, 6003);
+                self.optMsg(self.$CPassword, false, 6003);
+            } else {
+                self.removeClass(self.$FPassword);
+                self.checkpassword();
             }
         },
         /*==================================*/
         sendMsgFor: function(operationType, domainName, sendType) {
-            var that = this;
-            if (!(that.timeBoo)) {
+            var self = this;
+            if (!(self.timeBoo)) {
                 return false;
             } else {
                 $.ajax({
@@ -271,34 +202,32 @@ define(['脚本tool', '脚本layer'], function() {
                             "operationType": operationType,
                             "domainName": domainName,
                             "sendType": sendType,
-                            "mobile": that.$mobile.val() || "",
-                            "code": that.$validateCode.val() || "",
+                            "mobile": self.$mobile.val() || "",
+                            "code": self.$validateCode.val() || "",
                         },
                         type: "POST",
                         success: function(data) {
                             if (data.code == 200 || data.result) {
                                 $("#msgtimer").hide();
                                 $("#sendmsg").show();
-                                $("#mobilemsg").addClass('text-success').html(MSG["true"] + data.msg);
-                                that.Timesetter();
+                                self.Timesetter();
                                 return;
                             }
-                            ResultOpt.msg(data);
+                            tools.msg(data);
                         },
                         error: function(data) {
                             layer.msg('请求出错，请稍后重试');
                             return;
                         }
                     })
-                    .done(function(data) {
-                    });
+                    .done(function(data) {});
             }
         },
         //身份证号格式检测
         checkIDnumber: function(IDnum) {
-            var that = this;
+            var self = this;
             if (IDnum.length != 18) {
-                that.optMsg(that.$certificateNum, false, 'IdReg');
+                self.optMsg(self.$certificateNum, false, 'IdReg');
                 return false;
             }
             if (IDnum[17] == 'x') {
@@ -317,17 +246,17 @@ define(['脚本tool', '脚本layer'], function() {
             if (IDnum[17] == IDcheckArray[IDmod]) {
                 return true;
             } else {
-                that.optMsg(that.$certificateNum, false, 'IdReg');
+                self.optMsg(self.$certificateNum, false, 'IdReg');
             }
         },
         /*================市民注册==================*/
         SignUp: function() {
-            var that = this;
-            if (!that.$Check.is(':checked')) {
+            var self = this;
+            if (!self.$Check.is(':checked')) {
                 layer.msg('请勾选通行证协议');
                 return;
             }
-            var attributeValue = that.$userName.val() + ";" + that.$mobile.val();
+            var attributeValue = self.$userName.val() + ";" + self.$mobile.val();
             $.ajax({
                 url: "dis/passport/checkUserAttribute",
                 dataType: "json",
@@ -340,86 +269,59 @@ define(['脚本tool', '脚本layer'], function() {
                 type: "POST"
             }).done(function(data) {
                 if (data.code == 200 || data.result) {
-                    $('form').submit();
-                } else {
-                    ResultOpt.msg(data);
-                }
-            }).fail(function(error) {
-                console.log(error);
-                layer.msg('请求出错，请稍后重试');
-                return;
-            });
-        },
-        /*===============法人注册===================*/
-        EnterpriseSignUp: function() {
-            var that = this;
-            if (!that.$Check.is(':checked')) {
-                layer.msg('请勾选通行证协议');
-                return;
-            }
-            var attributeValue, attributeName;
-            if ($("input[name='idUpdate']:checked").val() == "true") {
-                attributeValue = that.$userName.val() + ";" + that.$mobile.val() + ";" +
-                    that.$enterpriseName.val() + ";" + that.$unifiedcreditCode.val();
-                attributeName = "userName;mobile;enterpriseName;unifiedcreditCode";
-            } else {
-                attributeValue = that.$userName.val() + ";" + that.$mobile.val() + ";" +
-                    that.$enterpriseName.val() + ";" + that.$businessLicense.val() + ";" + that.$organizationCode.val();
-                attributeName = "userName;mobile;enterpriseName;businessLicense;organizationCode";
-            }
-            $.ajax({
-                url: "/dis/passport/checkUserAttribute",
-                dataType: "json",
-                async: true,
-                data: {
-                    "attributeValue": attributeValue,
-                    "attributeName": attributeName,
-                    "code": that.$validateCode.val(),
-                    "domainName": "Enterprise"
-                },
-                type: "POST"
-            }).done(function(data) {
-                if (data.code == 200 || data.result) {
-                    layer.load(2, {
-                        shade: [0.1, '#333'] //0.1透明度的白色背景
+                    $.ajax({
+                        url: 'dis/passport/reg',
+                        type: 'POST',
+                        dataType: 'json',
+                        cache:false,
+                        data: {
+                            domainName: "Citizen",
+                            userName: self.$userName.val() || '',
+                            mobile: self.$mobile.val() || '',
+                            validateCode: self.$validateCode.val() || '',
+                            msgCode: self.$msgCode.val() || '',
+                            password: self.$Password.val() || '',
+                            confirm_password: self.$CPassword.val() || ''
+                        },
+                        success: function(data) {
+                            if (data.result) {
+                                window.location = '/KILL-IE.html';
+                            } else {
+                                console.time();
+                                $(data.data).each(function(index,e){
+                                    tools.msg(e);
+                                });
+                                console.timeEnd();
+                            }
+                        }
                     });
-                    $('form').submit();
+
                 } else {
-                    ResultOpt.msg(data);
+                    tools.msg(data);
                 }
             }).fail(function(error) {
                 console.log(error);
                 layer.msg('请求出错，请稍后重试');
                 return;
             });
-        },
-        Enterpriseinfo: function(idUpdate) {
-            var that = this;
-            if (idUpdate == "true") {
-                that.$EnBox1.show();
-                that.$EnBox2.hide();
-            } else {
-                that.$EnBox1.hide();
-                that.$EnBox2.show();
-            }
         },
         /*===============找回密码===================*/
         ForgetAccount: function(domainName) {
-            var that = this;
+            var self = this;
             $.ajax({
                 url: '/dis/passport/checkUser',
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    "userName": that.$forgetInput.val(),
-                    "code": that.$validateCode.val(),
+                    "userName": self.$forgetInput.val(),
+                    "code": self.$validateCode.val(),
                     "domainName": domainName
                 },
                 success: function(data) {
                     if (data.code === 200 || data.result) {
                         $('form').submit();
                     } else {
-                        ResultOpt.msg(data);
+                        tools.msg(data);
                     }
                 },
                 error: function(error) {

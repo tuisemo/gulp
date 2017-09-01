@@ -11,7 +11,7 @@ const request = require('request'); //解决服务请求转发
 //const multer = require('multer'); 
 const EXP = express();
 const pathName = 'E:/gulp/dist'
-    //静态资源文件路由
+//静态资源文件路由
 EXP.use(express.static(pathName + '/'));
 EXP.use(express.static(pathName + '/css'));
 EXP.use(express.static(pathName + '/js'));
@@ -54,7 +54,13 @@ EXP.get('/dis/passport/authCode/check', function(req, res) {
 });
 EXP.get('/dis/ids/checkUserPwd', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
-    req.pipe(request(url)).pipe(res);
+    /*req.pipe(request(url)).pipe(res);*/
+    res.json({
+        result: true,
+        code: 200,
+        data: '',
+        msg: ''
+    })
 });
 EXP.get('/ids/custom/xiamen/login_xm.jsp', function(req, res) {
     var url = 'http://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp';
@@ -65,15 +71,39 @@ EXP.post('/dis/passport/checkUserAttribute', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/checkUserAttribute';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
-        result:false,
-        code:200,
-        data:'',
-        msg:'成功'
+        result: true,
+        code: 200,
+        data: '',
+        msg: ''
     })
 });
 EXP.post('/dis/passport/reg', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/reg';
-    request.post(url, { form: req.body }).pipe(res);
+    /*request.post(url, { form: req.body }).pipe(res);*/
+    res.json({
+        "result": false,
+        "code": -1,
+        "data": [{
+                "name": "userName",
+                "result": true,
+                "code": 200,
+                "msg": ""
+            },
+            {
+                "name": "phone",
+                "result": false,
+                "code": 2001,
+                "msg": "手机号已被占用"
+            },
+            {
+                "name": "msgCode",
+                "result": false,
+                "code": 5001,
+                "msg": "短信验证码错误"
+            }
+        ],
+        "msg": "注册失败"
+    })
 });
 EXP.post('/dis/passport/checkUser', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/checkUser';
@@ -87,10 +117,10 @@ EXP.post('/dis/passport/sendMsg', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/sendMsg';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
-        result:false,
-        code:200,
-        data:'',
-        msg:'成功'
+        result: false,
+        code: 4001,
+        data: '',
+        msg: '错误'
     })
 });
 

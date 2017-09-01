@@ -1,14 +1,13 @@
-define(['脚本layer'], function(layer) {
-    var ResultOpt = function() {
-        //this.$userName = $("#userName");
+define(['脚本layer'], function() {
+    var tools = function() {
         this.$userName = $('input[name="userName"]');
-        this.$Tel = $("input[type='tel']");
-        //this.$validateCode = $("#validateCode");
+        this.$mobile = $('input[name="mobile"]');
         this.$validateCode = $('input[name="validateCode"]');
-        this.$msgCode = $("#msgCode");
-        this.$codeimg = $("#codeimg");
-        this.$reloadBtn = $("#reloadBtn");
-        this.$Password = $(".password");
+        this.$sendmsgBtn = $("#sendmsg");
+        this.$msgCode = $('input[name="msgCode"]');
+        this.$codeimg = $(".codeimg");
+        this.$reloadBtn = $(".reloadBtn");
+        this.$Password = $('input[name="password"]');
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
         this.$enterpriseName = $("#enterpriseName");
@@ -23,7 +22,7 @@ define(['脚本layer'], function(layer) {
         this.$ixmcontainer = $(".ixm-container");
         this.init();
     };
-    ResultOpt.prototype = {
+    tools.prototype = {
         init: function() {
             this.logo();
             this.Alltemplate();
@@ -85,6 +84,10 @@ define(['脚本layer'], function(layer) {
                 user: user
             }));
         },
+        errorMsg:function(element,msg){
+            return $(element).parents('.form-group').addClass('has-error')
+            .find('.help-block').html(MSG["false"] + msg);
+        },
         msg: function(data) {
             switch (data.code) {
                 case 200:
@@ -99,9 +102,8 @@ define(['脚本layer'], function(layer) {
                 case 1001:
                 case 1002:
                 case 1003:
-                    {
-                        this.$userName.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                    {//用户名错误提示
+                        this.errorMsg(this.$userName,data.msg);
                         break;
                     }
                 case 2001:
@@ -109,60 +111,58 @@ define(['脚本layer'], function(layer) {
                 case 2003:
                 case 2004:
                 case 2005:
-                    {
-                        this.$Tel.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
-                        break;
-                    }
                 case 3001:
                 case 3002:
                 case 3003:
                 case 3004:
                 case 3005:
-                    {
-                        this.$Tel.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                    {//手机、邮箱错误提示
+                        this.errorMsg(this.$mobile,data.msg);
                         break;
                     }
+                case 4001:
+                case 4002:
                 case 4004:
                 case 4006:
-                    {
-                        this.$validateCode.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                    {//图片验证码错误提示
+                        this.errorMsg(this.$validateCode,data.msg);
+                        break;
+                    }
+                case 5001:
+                case 5002:
+                case 5003:
+                case 5004:
+                    {//短信验证码错误提示
+                        this.errorMsg(this.$msgCode,data.msg);
                         break;
                     }
                 case 6002:
                     {
-                        this.$certificateNum.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                        this.errorMsg(this.$certificateNum,data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 7002:
                     {
-                        this.$enterpriseName.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                        this.errorMsg(this.$enterpriseName,data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 8002:
                     {
-                        this.$businessLicense.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                        this.errorMsg(this.$businessLicense,data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 9002:
                     {
-                        this.$organizationCode.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                        this.errorMsg(this.$organizationCode,data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 10002:
                     {
-                        this.$unifiedcreditCode.parents('.form-group').addClass('has-error')
-                        .find('.help-block').html(MSG["false"] + data.msg);
+                        this.errorMsg(this.$unifiedcreditCode,data.msg);
                         layer.msg(data.msg);
                         break;
                     }
@@ -174,33 +174,41 @@ define(['脚本layer'], function(layer) {
             }
         }
     };
-    window.ResultOpt = new ResultOpt();
+    window.tools = new tools();
     window.MSG = {
         "true": '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
         "false": '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',
-        "101": '以英文字母开头，可包含3-20个字符（例：abc123）',
-        "102": '用户名格式不正确！',
-        "103": '该用户名已被占用！',
-        "104": '该账号不存在！',
-        "201": '请输入省内有效手机号码 (不支持170/171/175号段)',
-        "202": '手机号码格式有误！',
-        "203": '该手机号已被占用！',
-        "301": '请输入您的邮箱地址',
-        "302": '请输入正确的邮箱地址！',
-        "303": '该邮箱已被占用！',
-        "401": '', //请输入图片验证码
-        "402": '验证码过期或有误！',
-        "501": '8-30位字符包含数字和英文字符',
-        "502": '密码格式不符合，请重设！',
-        "503": '密码强度太弱，请重设！',
-        "504": '密码要求8-30位！',
-        "505": '两次密码不一致！',
-        "601": '校验码过期或有误！',
-        "En100": '请输入营业执照上的单位名称',
-        "En200": '请填写登记注册地址',
-        "En300": '请输入15位营业执照注册号',
-        "En400": '请输入9位组织机构代码',
-        "En500": '请输入18位统一社会信用代码',
+        "1000": '以英文字母开头，可包含3-20个字符（例：abc123）',
+        "1001": '用户名不能为空',
+        "1002": '用户名已被占用',
+        "1003": '用户名格式不正确',
+        "1004": '该账号不存在！',
+        "2000": '请输入省内有效手机号码 (不支持170/171/175号段)',
+        "2001": '手机号不能为空',
+        "2002": '手机号已被占用',
+        "2003": '手机格式不正确',
+        "3000": '请输入您的邮箱地址',
+        "3001": '邮箱不能为空',
+        "3002": '邮箱已被占用',
+        "3003": '邮箱格式不正确',
+        "4000": '', //请输入图片验证码
+        "4001": '图片验证码过期或有误', 
+        "4002": '图片验证码校验次数过多',
+        "5000": '',
+        "5001": '短信验证码过期或有误',
+        "5002": '短信验证码发送失败',
+        "5003": '邮箱验证码过期或有误',
+        "5004": '邮箱验证码发送失败',
+        "6000": '8-30位字符包含数字和英文字符',
+        "6001": '密码格式不正确',
+        "6002": '密码强度弱，请重试',
+        "6003": '两次密码不一致',
+        "6004": '新密码与旧密码一致',
+        "7000": '',
+        "7001": '身份证不能为空',
+        "7002": '身份证已被占用',
+        "7003": '身份证格式不正确',
+        "7004": '身份证与姓名不匹配',
         "REG": '格式不符合！',
         "IdReg": '证件号格式不符合！'
     };
