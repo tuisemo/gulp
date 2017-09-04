@@ -1,0 +1,83 @@
+<!--JSP@include('./include/JSPinclude.html')-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>通行证</title>
+    <!-- inject:base:css -->
+    <!-- endinject -->
+    <!--IEhack@include('./include/IEhack.html')-->
+</head>
+
+<body>
+    <!--top-->
+    @@include('./include/header.html')
+    <!--body-->
+    <div class="ixm-container wrap">
+        <div class="ixm-body">
+            <div class="col-sm-12 container-top hidden-xs">市民通行证注册</div>
+            <div class="col-sm-5 col-sm-offset-1 col-xs-12">
+                <form class="form-horizontal col-sm-8 col-sm-offset-4 col-xs-12" action="/dis/passport/reg" method="post">
+                    <div class="form-group pad-b10">
+                        <div class="btn-group" style="width: 100%;">
+                            <div class="col-sm-4 btn btn-primary">市民</div>
+                            <div class="col-sm-4 btn btn-default">法人</div>
+                            <div class="col-sm-4 btn btn-default">二维码</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">用户名</span>
+                            <input name="userName" type="text" class="form-control" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</span>
+                            <input name="userName" type="text" class="form-control" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <!-- <span class="input-group-addon">图片验证</span> -->
+                            <input name="userName" type="text" class="form-control" placeholder="密码">
+                            <div class="input-group-btn">
+                                <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                <div class="btn btn-default reloadBtn">刷新</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="submit" class="btn btn-primary col-sm-12 col-xs-12">提交注册</div>
+                    </div>
+                    <div class="form-group">
+                        <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
+                            </a></span>
+                        <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去登录</small>
+                            </a></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 hidden-xs">
+                <div class="warm-text">
+                    <h3>温馨提示：</h3>
+                    <p>市民通行证为您提供统一权威的实名电子身份，注册实名后不仅可以在“i厦门”惠民服务平台上享受在线办理积分入学、交通违法查询与缴交、生育险在线申领等来自多个部门的办事服务，还可以登录到其他如厦门交警网、人力资源和社会保障局网、厦门图书馆等打通了市民通行证登录的系统。随着越来越多的应用服务系统改造成市民通行证通行系统，未来您的市民通行证将在厦门“一个ID，一次登录，全市通行”。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--buttom-->
+    @@include('./include/footer.html')
+    <!-- inject:none:js -->
+    <!-- endinject -->
+    <!-- @@include('./include/JSinclude.html') -->
+    <script src="js/lib/require.js"></script>
+    <script>
+    require(['脚本tool', '脚本PassportLogin'], function() {});
+    </script>
+</body>
+
+</html>

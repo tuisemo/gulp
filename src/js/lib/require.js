@@ -129,8 +129,12 @@ require.config({
         //脚本vueController: "./vueController",
         //脚本commonJS: "./commonJS",
         //脚本vuetools: "./vuetools",
-        //脚本vuedouban: "./vuedouban"
+        DES1: "http://ixm.terton.com.cn/ids/admin/js/core",
+        DES2: "http://ixm.terton.com.cn/ids/admin/js/cipher-core",
+        DES3: "http://ixm.terton.com.cn/ids/admin/js/mode-ecb",
+        DES4: "http://ixm.terton.com.cn/ids/admin/js/tripledes",
         脚本ixmSign: "./ixmSign",
-        脚本Passport: "./Passport"
+        脚本Passport: "./Passport",
+        脚本PassportLogin: "./PassportLogin"
     }
 });
