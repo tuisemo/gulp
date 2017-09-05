@@ -12,59 +12,79 @@
     <!--IEhack@include('./include/IEhack.html')-->
 </head>
 
-<body>
+<body data-type="citizen">
     <!--top-->
     @@include('./include/header.html')
     <!--body-->
     <div class="ixm-container wrap">
         <div class="ixm-body">
-            <div class="col-sm-12 container-top hidden-xs">市民通行证注册</div>
-            <div class="col-sm-5 col-sm-offset-1 col-xs-12">
-                <form class="form-horizontal col-sm-8 col-sm-offset-4 col-xs-12" action="/dis/passport/reg" method="post">
-                    <div class="form-group pad-b10">
-                        <div class="btn-group" style="width: 100%;">
-                            <div class="col-sm-4 btn btn-primary">市民</div>
-                            <div class="col-sm-4 btn btn-default">法人</div>
-                            <div class="col-sm-4 btn btn-default">二维码</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">用户名</span>
-                            <input name="userName" type="text" class="form-control" placeholder="用户名">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</span>
-                            <input name="userName" type="text" class="form-control" placeholder="密码">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <!-- <span class="input-group-addon">图片验证</span> -->
-                            <input name="userName" type="text" class="form-control" placeholder="密码">
-                            <div class="input-group-btn">
-                                <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
-                                <div class="btn btn-default reloadBtn">刷新</div>
+            <div class="col-sm-12 container-top">市民通行证登录</div>
+            <div class="col-sm-8 col-xs-12">
+                <div class="col-sm-12">
+                    <form class="form-horizontal col-sm-5 col-sm-offset-3 col-xs-12" action="http://ixm.terton.com.cn/ids/admin/do_login.jsp" method="post">
+                        <input type="text" name="fromAppName" value="" hidden>
+                        <input type="text" name="returnUrl" value="http://ixm.terton.com.cn/dis" hidden>
+                        <input type="text" name="sourceName" value="ids_internal" hidden>
+                        <input type="text" name="domainName" value="Citizen" hidden>
+                        <input type="text" name="show2FA" value="false" hidden>
+                        <input type="text" name="loginType" value="userName" hidden>
+                        <input type="text" name="isImpUser" value="false" hidden>
+                        <input type="text" name="isUpdatePwd" value="true" hidden>
+                        <div class="form-group pad-b10">
+                            <div class="btn-group" style="width: 100%;">
+                                <div class="col-sm-4 col-xs-4 btn btn-primary">市民</div>
+                                <div class="col-sm-4 col-xs-4 btn btn-default">法人</div>
+                                <div class="col-sm-4 col-xs-4 btn btn-default">二维码</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="submit" class="btn btn-primary col-sm-12 col-xs-12">提交注册</div>
-                    </div>
-                    <div class="form-group">
-                        <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
+                        <div class="form-group pad-b5">
+                            <div class="input-group">
+                                <span class="input-group-addon">用户名</span>
+                                <input name="loginKey" type="text" class="form-control" placeholder="您可使用用户名/手机/邮箱/身份证号登录">
+                            </div>
+                        </div>
+                        <div class="form-group pad-b5">
+                            <div class="input-group">
+                                <span class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</span>
+                                <input name="password" type="password" class="form-control" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <!-- ================双因子验证==START============== -->
+                        <div id="Boxof2FA" class="form-group pad-b5" hidden>
+                            <div class="input-group">
+                                <input name="2FAVerifyCode" type="text" class="form-control" placeholder="双因子验证码">
+                                <div class="input-group-btn">
+                                    <div id="Btn2FA" class="btn btn-default">点击获取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ================双因子验证==END============== -->
+                        <div class="form-group pad-b5">
+                            <div class="input-group">
+                                <input name="verifycode" type="text" class="form-control" placeholder="图片验证">
+                                <div class="input-group-btn">
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/ids/admin/abc.code?" style="padding:0;height:34px;">
+                                    <div class="btn btn-default reloadBtn">刷新</div>
+                                </div>
+                            </div>
+                            <span class="errorMsg"></span>
+                        </div>
+                        <div class="form-group">
+                            <div id="submit" class="btn btn-primary col-sm-12 col-xs-12" data-type="true">登录</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
                             </a></span>
-                        <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去登录</small>
+                            <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去注册</small>
                             </a></span>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-sm-4 col-sm-offset-2 hidden-xs">
+            <div class="col-sm-4 hidden-xs">
                 <div class="warm-text">
-                    <h3>温馨提示：</h3>
-                    <p>市民通行证为您提供统一权威的实名电子身份，注册实名后不仅可以在“i厦门”惠民服务平台上享受在线办理积分入学、交通违法查询与缴交、生育险在线申领等来自多个部门的办事服务，还可以登录到其他如厦门交警网、人力资源和社会保障局网、厦门图书馆等打通了市民通行证登录的系统。随着越来越多的应用服务系统改造成市民通行证通行系统，未来您的市民通行证将在厦门“一个ID，一次登录，全市通行”。</p>
+                    <h4>温馨提示：</h4>
+                    <p class="warm-msg">市民通行证为您提供统一权威的实名电子身份，注册实名后不仅可以在“i厦门”惠民服务平台上享受在线办理积分入学、交通违法查询与缴交、生育险在线申领等来自多个部门的办事服务，还可以登录到其他如厦门交警网、人力资源和社会保障局网、厦门图书馆等打通了市民通行证登录的系统。随着越来越多的应用服务系统改造成市民通行证通行系统，未来您的市民通行证将在厦门“一个ID，一次登录，全市通行”。</p>
                 </div>
             </div>
         </div>
@@ -75,6 +95,10 @@
     <!-- endinject -->
     <!-- @@include('./include/JSinclude.html') -->
     <script src="js/lib/require.js"></script>
+    <script src="http://ixm.terton.com.cn/ids/admin/js/core.js"></script>
+    <script src="http://ixm.terton.com.cn/ids/admin/js/cipher-core.js"></script>
+    <script src="http://ixm.terton.com.cn/ids/admin/js/tripledes.js"></script>
+    <script src="http://ixm.terton.com.cn/ids/admin/js/mode-ecb.js"></script>
     <script>
     require(['脚本tool', '脚本PassportLogin'], function() {});
     </script>

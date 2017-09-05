@@ -5,6 +5,8 @@
 
 
 
+
+
 /**
 *Author:alone
 *CreatTime:2017/3/31
@@ -59,6 +61,8 @@ body {
         max-width: 350px;
     }
 }
+
+
 
 
 
@@ -167,6 +171,70 @@ body {
     text-indent: 50px;
 }
 
+.login-body {
+    width: 100%;
+    margin: 0 auto;
+    min-height: 450px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    &:after {
+        .clearfix
+    }
+}
+
+
+
+/*step 流程步骤组件*/
+
+.step-row {
+    .step-item {
+        position: relative;
+        display: inline-block;
+        .step-line {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            line-height: 0;
+            top: 15px;
+            padding: 0 15px;
+            i {
+                display: inline-block;
+                width: 100%;
+                height: 1px;
+                vertical-align: top;
+                background-color: #d9d9d9;
+                border-radius: 1px;
+                position: relative;
+            }
+        }
+        .num {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #d9d9d9;
+            border-radius: 15px;
+            color: #d9d9d9;
+            background-color: #fff;
+            line-height: 1.5;
+            text-align: center;
+            span {
+                display: block;
+                line-height: 28px;
+                font-size: 16px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        }
+        .step-msg {
+            display: inline-block;
+            line-height: 30px;
+            padding: 0 15px;
+        }
+    }
+}
 
 
 
@@ -186,7 +254,11 @@ body {
         width: 50px;
     }
 }
+
+
+
 /* =================按钮颜色重定义============= */
+
 .btn-primary {
     border-color: #00b4e9;
     background-color: #00bff7;
@@ -217,6 +289,8 @@ body {
     border-color: #00a4d4;
     background-color: #00bff7
 }
+
+
 
 
 
@@ -345,6 +419,8 @@ ul.login-tab {
 
 
 
+
+
 /*文件上传样式*/
 
 .uploadtable {
@@ -381,6 +457,8 @@ ul.login-tab {
         .clearfix
     }
 }
+
+
 
 
 

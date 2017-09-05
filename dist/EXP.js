@@ -105,6 +105,10 @@ EXP.post('/dis/passport/reg', function(req, res) {
         "msg": "注册失败"
     })
 });
+EXP.post('/ids/admin/sendVerifyCodeFor2FA.jsp', function(req, res) {
+    var url = 'http://ixm.terton.com.cn/ids/admin/sendVerifyCodeFor2FA.jsp';
+    request.post(url, { form: req.body }).pipe(res);
+});
 EXP.post('/dis/passport/checkUser', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/passport/checkUser';
     request.post(url, { form: req.body }).pipe(res);

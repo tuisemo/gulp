@@ -43,7 +43,8 @@ gulp.task('htmlhint', function() {
 // 编译Less
 gulp.task('less', function() {
     gulp.src('./src/css/Style.less')
-        .pipe(cache(less()))
+        //.pipe(cache(less()))
+        .pipe(less())
         .pipe(gulp.dest('./src/css'));
 });
 //补全前缀+压缩css

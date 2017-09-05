@@ -131,10 +131,17 @@ require.config({
         //脚本vuetools: "./vuetools",
         DES1: "http://ixm.terton.com.cn/ids/admin/js/core",
         DES2: "http://ixm.terton.com.cn/ids/admin/js/cipher-core",
-        DES3: "http://ixm.terton.com.cn/ids/admin/js/mode-ecb",
-        DES4: "http://ixm.terton.com.cn/ids/admin/js/tripledes",
+        DES3: "http://ixm.terton.com.cn/ids/admin/js/tripledes",
+        DES4: "http://ixm.terton.com.cn/ids/admin/js/mode-ecb",
         脚本ixmSign: "./ixmSign",
         脚本Passport: "./Passport",
         脚本PassportLogin: "./PassportLogin"
-    }
+    }/*,
+    shim:{
+        '脚本layer':['jquery'],
+        '脚本Passport':['jquery'],
+        '脚本PassportLogin':['jquery'],
+        '脚本ixmSign':['jquery'],
+        'DES1':['jquery']
+    }*/
 });

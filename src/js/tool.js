@@ -19,7 +19,7 @@ define(['脚本layer'], function() {
         this.$certificateNum = $("#certificateNum");
         this.$header = $("#header");
         this.$headercon = $("#header .header-nav");
-        this.$ixmcontainer = $(".ixm-container");
+        this.baseUrl = "http://ixm.terton.com.cn";
         this.init();
     };
     tools.prototype = {
@@ -29,36 +29,37 @@ define(['脚本layer'], function() {
             this.loginCheck();
         },
         logo: function() {
-            if (this.$ixmcontainer.attr("data-type") == "enterprise") {
-                $(".logo").css("background", "url(http://www.ixm.gov.cn/dis/images/trs_en_logo.png) no-repeat");
+            var self = this;
+            if ($('body').attr("data-type") == "enterprise") {
+                $(".logo").css("background", "url(" + self.baseUrl + "/dis/images/trs_en_logo.png) no-repeat");
             }
         },
         //检查登录状态
         loginCheck: function() {
-            var that = this;
+            var self = this;
             $.ajax({
-                url: 'http://ixm.terton.com.cn/dis/interface/passport_inferface_v1.0.jsp',
+                url: self.baseUrl + '/dis/interface/passport_inferface_v1.0.jsp',
                 type: 'GET',
                 dataType: 'jsonp',
                 jsonpCallback: "ssoUser_for_login",
                 data: {},
                 success: function(data) {
                     if (data.result) {
-                        that.loginDraw(data.result, data.user);
+                        self.loginDraw(data.result, data.user);
                     } else {
-                        that.loginDraw(false);
+                        self.loginDraw(false);
                     }
                 },
                 error: function() {
-                    that.loginDraw(false);
+                    self.loginDraw(false);
                     return false;
                 }
             });
         },
         //初始化全部模板
         Alltemplate: function() {
-            var that = this;
-            that.TMPheader = _.template(
+            var self = this;
+            self.TMPheader = _.template(
                 '            <ul class="nav-menu fr">' +
                 '<% if (!haslogin) { %>' +
                 '                <li class="nav-li"><a href="http://www.ixm.gov.cn/sy/zczy/" target=_blank >注册指引</a></li>' +
@@ -78,15 +79,15 @@ define(['脚本layer'], function() {
             );
         },
         loginDraw: function(haslogin, user) {
-            var that = this;
-            that.$headercon.append(that.TMPheader({
+            var self = this;
+            self.$headercon.append(self.TMPheader({
                 haslogin: haslogin,
                 user: user
             }));
         },
-        errorMsg:function(element,msg){
+        errorMsg: function(element, msg) {
             return $(element).parents('.form-group').addClass('has-error')
-            .find('.help-block').html(MSG["false"] + msg);
+                .find('.help-block').html(MSG["false"] + msg);
         },
         msg: function(data) {
             switch (data.code) {
@@ -102,8 +103,8 @@ define(['脚本layer'], function() {
                 case 1001:
                 case 1002:
                 case 1003:
-                    {//用户名错误提示
-                        this.errorMsg(this.$userName,data.msg);
+                    { //用户名错误提示
+                        this.errorMsg(this.$userName, data.msg);
                         break;
                     }
                 case 2001:
@@ -116,53 +117,53 @@ define(['脚本layer'], function() {
                 case 3003:
                 case 3004:
                 case 3005:
-                    {//手机、邮箱错误提示
-                        this.errorMsg(this.$mobile,data.msg);
+                    { //手机、邮箱错误提示
+                        this.errorMsg(this.$mobile, data.msg);
                         break;
                     }
                 case 4001:
                 case 4002:
                 case 4004:
                 case 4006:
-                    {//图片验证码错误提示
-                        this.errorMsg(this.$validateCode,data.msg);
+                    { //图片验证码错误提示
+                        this.errorMsg(this.$validateCode, data.msg);
                         break;
                     }
                 case 5001:
                 case 5002:
                 case 5003:
                 case 5004:
-                    {//短信验证码错误提示
-                        this.errorMsg(this.$msgCode,data.msg);
+                    { //短信验证码错误提示
+                        this.errorMsg(this.$msgCode, data.msg);
                         break;
                     }
                 case 6002:
                     {
-                        this.errorMsg(this.$certificateNum,data.msg);
+                        this.errorMsg(this.$certificateNum, data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 7002:
                     {
-                        this.errorMsg(this.$enterpriseName,data.msg);
+                        this.errorMsg(this.$enterpriseName, data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 8002:
                     {
-                        this.errorMsg(this.$businessLicense,data.msg);
+                        this.errorMsg(this.$businessLicense, data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 9002:
                     {
-                        this.errorMsg(this.$organizationCode,data.msg);
+                        this.errorMsg(this.$organizationCode, data.msg);
                         layer.msg(data.msg);
                         break;
                     }
                 case 10002:
                     {
-                        this.errorMsg(this.$unifiedcreditCode,data.msg);
+                        this.errorMsg(this.$unifiedcreditCode, data.msg);
                         layer.msg(data.msg);
                         break;
                     }
@@ -183,6 +184,7 @@ define(['脚本layer'], function() {
         "1002": '用户名已被占用',
         "1003": '用户名格式不正确',
         "1004": '该账号不存在！',
+        "1005": '请输入用户名/手机/邮箱',//找回密码用户名输入框默认提示
         "2000": '请输入省内有效手机号码 (不支持170/171/175号段)',
         "2001": '手机号不能为空',
         "2002": '手机号已被占用',
@@ -192,7 +194,7 @@ define(['脚本layer'], function() {
         "3002": '邮箱已被占用',
         "3003": '邮箱格式不正确',
         "4000": '', //请输入图片验证码
-        "4001": '图片验证码过期或有误', 
+        "4001": '图片验证码过期或有误',
         "4002": '图片验证码校验次数过多',
         "5000": '',
         "5001": '短信验证码过期或有误',

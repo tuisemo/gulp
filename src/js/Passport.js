@@ -17,6 +17,7 @@ define(['脚本tool', '脚本layer'], function() {
         this.$forgetInput = $("#forgetInput");
         this.$ForgetBtn = $("#ForgetBtn");
         this.$infoSpan = $('span.help-block');
+        this.baseUrl = tools.baseUrl;
         this.init();
     };
     Passport.prototype = {
@@ -28,7 +29,7 @@ define(['脚本tool', '脚本layer'], function() {
         scan: function(elements) {
             var self = this;
             console.time();
-            $(elements).each(function(index,element) {
+            $(elements).each(function(index, element) {
                 $(element).html(MSG[$(element).attr('data-msg')]);
             });
             console.timeEnd();
@@ -41,6 +42,9 @@ define(['脚本tool', '脚本layer'], function() {
         listen: function() {
             var self = this;
             self.$userName.on("blur", function() {
+                if ($(this).attr('data-ignore') == "true") {//是否忽略数据格式正则校验
+                    return;
+                }
                 self.checkuserName();
             }).on("focus", function() {
                 self.removeClass(this);
@@ -143,7 +147,7 @@ define(['脚本tool', '脚本layer'], function() {
         reloadvalidate: function() {
             var self = this;
             self.$validateCode.val("");
-            self.$codeimg.attr('src', 'http://ixm.terton.com.cn/dis/passport/authCode/show?' + Math.random());
+            self.$codeimg.attr('src', self.baseUrl + '/dis/passport/authCode/show?' + Math.random());
             validateTrue = false;
         },
         //密码安全性校验
@@ -273,7 +277,7 @@ define(['脚本tool', '脚本layer'], function() {
                         url: 'dis/passport/reg',
                         type: 'POST',
                         dataType: 'json',
-                        cache:false,
+                        cache: false,
                         data: {
                             domainName: "Citizen",
                             userName: self.$userName.val() || '',
@@ -288,7 +292,7 @@ define(['脚本tool', '脚本layer'], function() {
                                 window.location = '/KILL-IE.html';
                             } else {
                                 console.time();
-                                $(data.data).each(function(index,e){
+                                $(data.data).each(function(index, e) {
                                     tools.msg(e);
                                 });
                                 console.timeEnd();
