@@ -1,4 +1,4 @@
-define(['脚本tool', '脚本layer'], function() {
+define(['脚本tools', '脚本layer'], function() {
     var Passport = function() {
         this.wait = 10;
         this.timeBoo = true;
@@ -16,49 +16,27 @@ define(['脚本tool', '脚本layer'], function() {
         this.$Check = $("#check"); //服务协议勾选
         this.$forgetInput = $("#forgetInput");
         this.$ForgetBtn = $("#ForgetBtn");
-        this.$infoSpan = $('span.help-block');
+        this.$certificateNum = $('input[name="certificateNum"]');
+        //this.$infoSpan = $('span.help-block');
         this.baseUrl = tools.baseUrl;
         this.init();
     };
     Passport.prototype = {
         init: function() {
-            this.scan(this.$infoSpan);
+            //tools.scan(this.$infoSpan);
             this.listen();
-        },
-        //对象扫描，提示信息复位功能
-        scan: function(elements) {
-            var self = this;
-            console.time();
-            $(elements).each(function(index, element) {
-                $(element).html(MSG[$(element).attr('data-msg')]);
-            });
-            console.timeEnd();
-        },
-        //捕获提示对象span
-        catchspan: function(element) {
-            return $(element).parents('.form-group').find('.help-block');
         },
         //对象时间监听
         listen: function() {
             var self = this;
             self.$userName.on("blur", function() {
-                if ($(this).attr('data-ignore') == "true") {//是否忽略数据格式正则校验
+                if ($(this).attr('data-ignore') == "true") { //是否忽略数据格式正则校验
                     return;
                 }
                 self.checkuserName();
-            }).on("focus", function() {
-                self.removeClass(this);
-                self.scan(self.catchspan(this));
             });
             self.$mobile.on("blur", function() {
                 self.checkTel();
-            }).on("focus", function() {
-                self.removeClass(this);
-                self.scan(self.catchspan(this));
-            });
-            self.$validateCode.on("focus", function() {
-                self.removeClass(this);
-                self.scan(self.catchspan(this));
             });
             self.$codeimg.on("click", function() {
                 self.reloadvalidate();
@@ -70,19 +48,11 @@ define(['脚本tool', '脚本layer'], function() {
             self.$sendmsgBtn.on("click", function(event) {
                 self.sendMsgFor($(this).attr('data-type'), $(this).attr('data-domainname'));
             });
-            self.$msgCode.on("focus", function() {
-                self.removeClass(this);
-                self.scan(self.catchspan(this));
-            });
             self.$FPassword.on("blur", function() {
                 self.checkpassword();
             });
             self.$CPassword.on("blur", function() {
                 self.confirmpwd();
-            });
-            self.$Password.on("focus", function() {
-                self.removeClass(this);
-                self.scan(self.catchspan(this));
             });
             self.$SubmitBtn.on("click", function() {
                 self.SignUp();
@@ -100,10 +70,6 @@ define(['脚本tool', '脚本layer'], function() {
                 Obj.parents('.form-group').addClass('has-error')
                     .find('.help-block').html(MSG["false"] + MSG[MSGnum]);
             }
-        },
-        //提示复位清除样式
-        removeClass: function(Obj) {
-            $(Obj).parents('.form-group').removeClass("has-success has-warring has-error");
         },
         Timesetter: function(o) {
             var self = this;
@@ -173,8 +139,7 @@ define(['脚本tool', '脚本layer'], function() {
                             self.optMsg(self.$FPassword, true);
                         } else {
                             tools.msg(data);
-                            self.optMsg(self.$FPassword, false, 6002);
-
+                            //self.optMsg(self.$FPassword, false, 6002);
                         }
                     }
                 });
@@ -183,11 +148,14 @@ define(['脚本tool', '脚本layer'], function() {
         //再次确认密码
         confirmpwd: function() {
             var self = this;
+            if (!self.$FPassword.val()) {//为空直接返回
+                return false;
+            }
             if (self.$FPassword.val() != self.$CPassword.val()) {
                 self.optMsg(self.$FPassword, false, 6003);
                 self.optMsg(self.$CPassword, false, 6003);
             } else {
-                self.removeClass(self.$FPassword);
+                tools.removeClass(self.$FPassword);
                 self.checkpassword();
             }
         },
@@ -225,32 +193,6 @@ define(['脚本tool', '脚本layer'], function() {
                         }
                     })
                     .done(function(data) {});
-            }
-        },
-        //身份证号格式检测
-        checkIDnumber: function(IDnum) {
-            var self = this;
-            if (IDnum.length != 18) {
-                self.optMsg(self.$certificateNum, false, 'IdReg');
-                return false;
-            }
-            if (IDnum[17] == 'x') {
-                IDnum = IDnum.replace('x', 'X');
-            }
-            //权重数组
-            var IDweight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-            //校验码数组
-            var IDcheckArray = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
-            var IDsum = 0;
-            var IDmod;
-            for (var i = 0; i <= 16; i++) {
-                IDsum += IDnum[i] * IDweight[i];
-            }
-            IDmod = IDsum % 11;
-            if (IDnum[17] == IDcheckArray[IDmod]) {
-                return true;
-            } else {
-                self.optMsg(self.$certificateNum, false, 'IdReg');
             }
         },
         /*================市民注册==================*/
@@ -333,6 +275,21 @@ define(['脚本tool', '脚本layer'], function() {
                     return;
                 }
             });
+        },
+        ForgetPassword: function() {
+            var self = this;
+            if (self.$certificateNum && self.$certificateNum.is(':visible')) {//是否需要判断身份证为必填项
+                var isSubmit = [];
+                $('form input').each(function(index, el) {
+                    (!$(el).val()) ? isSubmit[index] = false : isSubmit[index] = true;
+                });
+                $.each(isSubmit, function(index, el) {
+                    if (!el) {
+                        layer.msg('请将所有内容填写完整');
+                        return false;
+                    }
+                });
+            }
         }
     };
     window.Passport = new Passport();

@@ -125,7 +125,7 @@ require.config({
         //脚本handlejs: "./handlejs",
         //脚本WebUploader: "./lib/WebUploader",
         //脚本upload: "./upload",
-        脚本tool: "./tool",
+        脚本tools: "./tools",
         //脚本vueController: "./vueController",
         //脚本commonJS: "./commonJS",
         //脚本vuetools: "./vuetools",
@@ -135,6 +135,7 @@ require.config({
         DES4: "http://ixm.terton.com.cn/ids/admin/js/mode-ecb",
         脚本ixmSign: "./ixmSign",
         脚本Passport: "./Passport",
+        脚本EnPassport: "./EnPassport",
         脚本PassportLogin: "./PassportLogin"
     }/*,
     shim:{

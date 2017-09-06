@@ -1,4 +1,4 @@
-define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function() {
+define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tools', '脚本layer'], function() {
     var Passportlogin = function() {
         this.$returnUrl = $('input[name="returnUrl"]'); //跳转地址
         this.$sourceName = $('input[name="sourceName"]'); //跳转地址
@@ -59,6 +59,31 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
             self.$verifycode.val("");
             self.$codeimg.attr('src', self.baseUrl + '/ids/admin/abc.code?' + Math.random());
         },
+        //身份证号格式检测
+        checkIDnumber: function(IDnum) {
+            var self = this;
+            if (IDnum.length != 18) {
+                return false;
+            }
+            if (IDnum[17] == 'x') {
+                IDnum = IDnum.replace('x', 'X');
+            }
+            //权重数组
+            var IDweight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+            //校验码数组
+            var IDcheckArray = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+            var IDsum = 0;
+            var IDmod;
+            for (var i = 0; i <= 16; i++) {
+                IDsum += IDnum[i] * IDweight[i];
+            }
+            IDmod = IDsum % 11;
+            if (IDnum[17] == IDcheckArray[IDmod]) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         send2FAVerifyCode: function(login) {
             var self = this;
             var loginKey = $.trim(self.$loginKey.val());
@@ -80,7 +105,8 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
             self.$loginType.val('userName');
             if (loginKey.length == 11 && (/^\d+$/.test(loginKey))) {
                 self.$loginType.val('mobile');
-            } else if (loginKey.length == 18 && (/^[0-9]+[\s\S]*$/.test(loginKey))) {
+                //} else if (loginKey.length == 18 && (/^[0-9]+[\s\S]*$/.test(loginKey))) {
+            } else if (self.checkIDnumber(loginKey)) { //严谨校验用户输入是否为有效身份证
                 self.$loginType.val('creditID');
             } else if (loginKey.indexOf("@") >= 0) {
                 self.$loginType.val('email');
@@ -107,8 +133,8 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
             var loginType = self.$loginType.val();
             var sourceName = self.$sourceName.val();
             var domainName = self.$domainName.val();
-            var FAValue = self.$2FAVerifyCode.val();
-            var verifycode = self.$verifycode.val();
+            var FAValue = self.$2FAVerifyCode.val(); //双因子验证
+            var verifycode = self.$verifycode.val(); //图片验证
 
             //发起请求查询是否需要双因子验证
             var loginAjax = $.ajax({
@@ -138,11 +164,11 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
         checkUserFinish: function(oXmlHttp) {
             var self = this;
             var result = $.trim(oXmlHttp).split("|"); //IDS返回值格式为text，需要转化
-            if (result[0] == 'NO') { //当返回值为"NO|true"则无需双因子验证
+            if (result[0] == 'NO') { //result[0]为提示语，当返回值结果为NO|true时，表示通过验证
                 if (result[1] == 'true') {
                     self.loginForm();
-                } else { //考虑i厦门是否存在双因子验证场景？                	
-                    //self.$errorMsg.show().html('不需要填写双因子验证码，请直接点击登录');
+                } else { //当返回值result[1]为false时，表示无需双因子验证，可直接登录             	
+                    self.$errorMsg.show().addClass('text-danger').html('不需要填写双因子验证码，请直接点击登录');
                     return;
                 }
             } else if (oXmlHttp.indexOf("YES") < 0) {
@@ -165,8 +191,7 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
                             "&returnUrl=" + self.$returnUrl.val();
                     }
                 }
-            } else { //必须获取双因子验证执行登录
-                var login = result[2];
+            } else { //必须获取双因子验证执行登录            	
                 if (result[2] == "true") {
                     self.$Boxof2FA.show();
                     self.$errorMsg.show().html('需要输入双因子验证码，请点击获取');
@@ -174,7 +199,7 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
                     return;
                 }
                 if (!self.$Boxof2FA.is(':hidden')) {
-                    if (login == "true") {
+                    if (result[2] == "true") {
                         if (!self.$2FAVerifyCode.val()) {
                             self.$errorMsg.show().addClass('text-danger').html('请填写双因子验证码');
                             self.reloadvalidate();
@@ -190,16 +215,10 @@ define([ /*'DES1','DES2','DES3','DES4',*/ '脚本tool', '脚本layer'], function
                 }
             }
         },
-        //loginForm
+        //执行表单提交
         loginForm: function() {
             var self = this;
-            if (!self.$verifycode.val()) {
-                self.$verifycode.focus();
-                self.$errorMsg.show().addClass('text-danger').html('请填写图片验证码');
-                return;
-            } else {
-                $('form').submit();
-            }
+            $('form').submit();
         }
     };
     window.Passportlogin = new Passportlogin();

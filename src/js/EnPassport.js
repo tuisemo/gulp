@@ -1,4 +1,4 @@
-define(['脚本tool', '脚本layer'], function() {
+define(['脚本tools', '脚本layer'], function() {
     var EnPassport = function(ResultOpt) {
         /*=======企业注册dom======*/
         this.$enterpriseName = $("#enterpriseName");
@@ -22,12 +22,12 @@ define(['脚本tool', '脚本layer'], function() {
         //对象扫描，提示信息复位功能
         scan: function(elements) {
             var self = this;
-            $(elements).each(function(index,element) {
+            $(elements).each(function(index, element) {
                 $(element).html(MSG[$(element).attr('data-msg')]);
             });
         },
         //捕获提示对象span
-        catchspan:function(element){
+        catchspan: function(element) {
             return $(element).parents('.form-group').find('.help-block');
         },
         listen: function() {
@@ -76,7 +76,9 @@ define(['脚本tool', '脚本layer'], function() {
                 self.removeClass($(this));
                 self.scan(self.catchspan(this));
             }).on("blur", function() {
-                self.checkIDnumber($(this).val());
+                if (!tools.checkIDnumber($(this).val())) {
+                    tools.errorMsg(this, MSG[7003]);
+                }
             });
         },
         //操作结果通用提示工具

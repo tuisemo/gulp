@@ -24,17 +24,18 @@
     @@include('./include/header.html')
     <div class="ixm-container wrap">
         <div class="ixm-body">
-            <div class="col-sm-12 step-row">
-                <div class="step-item col-sm-4">
-                    <div class="step-line"><i></i></div>
-                    <div class="num"><span>1</span></div>
-                    <label class="step-msg">已完成</label>
-                </div>
-                <div class="step-item col-sm-4">
-                    <div class="num"><span>1</span></div>
-                    <label class="step-msg">已完成</label>
-                    <div class="step-line"><i></i></div>
-                </div>
+            <div class="col-sm-12">
+                <ul class="step step-square">
+                    <li class="active">
+                        <a>填写用户名</a>
+                    </li>
+                    <li class="active">
+                        <a>选择找回方式</a>
+                    </li>
+                    <li>
+                        <a>重新设置密码</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">

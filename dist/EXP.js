@@ -56,10 +56,10 @@ EXP.get('/dis/ids/checkUserPwd', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
     /*req.pipe(request(url)).pipe(res);*/
     res.json({
-        result: true,
-        code: 200,
+        result: false,
+        code: 6002,
         data: '',
-        msg: ''
+        msg: '密码弱'
     })
 });
 EXP.get('/ids/custom/xiamen/login_xm.jsp', function(req, res) {

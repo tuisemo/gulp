@@ -195,49 +195,101 @@ body {
   visivilty: hidden;
 }
 /*step 流程步骤组件*/
-.step-row .step-item {
+.step {
+  counter-reset: flag;
+}
+.step li {
   position: relative;
-  display: inline-block;
-}
-.step-row .step-item .step-line {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  line-height: 0;
-  top: 15px;
-  padding: 0 15px;
-}
-.step-row .step-item .step-line i {
-  display: inline-block;
-  width: 100%;
-  height: 1px;
-  vertical-align: top;
-  background-color: #d9d9d9;
-  border-radius: 1px;
-  position: relative;
-}
-.step-row .step-item .num {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 1px solid #d9d9d9;
-  border-radius: 15px;
-  color: #d9d9d9;
-  background-color: #fff;
-  line-height: 1.5;
+  display: table-cell;
+  width: 1%;
   text-align: center;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
 }
-.step-row .step-item .num span {
+.step li a {
   display: block;
-  line-height: 28px;
-  font-size: 16px;
-  margin: 0 auto;
-  text-align: center;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
 }
-.step-row .step-item .step-msg {
-  display: inline-block;
-  line-height: 30px;
-  padding: 0 15px;
+.step li a:before {
+  content: counter(flag);
+  counter-increment: flag;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+.step li a:after {
+  content: "";
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+.step-square {
+  margin-top: 40px;
+}
+.step-square > li > a {
+  color: #ebebeb;
+}
+.step-square > li > a:hover {
+  background-color: #ffffff;
+  color: #00b4e9;
+}
+.step-square > li > a:before {
+  position: absolute;
+  z-index: 2;
+  top: -2rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 2rem;
+  height: 2rem;
+  background-color: #ffffff;
+  line-height: 20px;
+  border: 1px solid #ebebeb;
+}
+.step-square > li > a:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -35%;
+  background-color: #ebebeb;
+  z-index: 1;
+  height: 2px;
+  border: solid #ffffff;
+  border-width: 0 1px;
+}
+.step-square > li:hover a:before,
+.step-square > li:active a:before,
+.step-square > li.active a:before,
+.step-square > li.hover a:before {
+  background-color: #00b4e9;
+  color: #ffffff;
+  border-color: #00b4e9;
+}
+.step-square > li:hover a:after,
+.step-square > li:active a:after,
+.step-square > li.active a:after,
+.step-square > li.hover a:after {
+  background-color: #00b4e9;
+}
+.step-square > li:first-child a:after {
+  left: 50%;
+  border-right: 1px solid #ffffff;
+}
+.step-square > li:last-child a:after {
+  right: 50%;
+  border-left: 1px solid #ffffff;
+}
+.step-square > li.active > a,
+.step-square > li.active > a:focus,
+.step-square > li.active > a:hover {
+  color: #00b4e9;
+  background: transparent;
 }
 /* 底部自定义样式 */
 #footer {

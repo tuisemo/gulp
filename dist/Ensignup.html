@@ -128,7 +128,7 @@
                         <div class="col-sm-5">
                             <input id="certificateNum" name="certificateNum" type="text" value="" class="form-control" placeholder="请输入有效证件号">
                         </div>
-                        <span class="help-block"></span>
+                        <span class="help-block" data-msg="7000"></span>
                     </div>
                     <!--===================法人注册信息====================-->
                     <div class="form-group">
@@ -136,14 +136,14 @@
                         <div class="col-sm-5">
                             <input id="userName" name="userName" type="text" class="form-control" placeholder="用户名">
                         </div>
-                        <span class="help-block">以英文字母开头，可包含3-20个字符（例：abc123）</span>
+                        <span class="help-block" data-msg="1000">以英文字母开头，可包含3-20个字符（例：abc123）</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机:</label>
                         <div class="col-sm-5">
                             <input name="mobile" type="tel" class="form-control" id="Tel" placeholder="建议使用省内手机">
                         </div>
-                        <span class="help-block">请输入省内有效手机号码 (不支持170/171/175号段)</span>
+                        <span class="help-block" data-msg="2000">请输入省内有效手机号码 (不支持170/171/175号段)</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">图片验证:</label>
@@ -151,12 +151,12 @@
                             <div class="input-group">
                                 <input id="validateCode" name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                 <div class="input-group-btn">
-                                    <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <img id="codeimg" class="btn btn-default" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
                                     <div id="reloadBtn" class="btn btn-default">刷新</div>
                                 </div>
                             </div>
                         </div>
-                        <span class="help-block"></span>
+                        <span class="help-block" data-msg="4000"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">短信验证:</label>
@@ -169,7 +169,7 @@
                         </span>
                             </div>
                         </div>
-                        <span class="help-block"></span>
+                        <span class="help-block" data-msg="5000"></span>
                     </div>
                     <p class="col-sm-offset-2 help-block">省外手机用户可在点击发送按钮后，使用本机号码拨打0592-5051516询查验证码</p>
                     <div class="form-group">
@@ -177,7 +177,7 @@
                         <div class="col-sm-5">
                             <input name="password" type="password" class="form-control password" id="FPassword" placeholder="设置密码">
                         </div>
-                        <span class="help-block">8-30位字符包含数字和英文字符</span>
+                        <span class="help-block" data-msg="6000">8-30位字符包含数字和英文字符</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">确认密码:</label>
@@ -196,7 +196,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-5">
-                            <div class="btn btn-primary col-sm-12 col-xs-12" onclick="Passport.EnterpriseSignUp()">提交注册</div>
+                            <div class="btn btn-primary col-sm-12 col-xs-12" onclick="EnPassport.EnterpriseSignUp()">提交注册</div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -228,9 +228,10 @@
 
     <!-- inject:none:js -->
     <!-- endinject -->
+
     <script src="js/lib/require.js"></script>
     <script>
-        require(['脚本tool', '脚本Passport'], function() {});
+        require(['脚本tools', '脚本EnPassport'], function() {});
     </script>
 </body>
 

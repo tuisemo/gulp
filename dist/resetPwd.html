@@ -35,30 +35,41 @@
 
     <div class="ixm-container wrap">
         <div class="ixm-body">
-            <!-- <div class="col-sm-12 container-top">市民通行证</div> -->
+            <div class="col-sm-12">
+                <ul class="step step-square">
+                    <li class="active">
+                        <a>填写用户名</a>
+                    </li>
+                    <li class="active">
+                        <a>选择找回方式</a>
+                    </li>
+                    <li class="active">
+                        <a>重新设置密码</a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-sm-8 col-sm-offset-2 col-xs-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">手机短信方式找回密码</div>
                     <div class="panel-body">
                         <form class="form-horizontal col-sm-9 col-sm-offset-1 col-xs-12" action="/dis/passport/resetPwdByMobileOrEmail" method="post">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">用户名:</label>
                                 <div class="col-sm-9">
-                                    <p>tui**mo</p>
-                                    <!-- <span class="help-block">以英文字母开头，可包含3-20个字符</span> -->
+                                    <p class="form-control-static">tui**mo</p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">证件号码:</label>
                                 <div class="col-sm-9">
                                     <input name="certificateNum" type="text" class="form-control" placeholder="证件号码">
-                                    <span class="help-block">请输入有效证件号码</span>
+                                    <span class="help-block" data-msg="7000">请输入有效证件号码</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">手&nbsp;&nbsp;&nbsp;&nbsp;机:</label>
                                 <div class="col-sm-9">
-                                    <p>182****9098</p>
+                                    <p class="form-control-static">182****9098</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -67,11 +78,11 @@
                                     <div class="input-group">
                                         <input id="validateCode" name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                         <div class="input-group-btn">
-                                            <img id="codeimg" class="btn btn-default" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                            <img id="codeimg" class="btn btn-default" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
                                             <div id="reloadBtn" class="btn btn-default">刷新</div>
                                         </div>
                                     </div>
-                                    <span class="help-block"></span>
+                                    <span class="help-block" data-msg="4000"></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -84,14 +95,14 @@
                             <div id="msgtimer" class="btn btn-default" style="display:none;" disabled="">发送校验码</div>
                         </span>
                                     </div>
-                                    <span class="help-block"></span>
+                                    <span class="help-block" data-msg="5000"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">设置密码:</label>
                                 <div class="col-sm-9">
                                     <input name="password" type="password" class="form-control password" id="FPassword" placeholder="设置密码">
-                                    <span class="help-block">8-30位字符包含数字和英文字符</span>
+                                    <span class="help-block" data-msg="6000">8-30位字符包含数字和英文字符</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -102,7 +113,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <div class="btn btn-primary col-sm-12" onclick="$('form').submit();">确认修改</div>
+                                    <div class="btn btn-primary col-sm-12" onclick="Passport.ForgetPassword();">确认修改</div>
                                 </div>
                             </div>
                         </form>
@@ -124,7 +135,7 @@
     <!-- endinject -->
     <script src="js/lib/require.js"></script>
     <script>
-        require(['脚本tool', '脚本Passport'], function() {});
+        require(['脚本tools', '脚本Passport'], function() {});
     </script>
 </body>
 
