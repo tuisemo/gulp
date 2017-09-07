@@ -1,5 +1,17 @@
 define(['脚本tools', '脚本layer', '脚本Passport'], function() {
     var EnPassport = function(ResultOpt) {
+        this.wait = 10;
+        this.timeBoo = true;
+        this.$userName = $('input[name="userName"]');
+        this.$mobile = $('input[name="mobile"]');
+        this.$validateCode = $('input[name="validateCode"]');
+        this.$sendmsgBtn = $("#sendmsg");
+        this.$msgCode = $('input[name="msgCode"]');
+        this.$codeimg = $(".codeimg");
+        this.$reloadBtn = $(".reloadBtn");
+        this.$Password = $('input[name="password"]');
+        this.$FPassword = $("#FPassword");
+        this.$CPassword = $("#CPassword");
         /*=======企业注册dom======*/
         this.$enterpriseName = $("#enterpriseName");
         this.$licenseLocation = $("#licenseLocation");
@@ -11,13 +23,14 @@ define(['脚本tools', '脚本layer', '脚本Passport'], function() {
         this.$EnBox1 = $("#EnBox1");
         this.$EnBox2 = $("#EnBox2");
         this.$idUpdate = $("input[name='idUpdate']");
+        this.$Check = $("#check"); //服务协议勾选        
         this.$infoSpan = $('span.help-block');
         this.init();
     };
     EnPassport.prototype = {
         init: function() {
             //tools.scan(this.$infoSpan);
-            this.Enterpriseinfo('true');
+            this.Enterpriseinfo($("input[name='idUpdate']:checked").val());
             this.listen();
         },
         listen: function() {
@@ -124,7 +137,7 @@ define(['脚本tools', '脚本layer', '脚本Passport'], function() {
                 if (data.code == 200 || data.result) {
                     self.EnsignSubmit();
                 } else {
-                    ResultOpt.msg(data);
+                    tools.msg(data);
                 }
             }).fail(function(error) {
                 console.log(error);
@@ -132,14 +145,31 @@ define(['脚本tools', '脚本layer', '脚本Passport'], function() {
                 return;
             });
         },
-        EnsignSubmit: function() {
+        EnsignSubmit: function() {//企业注册表单最终提交动作
             var self = this;
-            layer.load(2, {
-                shade: [0.1, '#333'] //0.1透明度的白色背景
+            var hasValue = [];
+            var isSubmit = true;
+            $('form input').each(function(index, el) {
+                if (!$(el).is(':hidden')) { //当输入框可见时，则要求为必填项
+                    (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
+                } else {
+                    hasValue[index] = true; //隐藏的输入框可不输入
+                }
+                isSubmit = isSubmit && hasValue[index];
+                if (!hasValue[index]) {
+                    $(el).focus();
+                    layer.msg('请将所有内容填写完整');
+                    return false;
+                }
             });
-            $('form').submit();
+            if (isSubmit) {
+                layer.load(2, {
+                    shade: [0.1, '#333'] //0.1透明度的白色背景
+                });
+                $('form').submit();
+            }
         },
-        Enterpriseinfo: function(idUpdate) {
+        Enterpriseinfo: function(idUpdate) {//是否选择三证合一，触发输入框组渲染
             var self = this;
             if (idUpdate == "true") {
                 self.$EnBox1.show();

@@ -280,16 +280,22 @@ define(['脚本tools', '脚本layer'], function() {
         ForgetPassword: function() {
             var self = this;
             if (self.$certificateNum && self.$certificateNum.is(':visible')) { //是否需要判断身份证为必填项
-                var isSubmit = [];
+                var hasValue = [];
+                var isSubmit = true;
                 $('form input').each(function(index, el) {
-                    (!$(el).val()) ? isSubmit[index] = false: isSubmit[index] = true;
-                });
-                $.each(isSubmit, function(index, el) {
-                    if (!el) {
+                    (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
+                    isSubmit = isSubmit && hasValue[index];
+                    if (!hasValue[index]) {
                         layer.msg('请将所有内容填写完整');
                         return false;
                     }
                 });
+                if (isSubmit) {
+                    layer.load(2, {
+                        shade: [0.1, '#333'] //0.1透明度的白色背景
+                    });
+                    $('form').submit();
+                }
             }
         }
     };
