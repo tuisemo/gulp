@@ -148,7 +148,7 @@ define(['脚本tools', '脚本layer'], function() {
         //再次确认密码
         confirmpwd: function() {
             var self = this;
-            if (!self.$FPassword.val()) {//为空直接返回
+            if (!self.$FPassword.val()) { //为空直接返回
                 return false;
             }
             if (self.$FPassword.val() != self.$CPassword.val()) {
@@ -215,33 +215,7 @@ define(['脚本tools', '脚本layer'], function() {
                 type: "POST"
             }).done(function(data) {
                 if (data.code == 200 || data.result) {
-                    $.ajax({
-                        url: 'dis/passport/reg',
-                        type: 'POST',
-                        dataType: 'json',
-                        cache: false,
-                        data: {
-                            domainName: "Citizen",
-                            userName: self.$userName.val() || '',
-                            mobile: self.$mobile.val() || '',
-                            validateCode: self.$validateCode.val() || '',
-                            msgCode: self.$msgCode.val() || '',
-                            password: self.$Password.val() || '',
-                            confirm_password: self.$CPassword.val() || ''
-                        },
-                        success: function(data) {
-                            if (data.result) {
-                                window.location = '/KILL-IE.html';
-                            } else {
-                                console.time();
-                                $(data.data).each(function(index, e) {
-                                    tools.msg(e);
-                                });
-                                console.timeEnd();
-                            }
-                        }
-                    });
-
+                    self.signSubmit();
                 } else {
                     tools.msg(data);
                 }
@@ -249,6 +223,33 @@ define(['脚本tools', '脚本layer'], function() {
                 console.log(error);
                 layer.msg('请求出错，请稍后重试');
                 return;
+            });
+        },
+        signSubmit: function() {
+            var self = this;
+            $.ajax({
+                url: 'dis/passport/reg',
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                data: {
+                    domainName: "Citizen",
+                    userName: self.$userName.val() || '',
+                    mobile: self.$mobile.val() || '',
+                    validateCode: self.$validateCode.val() || '',
+                    msgCode: self.$msgCode.val() || '',
+                    password: self.$Password.val() || '',
+                    confirm_password: self.$CPassword.val() || ''
+                },
+                success: function(data) {
+                    if (data.result) {
+                        window.location = '/KILL-IE.html';
+                    } else {
+                        $(data.data).each(function(index, e) {
+                            tools.msg(e);
+                        });
+                    }
+                }
             });
         },
         /*===============找回密码===================*/
@@ -278,10 +279,10 @@ define(['脚本tools', '脚本layer'], function() {
         },
         ForgetPassword: function() {
             var self = this;
-            if (self.$certificateNum && self.$certificateNum.is(':visible')) {//是否需要判断身份证为必填项
+            if (self.$certificateNum && self.$certificateNum.is(':visible')) { //是否需要判断身份证为必填项
                 var isSubmit = [];
                 $('form input').each(function(index, el) {
-                    (!$(el).val()) ? isSubmit[index] = false : isSubmit[index] = true;
+                    (!$(el).val()) ? isSubmit[index] = false: isSubmit[index] = true;
                 });
                 $.each(isSubmit, function(index, el) {
                     if (!el) {

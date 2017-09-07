@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <div class="btn btn-primary col-sm-12" onclick="$('form').submit();">确认修改</div>
+                                    <div class="btn btn-primary col-sm-12" onclick="Passport.ForgetPassword();">确认修改</div>
                                 </div>
                             </div>
                         </form>

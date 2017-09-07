@@ -1,4 +1,4 @@
-define(['脚本tools', '脚本layer'], function() {
+define(['脚本tools', '脚本layer', '脚本Passport'], function() {
     var EnPassport = function(ResultOpt) {
         /*=======企业注册dom======*/
         this.$enterpriseName = $("#enterpriseName");
@@ -16,19 +16,9 @@ define(['脚本tools', '脚本layer'], function() {
     };
     EnPassport.prototype = {
         init: function() {
-            this.scan(this.$infoSpan);
+            //tools.scan(this.$infoSpan);
+            this.Enterpriseinfo('true');
             this.listen();
-        },
-        //对象扫描，提示信息复位功能
-        scan: function(elements) {
-            var self = this;
-            $(elements).each(function(index, element) {
-                $(element).html(MSG[$(element).attr('data-msg')]);
-            });
-        },
-        //捕获提示对象span
-        catchspan: function(element) {
-            return $(element).parents('.form-group').find('.help-block');
         },
         listen: function() {
             var self = this;
@@ -36,46 +26,25 @@ define(['脚本tools', '脚本layer'], function() {
             self.$idUpdate.on("click", function() {
                 self.Enterpriseinfo($(this).val());
             });
-            self.$enterpriseName.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$enterpriseName.on("blur", function() {
                 self.REGEX(03, $(this));
             });
-            self.$licenseLocation.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$licenseLocation.on("blur", function() {
                 self.REGEX(03, $(this));
             });
-            self.$businessLicense.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$businessLicense.on("blur", function() {
                 self.REGEX(02, $(this));
             });
-            self.$organizationCode.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$organizationCode.on("blur", function() {
                 self.REGEX(02, $(this));
             });
-            self.$unifiedcreditCode.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$unifiedcreditCode.on("blur", function() {
                 self.REGEX(02, $(this));
             });
-            self.$certificateName.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$certificateName.on("blur", function() {
                 self.REGEX(03, $(this));
             });
-            self.$certificateNum.on("focus", function() {
-                self.removeClass($(this));
-                self.scan(self.catchspan(this));
-            }).on("blur", function() {
+            self.$certificateNum.on("blur", function() {
                 if (!tools.checkIDnumber($(this).val())) {
                     tools.errorMsg(this, MSG[7003]);
                 }
@@ -90,10 +59,6 @@ define(['脚本tools', '脚本layer'], function() {
                 Obj.parents('.form-group').addClass('has-error')
                     .find('.help-block').html(MSG["false"] + MSG[MSGnum]);
             }
-        },
-        //提示复位清除样式
-        removeClass: function(Obj) {
-            Obj.parents('.form-group').removeClass("has-success has-warring has-error");
         },
         //正则格式检验
         REGEX: function(type, Obj) {
@@ -157,10 +122,7 @@ define(['脚本tools', '脚本layer'], function() {
                 type: "POST"
             }).done(function(data) {
                 if (data.code == 200 || data.result) {
-                    layer.load(2, {
-                        shade: [0.1, '#333'] //0.1透明度的白色背景
-                    });
-                    $('form').submit();
+                    self.EnsignSubmit();
                 } else {
                     ResultOpt.msg(data);
                 }
@@ -170,14 +132,23 @@ define(['脚本tools', '脚本layer'], function() {
                 return;
             });
         },
+        EnsignSubmit: function() {
+            var self = this;
+            layer.load(2, {
+                shade: [0.1, '#333'] //0.1透明度的白色背景
+            });
+            $('form').submit();
+        },
         Enterpriseinfo: function(idUpdate) {
             var self = this;
             if (idUpdate == "true") {
                 self.$EnBox1.show();
                 self.$EnBox2.hide();
+                self.$EnBox2.find('input').attr('hidden', 'hidden');
             } else {
                 self.$EnBox1.hide();
                 self.$EnBox2.show();
+                self.$EnBox1.find('input').attr('hidden', 'hidden');
             }
         }
     };
