@@ -61,7 +61,7 @@
                             <div class="input-group">
                                 <input name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                 <div class="input-group-btn">
-                                    <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
                                     <div class="btn btn-default reloadBtn">刷新</div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="col-sm-offset-3 col-sm-9">
                             <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
                             </a></span>
-                            <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去登录</small>
+                            <span class="fr"><a href="/login.html" target="_blank"><small>去登录</small>
                             </a></span>
                         </div>
                     </div>
@@ -139,8 +139,11 @@
     <!-- inject:none:js -->
     <!-- endinject -->
     <script src="js/lib/require.js"></script>
+
     <script>
-        require(['脚本tools', '脚本Passport'], function() {});
+        require(['DES4', '脚本tools', '脚本Passport'], function() {
+
+        });
     </script>
 </body>
 

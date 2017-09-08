@@ -37,6 +37,7 @@ define(['脚本layer'], function() {
         "REG": '格式不符合！',
         "IdReg": '证件号格式不符合！'
     };
+    window.formCheck = { 'userName': false, 'mobile': false, 'password': false };
     var tools = function() {
         this.$userName = $('input[name="userName"]');
         this.$mobile = $('input[name="mobile"]');
@@ -54,13 +55,12 @@ define(['脚本layer'], function() {
         this.$organizationCode = $("#organizationCode");
         this.$unifiedcreditCode = $("#unifiedcreditCode");
         this.$certificateName = $("#certificateName");
-        //this.$certificateNum = $("#certificateNum");
         this.$certificateNum = $('input[name="certificateNum"]');
         this.$header = $("#header");
         this.$headercon = $("#header .header-nav");
         this.$formInput = $('form input');
         this.$infoSpan = $('span.help-block');
-        this.baseUrl = "http://ixm.terton.com.cn";
+        this.baseUrl = "http://www.ixm.gov.cn";
         this.init();
     };
     tools.prototype = {
@@ -69,12 +69,12 @@ define(['脚本layer'], function() {
             //this.scan(this.$infoSpan);
             this.Alltemplate();
             this.listen();
-            this.loginCheck();            
+            this.loginCheck();
         },
-        listen:function(){
-            var self=this;
+        listen: function() {
+            var self = this;
             //全局输入框提示复位功能
-            self.$formInput.on("focus",function(){
+            self.$formInput.on("focus", function() {
                 self.removeClass(this);
                 self.scan(self.catchspan(this));
             });
@@ -158,6 +158,16 @@ define(['脚本layer'], function() {
                 user: user
             }));
         },
+        //DES密码加密
+        encryptByDES: function(message, key) {
+            key ? desKey = key : desKey = "des55781";
+            var keyHex = CryptoJS.enc.Utf8.parse(desKey);
+            var encrypted = CryptoJS.DES.encrypt(message, keyHex, {
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            return encrypted.toString();
+        },
         //身份证号格式检测
         checkIDnumber: function(IDnum) {
             var self = this;
@@ -205,6 +215,7 @@ define(['脚本layer'], function() {
                 case 1003:
                     { //用户名错误提示
                         this.errorMsg(this.$userName, data.msg);
+                        formCheck.userName = false;
                         break;
                     }
                 case 2001:
@@ -219,6 +230,7 @@ define(['脚本layer'], function() {
                 case 3005:
                     { //手机、邮箱错误提示
                         this.errorMsg(this.$mobile, data.msg);
+                        formCheck.mobile = false;
                         break;
                     }
                 case 4001:
@@ -243,6 +255,7 @@ define(['脚本layer'], function() {
                 case 6004:
                     { //短信验证码错误提示
                         this.errorMsg(this.$FPassword, data.msg);
+                        formCheck.password = false;
                         break;
                     }
                 case 7001:

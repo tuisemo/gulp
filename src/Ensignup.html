@@ -201,10 +201,9 @@
     @@include('./include/footer.html')
     <!-- inject:none:js -->
     <!-- endinject -->
-    <!-- @@include('./include/JSinclude.html') -->
-    <script src="js/lib/require.js"></script>
+    @@include('./include/JSinclude.html')
     <script>
-    require(['脚本tools', '脚本EnPassport'], function() {});
+    require(['DES4', '脚本tools', '脚本EnPassport'], function() {});
     </script>
 </body>
 

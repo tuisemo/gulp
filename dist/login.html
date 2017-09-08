@@ -40,9 +40,9 @@
             <div class="col-sm-12 container-top">市民通行证登录</div>
             <div class="col-sm-8 col-xs-12">
                 <div class="col-sm-12">
-                    <form class="form-horizontal col-sm-5 col-sm-offset-3 col-xs-12" action="http://ixm.terton.com.cn/ids/admin/do_login.jsp" method="post">
+                    <form class="form-horizontal col-sm-5 col-sm-offset-3 col-xs-12" action="http://www.ixm.gov.cn/ids/admin/do_login.jsp" method="post">
                         <input type="text" name="fromAppName" value="" hidden>
-                        <input type="text" name="returnUrl" value="http://ixm.terton.com.cn/dis" hidden>
+                        <input type="text" name="returnUrl" value="http://www.ixm.gov.cn/dis" hidden>
                         <input type="text" name="sourceName" value="ids_internal" hidden>
                         <input type="text" name="domainName" value="Citizen" hidden>
                         <input type="text" name="show2FA" value="false" hidden>
@@ -82,7 +82,7 @@
                             <div class="input-group">
                                 <input name="verifycode" type="text" class="form-control" placeholder="图片验证">
                                 <div class="input-group-btn">
-                                    <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/ids/admin/abc.code?" style="padding:0;height:34px;">
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://www.ixm.gov.cn/ids/admin/abc.code?" style="padding:0;height:34px;">
                                     <div class="btn btn-default reloadBtn">刷新</div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
                             </a></span>
-                            <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去注册</small>
+                            <span class="fr"><a href="/signup.html" target="_blank"><small>去注册</small>
                             </a></span>
                         </div>
                     </form>
@@ -120,14 +120,10 @@
 
     <!-- inject:none:js -->
     <!-- endinject -->
-
     <script src="js/lib/require.js"></script>
-    <script src="http://ixm.terton.com.cn/ids/admin/js/core.js"></script>
-    <script src="http://ixm.terton.com.cn/ids/admin/js/cipher-core.js"></script>
-    <script src="http://ixm.terton.com.cn/ids/admin/js/tripledes.js"></script>
-    <script src="http://ixm.terton.com.cn/ids/admin/js/mode-ecb.js"></script>
+
     <script>
-        require(['脚本tools', '脚本PassportLogin'], function() {});
+        require(['DES4', '脚本tools', '脚本PassportLogin'], function() {});
     </script>
 </body>
 

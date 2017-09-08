@@ -1,5 +1,5 @@
-define(['脚本tools', '脚本layer', '脚本Passport'], function() {
-    var EnPassport = function(ResultOpt) {
+define(['脚本tools','脚本Passport'], function() {
+    var EnPassport = function() {
         this.wait = 10;
         this.timeBoo = true;
         this.$userName = $('input[name="userName"]');
@@ -145,7 +145,7 @@ define(['脚本tools', '脚本layer', '脚本Passport'], function() {
                 return;
             });
         },
-        EnsignSubmit: function() {//企业注册表单最终提交动作
+        EnsignSubmit: function() { //企业注册表单最终提交动作
             var self = this;
             var hasValue = [];
             var isSubmit = true;
@@ -166,10 +166,14 @@ define(['脚本tools', '脚本layer', '脚本Passport'], function() {
                 layer.load(2, {
                     shade: [0.1, '#333'] //0.1透明度的白色背景
                 });
+                //===============密码加密START===============//
+                var Password = self.$Password.val();
+                self.$Password.val(tools.encryptByDES(Password));
+                //===============密码加密END===============// 
                 $('form').submit();
             }
         },
-        Enterpriseinfo: function(idUpdate) {//是否选择三证合一，触发输入框组渲染
+        Enterpriseinfo: function(idUpdate) { //是否选择三证合一，触发输入框组渲染
             var self = this;
             if (idUpdate == "true") {
                 self.$EnBox1.show();

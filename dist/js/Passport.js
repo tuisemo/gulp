@@ -1,4 +1,4 @@
-define(['脚本tools', '脚本layer'], function() {
+define(['脚本tools'], function() {
     var Passport = function() {
         this.wait = 10;
         this.timeBoo = true;
@@ -98,6 +98,9 @@ define(['脚本tools', '脚本layer'], function() {
             var userNameRE = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
             if (!userNameRE.test(userNameVal)) {
                 self.optMsg(self.$userName, false, 1003);
+                formCheck.userName = false;
+            } else {
+                formCheck.userName = true;
             }
         },
         //手机唯一性校验
@@ -107,6 +110,9 @@ define(['脚本tools', '脚本layer'], function() {
             var telVal = /^((13[0-9])|(14[0-9])|(15[0-9])|(17[2-9])|(18[0-9]))\d{8}$/;
             if (!telVal.test(TelVal) || TelVal.length != 11) {
                 self.optMsg(self.$mobile, false, 2003);
+                formCheck.mobile = false;
+            } else {
+                formCheck.mobile = true;
             }
         },
         //刷新图片验证码
@@ -124,6 +130,8 @@ define(['脚本tools', '脚本layer'], function() {
             var pwdRE2 = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)_\+-=\[\]\{\}\\\|;:'"<,>\.\?\/]{8,30}$/;
             if (!(pwdRE1.test(pwdVal) && pwdRE2.test(pwdVal))) {
                 self.optMsg(self.$FPassword, false, 6001);
+                formCheck.password = true;
+                return false;
             } else {
                 $.ajax({
                     url: '/dis/ids/checkUserPwd',
@@ -137,9 +145,12 @@ define(['脚本tools', '脚本layer'], function() {
                     success: function(data) {
                         if (data.result) {
                             self.optMsg(self.$FPassword, true);
+                            formCheck.password = true;
+                            return true;
                         } else {
                             tools.msg(data);
-                            //self.optMsg(self.$FPassword, false, 6002);
+                            formCheck.password = false;
+                            return false;
                         }
                     }
                 });
@@ -154,9 +165,12 @@ define(['脚本tools', '脚本layer'], function() {
             if (self.$FPassword.val() != self.$CPassword.val()) {
                 self.optMsg(self.$FPassword, false, 6003);
                 self.optMsg(self.$CPassword, false, 6003);
+                formCheck.password = false;
+                return false;
             } else {
                 tools.removeClass(self.$FPassword);
                 self.checkpassword();
+                return;
             }
         },
         /*==================================*/
@@ -227,7 +241,29 @@ define(['脚本tools', '脚本layer'], function() {
         },
         signSubmit: function() {
             var self = this;
-            $.ajax({
+            var hasValue = [];
+            var isSubmit = true;
+            $('form input').each(function(index, el) {
+                (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
+                isSubmit = isSubmit && hasValue[index];
+                if (!hasValue[index]) {
+                    $(el).focus();
+                    layer.msg('请将所有内容填写完整');
+                    return false;
+                }
+            });
+            if (isSubmit && formCheck.userName && formCheck.mobile && formCheck.password) {
+                layer.load(2, {
+                    shade: [0.1, '#333'] //0.1透明度的白色背景
+                });
+                //===============密码加密START===============//
+                var Password = self.$Password.val();
+                self.$Password.val(tools.encryptByDES(Password));
+                //===============密码加密END===============// 
+                $('form').submit();
+            }
+            /*================以下代码为ajax方式注册提交==================*/
+            /*$.ajax({
                 url: 'dis/passport/reg',
                 type: 'POST',
                 dataType: 'json',
@@ -250,7 +286,7 @@ define(['脚本tools', '脚本layer'], function() {
                         });
                     }
                 }
-            });
+            });*/
         },
         /*===============找回密码===================*/
         ForgetAccount: function(domainName) {
@@ -286,6 +322,7 @@ define(['脚本tools', '脚本layer'], function() {
                     (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
                     isSubmit = isSubmit && hasValue[index];
                     if (!hasValue[index]) {
+                        $(el).focus();
                         layer.msg('请将所有内容填写完整');
                         return false;
                     }
@@ -294,6 +331,10 @@ define(['脚本tools', '脚本layer'], function() {
                     layer.load(2, {
                         shade: [0.1, '#333'] //0.1透明度的白色背景
                     });
+                    //===============密码加密START===============//
+                    var Password = self.$Password.val();
+                    self.$Password.val(tools.encryptByDES(Password));
+                    //===============密码加密END===============// 
                     $('form').submit();
                 }
             }

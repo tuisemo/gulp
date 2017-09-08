@@ -137,12 +137,10 @@ require.config({
         脚本Passport: "./Passport",
         脚本EnPassport: "./EnPassport",
         脚本PassportLogin: "./PassportLogin"
-    }/*,
+    },
     shim:{
-        '脚本layer':['jquery'],
-        '脚本Passport':['jquery'],
-        '脚本PassportLogin':['jquery'],
-        '脚本ixmSign':['jquery'],
-        'DES1':['jquery']
-    }*/
+        'DES2':['DES1'],
+        'DES3':['DES2'],
+        'DES4':['DES3']
+    }
 });
