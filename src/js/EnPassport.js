@@ -29,7 +29,6 @@ define(['脚本tools','脚本Passport'], function() {
     };
     EnPassport.prototype = {
         init: function() {
-            //tools.scan(this.$infoSpan);
             this.Enterpriseinfo($("input[name='idUpdate']:checked").val());
             this.listen();
         },

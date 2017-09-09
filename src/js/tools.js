@@ -60,7 +60,7 @@ define(['脚本layer'], function() {
         this.$headercon = $("#header .header-nav");
         this.$formInput = $('form input');
         this.$infoSpan = $('span.help-block');
-        this.baseUrl = "http://www.ixm.gov.cn";
+        this.baseUrl = "http://ixm.terton.com.cn";
         this.init();
     };
     tools.prototype = {
@@ -79,7 +79,9 @@ define(['脚本layer'], function() {
                 self.scan(self.catchspan(this));
             });
             self.$certificateNum.on("blur", function() {
-                if (!self.checkIDnumber($(this).val())) {
+                if ($(this).attr('data-ignore') == "true") { //是否忽略数据格式正则校验
+                    return;
+                } else if (!self.checkIDnumber($(this).val())) {
                     self.errorMsg(this, MSG[7003]);
                 }
             });

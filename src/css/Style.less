@@ -278,8 +278,53 @@ body {
         }
     }
 }
-
-
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    img {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .caption{
+        padding-top: 9px;
+        padding-bottom: 5px;
+    }
+    a>input[type=file] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+    span.file-name{
+        padding-left: 15px;
+    }
+}
+.upload-example1{
+    width: 100%;
+    min-height: 220px;
+    background: url(../images/realNameexample1.jpg) no-repeat;
+    background-size: 100%;
+}
+.upload-example2{
+    width: 100%;
+    min-height: 220px;
+    background: url(../images/realNameexample2.jpg) no-repeat;
+    background-size: 100%;
+}
+.upload-example3{
+    width: 100%;
+    min-height: 220px;
+    background: url(../images/realNameexample3.jpg) no-repeat;
+    background-size: 100%;
+}
 /* 底部自定义样式 */
 
 #footer {

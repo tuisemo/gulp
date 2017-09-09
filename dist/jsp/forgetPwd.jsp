@@ -49,14 +49,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <div id="ForgetBtn" class="col-sm-12 btn btn-primary">找回密码</div>
+                            <div class="col-sm-12 btn btn-primary" onclick="Passport.ForgetAccount('Citizen')">找回密码</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>免费注册</small>
+                            <span class="fl"><a href="/signup.html" target="_blank"><small>免费注册</small>
                             </a></span>
-                            <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去登录</small>
+                            <span class="fr"><a href="/login.html" target="_blank"><small>去登录</small>
                             </a></span>
                         </div>
                     </div>
@@ -74,6 +74,9 @@
     <!-- inject:none:js -->
     <!-- endinject -->
     @@include('./include/JSinclude.html')
+    <script>
+    require(['脚本tools', '脚本Passport'], function() {});
+    </script>
 </body>
 
 </html>

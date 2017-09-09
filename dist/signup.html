@@ -41,6 +41,7 @@
             <div class="col-sm-5 col-sm-offset-1 col-xs-12">
                 <p class="fr pad-r15"><a class="text-danger" href="/dis/passport/realNameRegUI">港澳侨台外籍注册点击此处</a></p>
                 <form class="form-horizontal col-sm-12 col-xs-12" action="/dis/passport/reg" method="post">
+                    <input type="text" name="fromCoAppName" hidden="hidden">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">用&nbsp;户&nbsp;名:</label>
                         <div class="col-sm-9">
@@ -105,7 +106,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <div id="submit" class="btn btn-primary col-sm-12 col-xs-12">提交注册</div>
+                            <div class="btn btn-primary col-sm-12 col-xs-12" onclick="Passport.SignUp()">提交注册</div>
                         </div>
                     </div>
                     <div class="form-group">

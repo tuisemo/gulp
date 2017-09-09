@@ -21,6 +21,7 @@ const watch = require("gulp-watch");
 const cache = require("gulp-cache");
 const autoprefixer = require("gulp-autoprefixer");
 const ext_replace = require('gulp-ext-replace');
+const base64 = require('gulp-base64');
 
 var banner =
     "/** \n\
@@ -43,8 +44,15 @@ gulp.task('htmlhint', function() {
 // 编译Less
 gulp.task('less', function() {
     gulp.src('./src/css/Style.less')
-        //.pipe(cache(less()))
+        //.pipe(cache(less()))        
         .pipe(less())
+        .pipe(base64({
+            //baseDir: './src/',
+            extensions: ['jpg', 'png','jpge'],
+            //exclude:    [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+            maxImageSize: 1000*1024, // bytes 
+            debug: true
+        }))        
         .pipe(gulp.dest('./src/css'));
 });
 //补全前缀+压缩css
@@ -58,7 +66,7 @@ gulp.task('cssmin', function() {
             //cascade: true, //是否美化属性值 默认：true 像这样：
             //remove: true //是否去掉不必要的前缀 默认：true 
         //}))
-        .pipe(cache(cssmin()))
+        .pipe(cssmin())
         .pipe(concat('PassportStyle.css'))
         .pipe(gulp.dest('./src/css'))
         .pipe(gulp.dest('./dist/css'));
@@ -134,6 +142,20 @@ gulp.task('CSSspriter', function() {
         }))
         .pipe(gulp.dest('dist/css'));
 });
+
+//图片转base64
+gulp.task('picbase64', function () {
+    return gulp.src('./src/css/style.css')
+        .pipe(base64({
+            //baseDir: './src/',
+            extensions: ['jpg', 'png','jpge'],
+            //exclude:    [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+            maxImageSize: 1000*1024, // bytes 
+            debug: true
+        }))
+        .pipe(gulp.dest('./dist/css'));
+});
+
 // 合并，压缩文件
 gulp.task('scripts', function() {
     gulp.src(['./src/js/*.js'])

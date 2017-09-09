@@ -30,6 +30,7 @@
             <div class="col-sm-5 col-sm-offset-1 col-xs-12">
                 <p class="fr pad-r15"><a class="text-danger" href="/dis/passport/realNameRegUI">港澳侨台外籍注册点击此处</a></p>
                 <form class="form-horizontal col-sm-12 col-xs-12" action="/dis/passport/reg" method="post">
+                <input type="text" name="fromCoAppName" hidden="hidden">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">用&nbsp;户&nbsp;名:</label>
                         <div class="col-sm-9">
@@ -50,11 +51,11 @@
                             <div class="input-group">
                                 <input name="validateCode" type="text" class="form-control" placeholder="图片验证码">
                                 <div class="input-group-btn">
-                                    <img class="btn btn-default reloadBtn codeimg" src="http://ixm.terton.com.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
                                     <div class="btn btn-default reloadBtn">刷新</div>
                                 </div>
                             </div>
-                            <span class="help-block"  data-msg="4000"></span>
+                            <span class="help-block" data-msg="4000"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -94,14 +95,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <div id="submit" class="btn btn-primary col-sm-12 col-xs-12">提交注册</div>
+                            <div class="btn btn-primary col-sm-12 col-xs-12" onclick="Passport.SignUp()">提交注册</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
                             </a></span>
-                            <span class="fr"><a href="/forgetPwd.html" target="_blank"><small>去登录</small>
+                            <span class="fr"><a href="/login.html" target="_blank"><small>去登录</small>
                             </a></span>
                         </div>
                     </div>
@@ -120,6 +121,11 @@
     <!-- inject:none:js -->
     <!-- endinject -->
     @@include('./include/JSinclude.html')
+    <script>
+    require(['DES4','脚本tools', '脚本Passport'], function() {
+       
+    });
+    </script>
 </body>
 
 </html>

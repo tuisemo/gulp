@@ -12,7 +12,6 @@ define(['脚本tools'], function() {
         this.$Password = $('input[name="password"]');
         this.$FPassword = $("#FPassword");
         this.$CPassword = $("#CPassword");
-        this.$SubmitBtn = $("#submit");
         this.$Check = $("#check"); //服务协议勾选
         this.$forgetInput = $("#forgetInput");
         this.$ForgetBtn = $("#ForgetBtn");
@@ -53,9 +52,6 @@ define(['脚本tools'], function() {
             });
             self.$CPassword.on("blur", function() {
                 self.confirmpwd();
-            });
-            self.$SubmitBtn.on("click", function() {
-                self.SignUp();
             });
             self.$ForgetBtn.on("click", function() {
                 self.ForgetAccount();
@@ -212,6 +208,8 @@ define(['脚本tools'], function() {
         /*================市民注册==================*/
         SignUp: function() {
             var self = this;
+            self.checkuserName();
+            self.checkTel();
             if (!self.$Check.is(':checked')) {
                 layer.msg('请勾选通行证协议');
                 return;
@@ -244,7 +242,11 @@ define(['脚本tools'], function() {
             var hasValue = [];
             var isSubmit = true;
             $('form input').each(function(index, el) {
-                (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
+                if (!$(el).is(':hidden')) { //当输入框可见时，则要求为必填项
+                    (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
+                } else {
+                    hasValue[index] = true; //隐藏的输入框可不输入
+                }
                 isSubmit = isSubmit && hasValue[index];
                 if (!hasValue[index]) {
                     $(el).focus();
@@ -315,29 +317,60 @@ define(['脚本tools'], function() {
         },
         ForgetPassword: function() {
             var self = this;
-            if (self.$certificateNum && self.$certificateNum.is(':visible')) { //是否需要判断身份证为必填项
-                var hasValue = [];
-                var isSubmit = true;
-                $('form input').each(function(index, el) {
+            self.confirmpwd();
+            var hasValue = [];
+            var isSubmit = true;
+            $('form input').each(function(index, el) {
+                if (!$(el).is(':hidden')) { //当输入框可见时，则要求为必填项
                     (!$(el).val()) ? hasValue[index] = false: hasValue[index] = true;
-                    isSubmit = isSubmit && hasValue[index];
-                    if (!hasValue[index]) {
-                        $(el).focus();
-                        layer.msg('请将所有内容填写完整');
-                        return false;
-                    }
-                });
-                if (isSubmit) {
-                    layer.load(2, {
-                        shade: [0.1, '#333'] //0.1透明度的白色背景
-                    });
-                    //===============密码加密START===============//
-                    var Password = self.$Password.val();
-                    self.$Password.val(tools.encryptByDES(Password));
-                    //===============密码加密END===============// 
-                    $('form').submit();
+                } else {
+                    hasValue[index] = true; //隐藏的输入框可不输入
                 }
+                isSubmit = isSubmit && hasValue[index];
+                if (!hasValue[index]) {
+                    $(el).focus();
+                    layer.msg('请将所有内容填写完整');
+                    return false;
+                }
+            });
+            if (isSubmit && formCheck.password) {
+                layer.load(2, {
+                    shade: [0.1, '#333'] //0.1透明度的白色背景
+                });
+                //===============密码加密START===============//
+                var Password = self.$Password.val();
+                self.$Password.val(tools.encryptByDES(Password));
+                //===============密码加密END===============// 
+                $('form').submit();
             }
+        },
+        fileUpload: function(element) {
+            var self = this;
+            var support = typeof FileReader != "undefinde"; //检测浏览器是否支持FileReader
+            var isIE = navigator.userAgent.match(/MSIE/) !== null;
+            var filextension = element.value.substring(element.value.lastIndexOf("."), element.value.length);
+            filextension = filextension.toLowerCase(); //获取文件扩展名
+            if ((filextension != '.jpg') && (filextension != '.png') && (filextension != '.jpge')) {
+                layer.msg('仅支持上传jpg/png/jpge格式的图片文件');
+                return;
+            }
+            var file = element.files[0];
+            if (support && file) {
+                if (file.size >= 2048000) {
+                    layer.msg('该图片已超过2M！');
+                    return;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    $(element).parents('.thumbnail').find('input.file-name').val(file.name);
+                    $(element).parents('.thumbnail').find('span.file-name').html(file.name);
+                    $(element).parents('.thumbnail').find('img').attr('src', reader.result);
+                }
+            } else {
+
+            }
+
         }
     };
     window.Passport = new Passport();

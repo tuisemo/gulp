@@ -49,26 +49,26 @@ EXP.post('/sever/data', function(req, res) {
 });
 //GET跨域请求转发
 EXP.get('/dis/passport/authCode/check', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/authCode/check';
+    var url = 'http://ixm.terton.com.cn/dis/passport/authCode/check';
     req.pipe(request(url)).pipe(res);
 });
 EXP.get('/dis/ids/checkUserPwd', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/ids/checkUserPwd';
-    req.pipe(request(url)).pipe(res);
-    /*res.json({
-        result: false,
-        code: 6002,
+    var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
+    //req.pipe(request(url)).pipe(res);
+    res.json({
+        result: true,
+        code: 200,
         data: '',
-        msg: '密码弱'
-    })*/
+        msg: ''
+    })
 });
 EXP.get('/ids/custom/xiamen/login_xm.jsp', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/ids/custom/xiamen/login_xm.jsp';
+    var url = 'http://ixm.terton.com.cn/ids/custom/xiamen/login_xm.jsp';
     req.pipe(request(url)).pipe(res);
 });
 //POST跨域请求转发
 EXP.post('/dis/passport/checkUserAttribute', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/checkUserAttribute';
+    var url = 'http://ixm.terton.com.cn/dis/passport/checkUserAttribute';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
         result: true,
@@ -78,7 +78,7 @@ EXP.post('/dis/passport/checkUserAttribute', function(req, res) {
     })
 });
 EXP.post('/dis/passport/reg', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/reg';
+    var url = 'http://ixm.terton.com.cn/dis/passport/reg';
     /*request.post(url, { form: req.body }).pipe(res);*/
     res.json({
         "result": false,
@@ -106,19 +106,19 @@ EXP.post('/dis/passport/reg', function(req, res) {
     })
 });
 EXP.post('/ids/admin/sendVerifyCodeFor2FA.jsp', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/ids/admin/sendVerifyCodeFor2FA.jsp';
+    var url = 'http://ixm.terton.com.cn/ids/admin/sendVerifyCodeFor2FA.jsp';
     request.post(url, { form: req.body }).pipe(res);
 });
 EXP.post('/dis/passport/checkUser', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/checkUser';
+    var url = 'http://ixm.terton.com.cn/dis/passport/checkUser';
     request.post(url, { form: req.body }).pipe(res);
 });
 EXP.post('/dis/passport/resetPwdChooseUI', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/resetPwdChooseUI';
+    var url = 'http://ixm.terton.com.cn/dis/passport/resetPwdChooseUI';
     request.post(url, { form: req.body }).pipe(res);
 });
 EXP.post('/dis/passport/sendMsg', function(req, res) {
-    var url = 'http://www.ixm.gov.cn/dis/passport/sendMsg';
+    var url = 'http://ixm.terton.com.cn/dis/passport/sendMsg';
     //request.post(url, { form: req.body }).pipe(res);
     res.json({
         result: false,

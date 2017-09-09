@@ -107,6 +107,9 @@
     <!-- inject:none:js -->
     <!-- endinject -->
     @@include('./include/JSinclude.html')
+    <script>
+    require(['脚本tools', '脚本Passport'], function() {});
+    </script>
 </body>
 
 </html>
