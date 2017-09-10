@@ -1,0 +1,204 @@
+<!--JSP@include('./include/JSPinclude.html')-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>通行证</title>
+    <!-- inject:base:css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <link rel="stylesheet" href="css/PassportStyle.css">
+    <!-- endinject -->
+    <!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!--[if lt IE 8]>
+        <script>window.location="/kill-IE.html"</script>
+        <![endif]-->
+
+</head>
+
+<body>
+    <!--top-->
+    <div id="header">
+        <div class="ixm-nav">
+            <a href="/">
+                <div class="logo col-sm-6 col-xs-12"></div>
+            </a>
+            <nav class="header-nav col-sm-4 hidden-xs">
+            </nav>
+        </div>
+    </div>
+
+    <!--body-->
+    <div class="ixm-container wrap">
+        <div class="ixm-body">
+            <div class="col-sm-12 container-top hidden-xs">市民通行证注册</div>
+            <div class="col-sm-5 col-sm-offset-1 col-xs-12">
+                <form class="form-horizontal col-sm-12 col-xs-12" action="/dis/passport/reg" method="post" enctype="multipart/form-data">
+                    <input type="text" name="fromCoAppName" hidden="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用&nbsp;户&nbsp;名:</label>
+                        <div class="col-sm-9">
+                            <input name="userName" type="text" class="form-control" placeholder="用户名">
+                            <span class="help-block" data-msg="1000">以英文字母开头，可包含3-20个字符（例：abc123）</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机:</label>
+                        <div class="col-sm-9">
+                            <input name="mobile" type="tel" class="form-control" placeholder="建议使用省内手机">
+                            <span class="help-block" data-msg="2000">请输入省内有效手机号码 (不支持170/171/175号段)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">图片验证:</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <input name="validateCode" type="text" class="form-control" placeholder="图片验证码">
+                                <div class="input-group-btn">
+                                    <img class="btn btn-default reloadBtn codeimg" src="http://www.ixm.gov.cn/dis/passport/authCode/show" style="padding:0;height:34px;">
+                                    <div class="btn btn-default reloadBtn">刷新</div>
+                                </div>
+                            </div>
+                            <span class="help-block" data-msg="4000"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">短信验证:</label>
+                        <div class="col-sm-9">
+                            <div class="input-group ">
+                                <input name="msgCode" type="text" class="form-control" placeholder="请输入校验码">
+                                <span class="input-group-btn">
+                            <div id="sendmsg" class="btn btn-primary" data-type="01" data-domainname="Citizen" style="display:inline-block;">发送校验码</div>
+                            <div id="msgtimer" class="btn btn-default" style="display:none;" disabled="">发送校验码</div>
+                        </span>
+                            </div>
+                            <span class="help-block" data-msg="5000"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">设置密码:</label>
+                        <div class="col-sm-9">
+                            <input name="password" type="password" class="form-control" id="FPassword" placeholder="设置密码">
+                            <span class="help-block" data-msg="6000">8-30位字符包含数字和英文字符</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">确认密码:</label>
+                        <div class="col-sm-9">
+                            <input name="password" type="password" class="form-control" id="CPassword" placeholder="确认密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">真实姓名:</label>
+                        <div class="col-sm-9">
+                            <input id="certificateName" name="certificateName" data-ignore="true" type="text" value="" class="form-control" placeholder="请填写真实姓名">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">证件类型:</label>
+                        <div class="col-sm-9">
+                            <select name="certificateType" class="form-control">
+                                <option value="gapass">港澳通行证</option>
+                                <option value="twpass">台胞证</option>
+                                <option value="passport">护照</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">证件号码:</label>
+                        <div class="col-sm-9">
+                            <input id="certificateNum" name="certificateNum" data-ignore="true" type="text" value="" class="form-control" placeholder="请输入有效证件号">
+                            <!-- <span class="help-block" data-msg="7000"></span> -->
+                        </div>
+                    </div>
+                    <!-- =================文件上传================ -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">证件号码:</label>
+                        <div class="col-sm-9">
+                            <div class="thumbnail">
+                                <input name="uploadName" type="text" class="file-name" hidden="hidden">
+                                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTVlNjYzMjE3Y2QgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWU2NjMyMTdjZCI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44MDQ2ODc1IiB5PSIxMDUuMSI+MjQyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
+                                    alt="...">
+                                <div class="caption">
+                                    <a class="btn btn-primary">选择文件
+                                    <input name="uploadfile" type="file" placeholder="上传" hidden="hidden" onchange="Passport.fileUpload(this);" /></a>
+                                    <span class="file-name"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">证件号码:</label>
+                        <div class="col-sm-9">
+                            <div class="thumbnail">
+                                <input name="uploadName" type="text" class="file-name" hidden="hidden">
+                                <img class="upload-example1" src="" alt="...">
+                                <div class="caption">
+                                    <a class="btn btn-primary">选择文件
+                                    <input name="uploadfile" type="file" placeholder="上传" hidden="hidden" onchange="Passport.fileUpload(this);" /></a>
+                                    <span class="file-name"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="check" type="checkbox" checked="checked"><small>我已阅读并接受 <a href="http://www.ixm.gov.cn/sy/fwxy/index.html" target="_blank">“市民通行证”服务协议</a></small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="btn btn-primary col-sm-12 col-xs-12" onclick="Passport.SignUp()">提交注册</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <span class="fl"><a href="/forgetPwd.html" target="_blank"><small>找回密码</small>
+                            </a></span>
+                            <span class="fr"><a href="/login.html" target="_blank"><small>去登录</small>
+                            </a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 hidden-xs">
+                <div class="warm-text">
+                    <h4>温馨提示：</h4>
+                    <p>市民通行证为您提供统一权威的实名电子身份，注册实名后不仅可以在“i厦门”惠民服务平台上享受在线办理积分入学、交通违法查询与缴交、生育险在线申领等来自多个部门的办事服务，还可以登录到其他如厦门交警网、人力资源和社会保障局网、厦门图书馆等打通了市民通行证登录的系统。随着越来越多的应用服务系统改造成市民通行证通行系统，未来您的市民通行证将在厦门“一个ID，一次登录，全市通行”。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--buttom-->
+    <div id="footer" class="footer">
+        <div class="container">
+            <div class="col-sm-12 text-c">
+                <span id="_ideConac"><a href="/" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" src="//dcs.conac.cn/image/blue.png" data-bd-imgshare-binded="1"></a></span>
+                <small>主办：厦门市经济和信息化局&nbsp;&nbsp;&nbsp;&nbsp;运行管理：厦门市信息中心&nbsp;&nbsp;&nbsp;&nbsp;闽ICP备14010412号-1&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-earphone">：0592-5051516</span></small>
+            </div>
+        </div>
+    </div>
+
+    <!-- inject:none:js -->
+    <!-- endinject -->
+    <script src="js/lib/require.js"></script>
+
+    <script>
+        require(['DES4', '脚本tools', '脚本Passport'], function() {
+
+        });
+    </script>
+</body>
+
+</html>
