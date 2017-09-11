@@ -354,8 +354,8 @@ define(['脚本tools'], function() {
                 layer.msg('仅支持上传jpg/png/jpge格式的图片文件');
                 return;
             }
-            var file = element.files[0];
-            if (support && file) {
+            if (false) {
+                var file = element.files[0];
                 if (file.size >= 2048000) {
                     layer.msg('该图片已超过2M！');
                     return;
@@ -368,7 +368,13 @@ define(['脚本tools'], function() {
                     $(element).parents('.thumbnail').find('img').attr('src', reader.result);
                 }
             } else {
-
+                element.select();
+                element.blur()
+                var reallocalpath = document.selection.createRange().text;
+                // 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+                $(element).parents('.thumbnail').find('img').css('filter', "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + reallocalpath + "\")");
+                // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+                $(element).parents('.thumbnail').find('img').attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
             }
 
         }

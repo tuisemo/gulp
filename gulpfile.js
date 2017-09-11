@@ -45,18 +45,11 @@ gulp.task('htmlhint', function() {
 gulp.task('less', function() {
     gulp.src('./src/css/Style.less')
         //.pipe(cache(less()))        
-        .pipe(less())
-        .pipe(base64({
-            //baseDir: './src/',
-            extensions: ['jpg', 'png','jpge'],
-            //exclude:    [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
-            maxImageSize: 1000*1024, // bytes 
-            debug: true
-        }))        
+        .pipe(less())    
         .pipe(gulp.dest('./src/css'));
 });
 //补全前缀+压缩css
-gulp.task('cssmin', function() {
+gulp.task('cssmin',['less'], function() {
     gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css', './src/css/webuploader.css'])
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
@@ -66,7 +59,10 @@ gulp.task('cssmin', function() {
             //cascade: true, //是否美化属性值 默认：true 像这样：
             //remove: true //是否去掉不必要的前缀 默认：true 
         //}))
-        .pipe(cssmin())
+        .pipe(cssmin({
+            compatibility:'ie8',//保留ie8及以下兼容写法
+            keepSpecialComments: '*'
+        }))
         .pipe(concat('PassportStyle.css'))
         .pipe(gulp.dest('./src/css'))
         .pipe(gulp.dest('./dist/css'));
