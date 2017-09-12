@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>keyCode</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/lodash.js/3.10.1/lodash.js"></script>
+</head>
+<input type="text" id="userName" value="tuisemo">
+<input type="text" id="fp" value="tuisemoczp2012">
+<input type="text" id="cp" value="tuisemoczp201">
+<button type="button" id="button">Click Me!</button>
+
+<body>
+</body>
+<script>
+$(function() {
+    var http = function() {
+        this.$userName = $('#userName');
+        this.$fpassword = $('#fp');
+        this.$cpassword = $('#cp');
+        this.$btn = $('#button');
+        this.init();
+    };
+    http.prototype = {
+        init: function() {
+            this.listen();
+        },
+        listen: function() {
+            var self = this;
+            self.$btn.on('click', function() {
+                self.formSubmit();
+            })
+        },
+        checkpassword: function() {
+            var self = this;
+            var promise = new Promise(function(resolve, reject) {
+                var pwdVal = self.$fpassword.val();
+                var pwdRE1 = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/;
+                var pwdRE2 = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)_\+-=\[\]\{\}\\\|;:'"<,>\.\?\/]{8,30}$/;
+                if (!(pwdRE1.test(pwdVal) && pwdRE2.test(pwdVal))) {
+                    resolve(false);
+                } else {
+                    $.ajax({
+                        url: '/dis/ids/checkUserPwd',
+                        type: 'GET',
+                        dataType: 'json',
+                        cache: false,
+                        data: {
+                            'userName': self.$userName.val() || '',
+                            'password': self.$fpassword.val()
+                        }
+                    }).then(function(data) {
+                        resolve(data.result);
+                    });
+                }
+            });
+            return promise;
+        },
+        confirmpwd: function() {
+            var self = this;
+            var promise = new Promise(function(resolve, reject) {
+                if (self.$fpassword.val() != self.$cpassword.val()) {
+                    return resolve(false);
+                } else {
+                    self.checkpassword().then(function(data) {
+                        return resolve(data)
+                    })
+                }
+            });
+            return promise;
+        },
+        formSubmit: function() {
+            var self = this;
+            self.confirmpwd().then(function(data) {
+                if (data) {
+                    console.log('success');
+                }
+            })
+        }
+
+    };
+    window.http = new http();
+
+})
+</script>
+
+</html>
