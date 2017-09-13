@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 页面描述 -->
+    <meta name="description" content="服务事项" />
+    <!-- 页面关键词 -->
+    <meta name="keywords" content="服务事项" />
+    <!-- 网页作者 -->
+    <meta name="author" content="tuisemo, tuisemo@sina.cn" />
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow" />
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        <TRS_ViewData Field="stitle" />-
+        <TRS_Curpage ONLY="false" HOMEPAGEDESC="i厦门" Reverse="true" value="-" autolink="false"></TRS_Curpage>
+    </title>
+    <link rel="stylesheet" href="./css/H5.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>  
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <header>
+        <h1>办事指南</h1>
+        <!-- <a href="javascript:window.history.back();" class="back">返回</a> -->
+    </header>
+    <div class="wrap">
+        <div class="item">
+            <div class="item-tag-1">最多去现场次数不超过
+                <br/>
+                <TRS_QZQD FIELD="BSBODY" XPATH="S_ZDXZCS" DATATYPE="STRING" DEFAULT="0">${S_ZDXZCS!}</TRS_QZQD>次
+            </div>
+            <div class="item-tag-2">承诺期限工作日
+                <br/>
+                <TRS_QZQD FIELD="BSBODY" XPATH="S_CNSX" DATATYPE="STRING" DEFAULT="0">${S_CNSX!}</TRS_QZQD>日
+            </div>
+            <h2>
+                <TRS_ViewData Field="stitle">主标题</TRS_ViewData>
+            </h2>
+            <p>
+                <TRS_ViewData Field="sdesc">副标题</TRS_ViewData>
+            </p>
+            <p>
+                <TRS_QZQD FIELD="BSBODY" XPATH="S_SFJZJZSXZFWDT" DATATYPE="STRING">
+                    <#if (S_SFJZJZSXZFWDT=='1' )>
+                        <span class="info">已入驻行政服务中心</span>
+                    </#if>
+                </TRS_QZQD>
+                <TRS_QZQD FIELD="BSBODY" XPATH="S_SBDZ" DATATYPE="STRING">
+                    <#if (S_SBDZ !='' )>
+                        <span class="info">已入开通网上办理</span>
+                    </#if>
+                </TRS_QZQD>
+            </p>
+        </div>
+        <!-- 基本信息 -->
+        <div class="item active">
+            <div class="title">
+                <h2>基本信息</h2>
+            </div>
+            <div class="container">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>事项名称：</td>
+                            <td colspan="3">
+                                <TRS_QZQD FIELD="BSBODY" XPATH="ITEMNAME" DATATYPE="STRING" DEFAULT="无">${ITEMNAME!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">事项编码：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="ITEMNO" DATATYPE="STRING" DEFAULT="无">${ITEMNO!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>事项类别：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_BJLX_NAME" DATATYPE="STRING" DEFAULT="无">${S_BJLX_NAME!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>申报对象：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_MXYHDX_NAME" DATATYPE="STRING" DEFAULT="无">${S_MXYHDX_NAME!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>事项性质：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="SXNAME" DATATYPE="STRING" DEFAULT="无">${SXNAME!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>实施部门：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="DEPTNAME" DATATYPE="STRING" DEFAULT="无">${DEPTNAME!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>主办处室：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_ZBCS" DATATYPE="STRING" DEFAULT="无">${S_ZBCS!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>联系人：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_LXR" DATATYPE="STRING" DEFAULT="无">${S_LXR!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>联系电话：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_LXDH" DATATYPE="STRING" DEFAULT="无">${S_LXDH!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>监督和投诉电话：</td>
+                            <td colspan="3">
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_JDBM" DATATYPE="STRING" DEFAULT="无">${S_JDBM!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>申报材料：</td>
+                            <td colspan="3">
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_SBCL" DATATYPE="STRING" DEFAULT="无">${S_SBCL?replace('&lt;p&gt;&lt;/p&gt;', '
+                                    <br/>')?replace('\r\n', '
+                                    <br/>')?replace('\r', '
+                                    <br/>')!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>法定时限：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_FDQX" DATATYPE="STRING" DEFAULT="无">${S_FDQX!}</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>承诺时限：</td>
+                            <td>
+                                <TRS_QZQD FIELD="BSBODY" XPATH="S_CNSX" DATATYPE="STRING" DEFAULT="无">受理后${S_CNSX!}个工作日</TRS_QZQD>
+                            </td>
+                        </tr>
+                        <TRS_QZQD FIELD="BSBODY" XPATH="S_CNSXSM" DATATYPE="STRING">
+                            <#if (S_CNSXSM !='' )>
+                                <tr>
+                                    <td>承诺时限说明：</td>
+                                    <td colspan="3">${S_CNSXSM?replace('\r', '
+                                        <br/>')!}</td>
+                                </tr>
+                            </#if>
+                        </TRS_QZQD>
+                        <TRS_QZQD FIELD="BSBODY" XPATH="S_FDSXSM" DATATYPE="STRING">
+                            <#if (S_FDSXSM !='' )>
+                                <tr>
+                                    <td>法定时限说明：</td>
+                                    <td colspan="3">${S_FDSXSM?replace('\r', '
+                                        <br/>')!}</td>
+                                </tr>
+                            </#if>
+                        </TRS_QZQD>
+                        <tr>
+                            <td>是否收费：</td>
+                            <TRS_QZQD FIELD="BSBODY" XPATH="@ALL" DATATYPE="STRING">
+                                <#if S_SFSF?exists && (S_SFSF !=0 )>
+                                    <td>是</td>
+                                    <td>缴费方式：</td>
+                                    <td>${S_JFFS!}</td>
+                        </tr>
+                        <tr>
+                            <td>收费标准及依据：</td>
+                            <td colspan="3">${S_SFYJ?replace('\r', '
+                                <br/>')!}</td>
+                        </tr>
+                        <#else>
+                            <td colspan='3'>否</td>
+                            </tr>
+                            </#if>
+                            </TRS_QZQD>
+                            <tr>
+                                <td>特殊环节时限：</td>
+                                <td colspan="3">
+                                    <TRS_QZQD FIELD="BSBODY" XPATH="S_TSHJSX" DATATYPE="STRING" DEFAULT="无">${S_TSHJSX?replace('\r', '
+                                        <br/>')}</TRS_QZQD>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>备注：</td>
+                                <td colspan="3">
+                                    <TRS_QZQD FIELD="BSBODY" XPATH="S_BZ" DATATYPE="STRING" DEFAULT="无">${S_BZ!}</TRS_QZQD>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 申报条件 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="S_SQTJ" DATATYPE="STRING" DEFAULT="0">
+            <#if (S_SQTJ !='0' )>
+                <div class="item">
+                    <div class="title">
+                        <h2>申报条件</h2>
+                    </div>
+                    <div class="container">
+                        ${S_SQTJ?replace('\n', '
+                        <br/>')!}
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+        <!-- 申报方式 -->
+        <div class="item">
+            <div class="title">
+                <h2>申报方式</h2>
+            </div>
+            <div class="container">
+                <TRS_QZQD FIELD="BSBODY" XPATH="WINDOW" DATATYPE="JARRAY">
+                    <#if WINDOW?? && (WINDOW?size>0)>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th rowspan="${WINDOW?size+1!}" class="h28" bgcolor="#fffcf7" width="100" align="center">行政服务
+                                        <br />中心窗口</th>
+                                    <th height="41">受理时间</th>
+                                    <th>受理地点或部门</th>
+                                    <th>交通指引</th>
+                                </tr>
+                                <#list WINDOW as pic>
+                                    <tr>
+                                        <td class="h24" width="300">
+                                            <#if (pic.BGSJ !='' )>${pic.BGSJ!}
+                                                <#else>无</#if>
+                                        </td>
+                                        <td class="h20">${pic.SLDZ!} ${pic.JDBM!}</td>
+                                        <#if (pic.DTZB !='' )>
+                                            <td id="mytd" width="90" onClick="dtzb('${pic.DTZB!}')" align="center"></td>
+                                            <#else>
+                                                <td width="90" align="center">无</td>
+                                        </#if>
+                                    </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </#if>
+                </TRS_QZQD>
+                <TRS_QZQD FIELD="BSBODY" XPATH="SQFS" DATATYPE="JARRAY">
+                    <#if SQFS?? && (SQFS?size>0)>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th height="53">申请方式</th>
+                                    <th width="170">网上申请到窗口最多
+                                        <br /> 次数（含领取结果）
+                                    </th>
+                                    <th width="114">承诺到窗口最
+                                        <br /> 多次数说明
+                                    </th>
+                                </tr>
+                                <#list SQFS as pic>
+                                    <tr>
+                                        <td align="center"> ${pic.SQFS!}</td>
+                                        <td align="center"> ${pic.DCKZDCS!}</td>
+                                        <td align="center"> ${pic.CNDCKZDCSSM!}</td>
+                                    </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </#if>
+                </TRS_QZQD>
+            </div>
+        </div>
+        <!-- 申报材料 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="SBCL" DATATYPE="JARRAY">
+            <#if SBCL?? && (SBCL?size>0)>
+                <div class="item">
+                    <div class="title">
+                        <h2>申报材料</h2>
+                    </div>
+                    <div class="container">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td width="5%" style="text-align: center" class="td1">序号</td>
+                                    <td width="45%" style="text-align: center" class="td1">材料名称</td>
+                                    <td width="25%" style="text-align: center" class="td1">资料说明</td>
+                                    <td width="25%" style="text-align: center" class="td1">附件下载</td>
+                                </tr>
+                                <#list SBCL as pic>
+                                    <tr>
+                                        <td width="5%">${pic_index+1}</td>
+                                        <td width="45%">${pic.CLMC!}</td>
+                                        <td width="25%">${pic.ZLSM!}</td>
+                                        <td width="25%" style="text-align: center">
+                                            <#if (pic.APPFILE !='' )>
+                                                <a href="${pic.SBCLURL!}">${pic.SRCFILE!}</a>
+                                                <#else>
+                                                    无
+                                            </#if>
+                                        </td>
+                                    </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+        <!-- 设定依据 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="S_FDYJ" DATATYPE="STRING" DEFAULT="0">
+            <#if (S_FDYJ !='0' )>
+                <div class="item">
+                    <div class="title">
+                        <h2>设定依据</h2>
+                    </div>
+                    <div class="container">
+                        ${S_FDYJ?replace('\r\n', '
+                        <br/>')?replace('\r', '
+                        <br/>')?replace('\n', '
+                        <br/>')?replace('000B', '
+                        <br/>')!}
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+        <!-- 办理流程 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="S_BLLC" DATATYPE="STRING" DEFAULT="0">
+            <#if (S_BLLC !='0' )>
+                <div class="item">
+                    <div class="title">
+                        <h2>办理流程</h2>
+                    </div>
+                    <div class="container">
+                        ${S_BLLC?replace('\r\n', '
+                        <br/>')?replace('\r', '
+                        <br/>')?replace('\n', '
+                        <br/>')!}
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+        <!-- 流程图 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="FLOW" DATATYPE="JOBJECT">
+            <#if FLOW?exists>
+                <div class="item">
+                    <div class="title">
+                        <h2>流程图</h2>
+                    </div>
+                    <div class="container">
+                        <#if (FLOW.EXT=='BMP' || FLOW.EXT=='JPG' || FLOW.EXT=='PNG' || FLOW.EXT=='GIF ' || FLOW.EXT=='JPEG' || FLOW.EXT=='bmp' || FLOW.EXT=='jpg' || FLOW.EXT=='png' || FLOW.EXT=='gif ' || FLOW.EXT=='jpeg' )>
+                            <p align="center"><img src="${FLOW.FLOWURL!}" style="max-width:100%" /> </p>
+                            <#else>
+                                <p align="center"><a href="${FLOW.FLOWURL!}">${FLOW.FLOWSRCFILE!}</a></p>
+                        </#if>
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+        <!-- 表格下载 -->
+        <TRS_QZQD FIELD="BSBODY" XPATH="FWBG" DATATYPE="JARRAY">
+            <#if FWBG?? && (FWBG?size>0)>
+                <div class="item">
+                    <div class="title">
+                        <h2>表格下载</h2>
+                    </div>
+                    <div class="container">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td width="5%" style="text-align: center" class="td1">序号</td>
+                                    <td width="80%" style="text-align: center" class="td1">表格名称</td>
+                                    <td width="15%" style="text-align: center" class="td1">表格类型</td>
+                                </tr>
+                                <#list FWBG as pic>
+                                    <tr>
+                                        <td width="5%">${pic_index+1}</td>
+                                        <td width="80%"><a href="${pic.FWBGURL!}">${pic.FWBGSRCFILE!}</a></td>
+                                        <td width="15%" style="text-align: center">${pic.BGLX!}</td>
+                                    </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <#else>
+                    <!-- 空 -->
+            </#if>
+        </TRS_QZQD>
+    </div>
+    <footer>
+        <p>主办：厦门市经济和信息化局</p>
+    </footer>
+</body>
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $(".item .title").click(function() {
+            var self = this,
+                $item = $(self).parents('.item'),
+                $container = $(self).parents('.item').find('.container');
+            if ($container.is(':visible')) {
+                $container.slideToggle();
+                $item.removeClass('active');
+            } else {
+                $container.slideToggle();
+                $item.addClass('active');
+            }
+        });
+    });
+</script>
+
+</html>

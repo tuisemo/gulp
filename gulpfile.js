@@ -43,14 +43,14 @@ gulp.task('htmlhint', function() {
 });
 // 编译Less
 gulp.task('less', function() {
-    gulp.src('./src/css/Style.less')
+    gulp.src(['./src/css/H5.less','./src/css/Style.less'])
         //.pipe(cache(less()))        
         .pipe(less())    
         .pipe(gulp.dest('./src/css'));
 });
 //补全前缀+压缩css
 gulp.task('cssmin',['less'], function() {
-    gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css', './src/css/webuploader.css'])
+    gulp.src(['./src/css/normalize.css', './src/css/layer.css', './src/css/unslider.css', './src/css/webuploader.css','./src/css/H5.css'])
         .pipe(cache(cssmin()))
         .pipe(gulp.dest('./dist/css'));
     gulp.src(['./src/css/bootstrap.min.css', './src/css/Style.css'])
