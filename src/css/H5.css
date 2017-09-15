@@ -611,10 +611,7 @@ header .back {
   left: 0;
 }
 .wrap {
-  margin-top: -60px;
-  margin-bottom: -63px;
-  padding-top: 60px;
-  padding-bottom: 63px;
+  padding-top: 15px;
   min-height: 100%;
   background-color: #fff;
 }
@@ -635,7 +632,7 @@ header .back {
   width: 80px;
   height: 80px;
   padding: 15px 10px;
-  background: url(https://www.ixm.gov.cn/images/16xmht_bszn_bar_bg1.png) center center no-repeat;
+  background: url(../images/16xmht_bszn_bar_bg1.png) center center no-repeat;
   background-size: 100%;
 }
 .item-tag-2 {
@@ -647,7 +644,7 @@ header .back {
   width: 80px;
   height: 80px;
   padding: 15px 10px;
-  background: url(https://www.ixm.gov.cn/images/16xmht_bszn_bar_bg2.png) center center no-repeat;
+  background: url(../images/16xmht_bszn_bar_bg2.png) center center no-repeat;
   background-size: 100%;
 }
 .item {
@@ -685,7 +682,7 @@ header .back {
   width: 15px;
   height: 15px;
   background-color: #00b4e9;
-  background: url(https://www.ixm.gov.cn/images/16xmqzqd_gl_icon1.jpg) center center;
+  background: url(../images/16xmqzqd_gl_icon1.jpg) center center;
   background-size: 100%;
   border-radius: 3px;
 }

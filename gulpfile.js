@@ -141,7 +141,7 @@ gulp.task('CSSspriter', function() {
 
 //图片转base64
 gulp.task('picbase64', function () {
-    return gulp.src('./src/css/style.css')
+    return gulp.src('./dist/css/H5.css')
         .pipe(base64({
             //baseDir: './src/',
             extensions: ['jpg', 'png','jpge'],
