@@ -188,7 +188,110 @@ table {
         }
     }
 }
-
+.slide-nav {
+    position: relative;
+    zoom: 1;
+    width: 100%;
+    overflow: hidden;
+    .navul {
+        position: relative;
+        float: left;
+        zoom: 1;
+        min-width: 100%;
+        display: inline;
+        .navli {
+            display: inline;
+            float: left;
+            text-align: center;
+            line-height: 32px;
+            font-size: 16px;
+            width: 16.6%;
+            padding: 0 10px;
+            cursor: pointer;
+            &.active {
+                color: #00b4e9;
+                border-bottom:3px solid #00b4e9; 
+            }
+        }
+    }
+}
+.list-item {
+    position: relative;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    &:before {
+        content: '➤';
+        font-size: 16px;
+        color: #ddd;
+        position: absolute;
+        right: 1rem;
+        top: 45%;
+        margin-top: -.5rem;
+    }
+    &:after {
+        .clearfix
+    }
+    .icon {
+        position: relative;
+        float: left;
+        width: 70px;
+        height: 70px;
+        border-radius: 5px;
+        text-align: center;
+        &.bg1 {
+            background-color: #32b16c;
+        }
+        &.bg2 {
+            background-color: #ff72b4;
+        }
+        &.bg3 {
+            background-color: #00b8ee;
+        }
+        &.bg4 {
+            background-color: #f9b552;
+        }
+        &.bg5 {
+            background-color: #ed1f32;
+        }
+        &.bg5 {
+            background-color: #90c521;
+        }
+        &.bg6 {
+            background-color: #1a97cc;
+        }
+        img {
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            left: 50%;
+            margin-left: -20px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .item-msg {
+        display: block;
+        float: left;
+        width: 70%;
+        padding-left: 15px;
+        h4 {
+            color: #333;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        p {
+            overflow: hidden;
+            font-size: 12px;
+            color: #666;
+            line-height: 16px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+    }
+}
 footer {
     position: relative;
     display: block;

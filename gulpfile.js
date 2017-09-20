@@ -43,9 +43,9 @@ gulp.task('htmlhint', function() {
 });
 // 编译Less
 gulp.task('less', function() {
-    gulp.src(['./src/css/H5.less','./src/css/Style.less'])
-        //.pipe(cache(less()))        
-        .pipe(less())    
+   return gulp.src(['./src/css/H5.less','./src/css/Style.less'])
+        .pipe(cache(less()))        
+        //.pipe(less())    
         .pipe(gulp.dest('./src/css'));
 });
 //补全前缀+压缩css
@@ -59,10 +59,10 @@ gulp.task('cssmin',['less'], function() {
             //cascade: true, //是否美化属性值 默认：true 像这样：
             //remove: true //是否去掉不必要的前缀 默认：true 
         //}))
-        .pipe(cssmin({
+        .pipe(cache(cssmin({
             compatibility:'ie8',//保留ie8及以下兼容写法
             keepSpecialComments: '*'
-        }))
+        })))
         .pipe(concat('PassportStyle.css'))
         .pipe(gulp.dest('./src/css'))
         .pipe(gulp.dest('./dist/css'));
