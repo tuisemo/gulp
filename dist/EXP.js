@@ -25,7 +25,10 @@ EXP.get('/', function(req, res) {
     res.send(pathName + '/login.html');
 });
 EXP.get('/sign', function(req, res) {
-    res.render(pathName + '/signup.html');
+    // res.render(pathName + '/signup.html');
+    let url = 'https://api.douban.com/v2/movie/search';
+    console.log(req);
+    req.pipe(request(url)).pipe(res);    
 });
 //手机校验
 EXP.get('/checkTel', function(req, res) {
@@ -55,6 +58,7 @@ EXP.get('/dis/passport/authCode/check', function(req, res) {
 EXP.get('/dis/ids/checkUserPwd', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
     //req.pipe(request(url)).pipe(res);
+    console.log(req);
     res.json({
         result: true,
         code: 200,
