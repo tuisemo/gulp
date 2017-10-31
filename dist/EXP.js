@@ -57,14 +57,14 @@ EXP.get('/dis/passport/authCode/check', function(req, res) {
 });
 EXP.get('/dis/ids/checkUserPwd', function(req, res) {
     var url = 'http://ixm.terton.com.cn/dis/ids/checkUserPwd';
-    //req.pipe(request(url)).pipe(res);
-    console.log(req);
+    req.pipe(request(url)).pipe(res);
+    /*console.log(req);
     res.json({
         result: true,
         code: 200,
         data: '',
         msg: ''
-    })
+    })*/
 });
 EXP.get('/ids/custom/xiamen/login_xm.jsp', function(req, res) {
     var url = 'http://ixm.terton.com.cn/ids/custom/xiamen/login_xm.jsp';
